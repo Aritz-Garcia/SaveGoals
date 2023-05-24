@@ -14,7 +14,7 @@ import com.savegoals.savegoals.R;
 public class EstadisticasResumenFragment extends Fragment {
 
     ProgressBar progressBar;
-    TextView porcentaje;
+    TextView porcentaje, tvAhorrado, tvPendiente, tvTotal, tvDia, tvSemana, tvMes;
 
     public EstadisticasResumenFragment() {
         // Required empty public constructor
@@ -31,6 +31,12 @@ public class EstadisticasResumenFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_estadisticas_resumen, container, false);
         progressBar = view.findViewById(R.id.progressBar);
         porcentaje = view.findViewById(R.id.porcentaje);
+        tvAhorrado = view.findViewById(R.id.tvAhorrado);
+        tvPendiente = view.findViewById(R.id.tvPendiente);
+        tvTotal = view.findViewById(R.id.tvTotal);
+        tvDia = view.findViewById(R.id.tvDia);
+        tvSemana = view.findViewById(R.id.tvSemana);
+        tvMes = view.findViewById(R.id.tvMes);
 
 
         return view;
