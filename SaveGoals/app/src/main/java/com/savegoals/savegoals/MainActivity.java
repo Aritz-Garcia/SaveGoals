@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.savegoals.savegoals.Controlador.PagerController;
+import com.savegoals.savegoals.db.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AppDatabase appDatabase = AppDatabase.getDatabase(getApplicationContext());
+
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
