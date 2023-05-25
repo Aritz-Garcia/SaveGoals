@@ -1,4 +1,4 @@
-package com.savegoals.savegoals.Controlador;
+package com.savegoals.savegoals.Controlador.estadisticas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -15,6 +15,12 @@ public interface ObjetivosDao {
     @Query("SELECT * FROM objetivos")
     List<Objetivos> getAll();
 
+    @Query("SELECT * FROM objetivos WHERE completado = 0")
+    List<Objetivos> getAllNotCompleted();
+
+    @Query("SELECT * FROM objetivos WHERE completado = 1")
+    List<Objetivos> getAllCompleted();
+
     @Query("SELECT * FROM objetivos WHERE id LIKE :id LIMIT 1")
     Objetivos findById(int id);
 

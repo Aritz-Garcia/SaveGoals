@@ -8,30 +8,28 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.savegoals.savegoals.Controlador.estadisticas.PagerController;
-import com.savegoals.savegoals.db.AppDatabase;
+import com.savegoals.savegoals.Controlador.menu.PagerControllerMenu;
 
-public class MainActivity extends AppCompatActivity {
+public class ObjetivosActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
     TabItem tab1, tab2, tab3;
-    PagerController pagerAdapter;
+    PagerControllerMenu pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_objetivos);
 
-        AppDatabase appDatabase = AppDatabase.getDatabase(getApplicationContext());
+        tabLayout = findViewById(R.id.tabLayoutMenu);
+        viewPager = findViewById(R.id.viewPagerMenu);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        tab1 = findViewById(R.id.tabObjetivosMenu);
+        tab2 = findViewById(R.id.tabEstadisticasMenu);
+        tab3 = findViewById(R.id.tabConfiguracionMenu);
 
-        tab1 = findViewById(R.id.tabResumen);
-        tab2 = findViewById(R.id.tabEstadisticas);
-        tab3 = findViewById(R.id.tabEntradas);
-
-        pagerAdapter = new PagerController(getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PagerControllerMenu(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             // @Override
@@ -52,5 +50,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
     }
 }
