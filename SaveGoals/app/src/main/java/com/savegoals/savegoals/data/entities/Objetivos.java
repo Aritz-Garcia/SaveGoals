@@ -2,10 +2,12 @@ package com.savegoals.savegoals.data.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-@Entity(primaryKeys = {"id"})
+@Entity
 public class Objetivos {
     @NonNull
+    @PrimaryKey(autoGenerate = true)
     public Integer id;
     @NonNull
     public String categoria;
@@ -22,8 +24,7 @@ public class Objetivos {
 
     public Objetivos() {}
 
-    public Objetivos(int id, String categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado) {
-        this.id = id;
+    public Objetivos(String categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.fecha = fecha;

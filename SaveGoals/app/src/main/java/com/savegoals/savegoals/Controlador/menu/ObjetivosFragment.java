@@ -1,28 +1,33 @@
 package com.savegoals.savegoals.Controlador.menu;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.R;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
+import com.savegoals.savegoals.AddObjetivosActivity;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ObjetivosFragment extends Fragment {
+public class ObjetivosFragment extends Fragment implements View.OnClickListener {
 
     LinearLayout linearLayoutObjetivos;
     TextView tv_objetivos, tv_cumplidos;
+    FloatingActionButton btn_add_objetivo;
 
     public ObjetivosFragment() {
         // Required empty public constructor
@@ -42,8 +47,11 @@ public class ObjetivosFragment extends Fragment {
         linearLayoutObjetivos = view.findViewById(R.id.objetivos);
         tv_objetivos = view.findViewById(R.id.tv_objetivos);
         tv_cumplidos = view.findViewById(R.id.tv_cumplidos);
+        btn_add_objetivo = view.findViewById(R.id.btnAdd);
 
         AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
+
+        btn_add_objetivo.setOnClickListener(this);
 
         List<Objetivos> objetivosSinCompletar = appDatabase.objetivosDao().getAllNotCompleted();
         List<Objetivos> objetivosCompletados = appDatabase.objetivosDao().getAllCompleted();
@@ -86,13 +94,42 @@ public class ObjetivosFragment extends Fragment {
                 nombre.setLayoutParams(paramsNombre);
                 nombre.setGravity(Gravity.CENTER);
 
-                TextView icono = new TextView(getContext());
-                icono.setText("prueba");
-                icono.setTextSize(18);
+                ImageView icono = new ImageView(getContext());
                 LinearLayout.LayoutParams paramsIcono = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsIcono.width = 0;
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
+                switch (objetivosSinCompletar.get(i).getCategoria()) {
+                    case "Viaje":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.avion));
+                        break;
+
+                    case "Ahorrar":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
+                        break;
+
+                    case "Regalo":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
+                        break;
+
+                    case "Compras":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
+                        break;
+
+                    case "Clase":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.clase));
+                        break;
+
+                    case "Juego":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.mando));
+                        break;
+
+                    case "Otros":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
+                        break;
+
+                }
+
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosSinCompletar.get(i).getFecha());
@@ -180,13 +217,41 @@ public class ObjetivosFragment extends Fragment {
                 nombre.setLayoutParams(paramsNombre);
                 nombre.setGravity(Gravity.CENTER);
 
-                TextView icono = new TextView(getContext());
-                icono.setText("prueba");
-                icono.setTextSize(18);
+                ImageView icono = new ImageView(getContext());
                 LinearLayout.LayoutParams paramsIcono = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsIcono.width = 0;
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
+                switch (objetivosCompletados.get(i).getCategoria()) {
+                    case "Viaje":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.avion));
+                        break;
+
+                    case "Ahorrar":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
+                        break;
+
+                    case "Regalo":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
+                        break;
+
+                    case "Compras":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
+                        break;
+
+                    case "Clase":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.clase));
+                        break;
+
+                    case "Juego":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.mando));
+                        break;
+
+                    case "Otros":
+                        icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
+                        break;
+
+                }
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosCompletados.get(i).getFecha());
@@ -240,5 +305,12 @@ public class ObjetivosFragment extends Fragment {
         return df.format(value);
     }
 
-    
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == btn_add_objetivo.getId()) {
+            Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
+            startActivity(intent);
+        }
+    }
 }
