@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ObjetivosFragment extends Fragment implements View.OnClickListener {
 
-    LinearLayout linearLayoutObjetivos;
+    LinearLayout linearLayoutObjetivos, linearLayoutCumplidos;
     TextView tv_objetivos, tv_cumplidos;
     FloatingActionButton btn_add_objetivo;
 
@@ -45,13 +45,43 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.fragment_objetivos, container, false);
 
         linearLayoutObjetivos = view.findViewById(R.id.objetivos);
+        linearLayoutCumplidos = view.findViewById(R.id.cumplidos);
         tv_objetivos = view.findViewById(R.id.tv_objetivos);
         tv_cumplidos = view.findViewById(R.id.tv_cumplidos);
         btn_add_objetivo = view.findViewById(R.id.btnAdd);
 
-        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
-
         btn_add_objetivo.setOnClickListener(this);
+
+        return view;
+    }
+
+    // double con 2 decimales
+    private static String obtieneDosDecimales(float value){
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(value);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == btn_add_objetivo.getId()) {
+            Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        linearLayoutObjetivos.removeAllViews();
+        linearLayoutCumplidos.removeAllViews();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
 
         List<Objetivos> objetivosSinCompletar = appDatabase.objetivosDao().getAllNotCompleted();
         List<Objetivos> objetivosCompletados = appDatabase.objetivosDao().getAllCompleted();
@@ -140,7 +170,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsProgress.width = 0;
-                paramsProgress.weight = 9;
+                paramsProgress.weight = 10;
                 paramsProgress.setMargins(0, 0, 50, 0);
                 progressBar.setLayoutParams(paramsProgress);
                 progressBar.setMax(100);
@@ -157,8 +187,9 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 porcentaje.setText(porcentajeInt + "%");
                 LinearLayout.LayoutParams paramsPorcentaje = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsPorcentaje.width = 0;
-                paramsPorcentaje.weight = 1;
+                paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
+                porcentaje.setGravity(Gravity.CENTER);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);
@@ -262,7 +293,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsProgress.width = 0;
-                paramsProgress.weight = 9;
+                paramsProgress.weight = 10;
                 paramsProgress.setMargins(0, 0, 50, 0);
                 progressBar.setLayoutParams(paramsProgress);
                 progressBar.setMax(100);
@@ -273,8 +304,9 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 porcentaje.setText(porcentajeInt + "%");
                 LinearLayout.LayoutParams paramsPorcentaje = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 paramsPorcentaje.width = 0;
-                paramsPorcentaje.weight = 1;
+                paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
+                porcentaje.setGravity(Gravity.CENTER);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);
@@ -290,27 +322,10 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 linearLayoutProgressBar.addView(porcentaje);
 
                 linearLayoutGeneral.addView(linearLayoutProgressBar);
-                linearLayoutObjetivos.addView(linearLayoutGeneral);
+                linearLayoutCumplidos.addView(linearLayoutGeneral);
             }
         } else {
             tv_cumplidos.setVisibility(View.GONE);
-        }
-
-        return view;
-    }
-
-    // double con 2 decimales
-    private static String obtieneDosDecimales(float value){
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(value);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == btn_add_objetivo.getId()) {
-            Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
-            startActivity(intent);
         }
     }
 }

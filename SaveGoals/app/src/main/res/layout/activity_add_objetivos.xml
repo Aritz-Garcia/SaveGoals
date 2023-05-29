@@ -27,12 +27,23 @@
         android:minHeight="48dp"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <TextView
+        android:id="@+id/tvErrorCategoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Seleccione una categoría"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <EditText
         android:id="@+id/etFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
+        android:focusable="false"
         android:hint="Fecha"
         android:inputType="date"
         android:minHeight="48dp" />
@@ -47,11 +58,25 @@
         android:inputType="number"
         android:minHeight="48dp" />
 
-    <Button
-        android:id="@+id/btnAddObjetivo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Crear Objetivo" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnVolverObjetivos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnAddObjetivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Crear Objetivo" />
+    </LinearLayout>
 
 </LinearLayout>
