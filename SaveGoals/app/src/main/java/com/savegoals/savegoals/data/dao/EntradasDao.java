@@ -15,10 +15,10 @@ public interface EntradasDao {
     @Query("SELECT * FROM entradas")
     List<Entradas> getAll();
 
-    @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos LIMIT 1")
+    @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos")
     List<Entradas> findByIdObj(int idObjetivos);
 
-    @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos AND idEntrada LIKE :idEntrada LIMIT 1")
+    @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos AND idEntrada LIKE :idEntrada")
     Entradas findByIds(int idObjetivos, int idEntrada);
 
     @Query("UPDATE entradas SET categoria = :categoria, fecha = :fecha, nombre = :nombre, cantidad = :cantidad WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")

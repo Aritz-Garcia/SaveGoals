@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 import com.savegoals.savegoals.dialog.DatePickerFragment;
@@ -20,38 +21,42 @@ import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class AddObjetivosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class AddEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     Spinner spinnerCategoria;
     ArrayList<CustomItem> customList;
-    Button btnGuardar, btnVolverObjetivos;
+    Button btnGuardar, btnVolverEntradas;
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_objetivos);
+        setContentView(R.layout.activity_add_entradas);
 
         db = AppDatabase.getDatabase(this);
 
-        etNombre = findViewById(R.id.etNombre);
-        etFecha = findViewById(R.id.etFecha);
-        etCantidad = findViewById(R.id.etCantidad);
+        id = getIntent().getIntExtra("id", 0);
 
-        tvErrorCategoria = findViewById(R.id.tvErrorCategoria);
-        tvErrorFecha = findViewById(R.id.tvErrorFecha);
+        etNombre = findViewById(R.id.etNombreEntradas);
+        etFecha = findViewById(R.id.etFechaEntradas);
+        etCantidad = findViewById(R.id.etCantidadEntradas);
 
-        btnGuardar = findViewById(R.id.btnAddObjetivo);
-        btnVolverObjetivos = findViewById(R.id.btnVolverObjetivos);
+        tvErrorCategoria = findViewById(R.id.tvErrorCategoriaEntradas);
+        tvErrorFecha = findViewById(R.id.tvErrorFechaEntradas);
 
-        spinnerCategoria = findViewById(R.id.spinnerCategoria);
+        btnGuardar = findViewById(R.id.btnAddEntradas);
+        btnVolverEntradas = findViewById(R.id.btnVolverEntradas);
+
+        spinnerCategoria = findViewById(R.id.spinnerCategoriaEntradas);
 
         etFecha.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
-        btnVolverObjetivos.setOnClickListener(this);
+        btnVolverEntradas.setOnClickListener(this);
 
         customList = getCustomList();
         CustomAdapter adapter = new CustomAdapter(this, customList);
@@ -65,18 +70,32 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
         customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Viaje", R.drawable.avion));
-        customList.add(new CustomItem("Ahorrar", R.drawable.hucha));
+        customList.add(new CustomItem("Cartera", R.drawable.cartera));
+        customList.add(new CustomItem("Hucha", R.drawable.hucha));
+        customList.add(new CustomItem("Trabajo", R.drawable.martillo));
         customList.add(new CustomItem("Regalo", R.drawable.regalo));
         customList.add(new CustomItem("Compras", R.drawable.carrito));
         customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Juego", R.drawable.mando));
         customList.add(new CustomItem("Otros", R.drawable.otros));
         return customList;
     }
 
     @Override
+    public void onClick(View v) {
+        if (v.getId() == btnGuardar.getId()) {
+            // Guardar en la base de datos
+            guardarBaseDeDatos();
+        } else if (v.getId() == btnVolverEntradas.getId()) {
+            // Volver a la pantalla de entradas
+            finish();
+        } else if (v.getId() == etFecha.getId()) {
+            showDatePickerDialog();
+        }
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     @Override
@@ -99,19 +118,6 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == btnGuardar.getId()) {
-            // Guardar en la base de datos
-            guardarBaseDeDatos();
-        } else if (v.getId() == etFecha.getId()) {
-            showDatePickerDialog();
-        } else if (v.getId() == btnVolverObjetivos.getId()) {
-            // Volver a la pantalla de objetivos
-            finish();
-        }
-    }
-
     private void guardarBaseDeDatos() {
         // Guardar en la base de datos
         if (spinnerCategoria.getSelectedItemId() != 0) {
@@ -119,14 +125,27 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             if (leerString(etNombre.getText().toString(), etNombre)) {
                 if (leerNumero(etCantidad.getText().toString(), etCantidad)) {
                     if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
-                        Objetivos objetivo = new Objetivos();
-                        objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
-                        objetivo.setNombre(etNombre.getText().toString());
-                        objetivo.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
-                        objetivo.setFecha(etFecha.getText().toString());
-                        objetivo.setAhorrado(0);
-                        objetivo.setCompletado(false);
-                        db.objetivosDao().insertAll(objetivo);
+
+                        List<Entradas> entradasList = db.entradasDao().findByIdObj(id);
+                        Objetivos objetivos = db.objetivosDao().findById(id);
+                        float ahorrado = objetivos.getAhorrado();
+                        float cantidad = objetivos.getCantidad();
+
+                        ahorrado += Float.parseFloat(etCantidad.getText().toString());
+                        db.objetivosDao().updateAhorrado(id, ahorrado);
+                        if (ahorrado >= cantidad) {
+                            db.objetivosDao().updateCompletado(id, true);
+                        }
+
+                        Entradas entradas = new Entradas();
+                        entradas.setIdObjetivos(id);
+                        entradas.setIdEntrada(entradasList.size()+1);
+                        entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                        entradas.setNombre(etNombre.getText().toString());
+                        entradas.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
+                        entradas.setFecha(etFecha.getText().toString());
+
+                        db.entradasDao().insertAll(entradas);
 
                         finish();
                     }
@@ -185,8 +204,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             text.setVisibility(View.VISIBLE);
             return false;
         } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
-            text.setText("La fecha no puede ser la actual");
-            text.setVisibility(View.VISIBLE);
+            text.setVisibility(View.GONE);
             return true;
         } else if (fecha.before(today)) {
             text.setText("La fecha no puede ser posterior a la actual");
@@ -201,21 +219,22 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     private String getCategoria(int posicion) {
         switch (posicion) {
             case 1:
-                return "Viaje";
+                return "Cartera";
             case 2:
-                return "Ahorrar";
+                return "Hucha";
             case 3:
-                return "Regalo";
+                return "Trabajo";
             case 4:
-                return "Compras";
+                return "Regalo";
             case 5:
-                return "Clase";
+                return "Compras";
             case 6:
-                return "Juego";
+                return "Clase";
             case 7:
                 return "Otros";
             default:
                 return "Seleccionar";
         }
     }
+
 }

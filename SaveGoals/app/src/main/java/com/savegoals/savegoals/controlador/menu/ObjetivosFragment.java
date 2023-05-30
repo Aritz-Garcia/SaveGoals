@@ -59,19 +59,6 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
-    private static String obtieneDosDecimales(float value){
-        DecimalFormat df = new DecimalFormat("0.00");
-        return df.format(value);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == btn_add_objetivo.getId()) {
-            Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -358,6 +345,19 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
             }
         } else {
             tv_cumplidos.setVisibility(View.GONE);
+        }
+    }
+
+    private static String obtieneDosDecimales(float value){
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(value);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == btn_add_objetivo.getId()) {
+            Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -186,6 +186,11 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             tvAhorrado.setText(obtieneDosDecimales(objetivo.getAhorrado()) + "€");
             tvPendiente.setText(obtieneDosDecimales(pendiente) + "€");
             tvTotal.setText(obtieneDosDecimales(objetivo.getCantidad()) + "€");
+
+            if (objetivo.getCompletado()) {
+                tvPendientetxt.setVisibility(View.GONE);
+                tvPendiente.setVisibility(View.GONE);
+            }
         }
         return view;
     }
