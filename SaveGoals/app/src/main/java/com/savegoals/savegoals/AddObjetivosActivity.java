@@ -19,6 +19,7 @@ import com.savegoals.savegoals.formularios.CustomAdapter;
 import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AddObjetivosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -26,7 +27,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     ArrayList<CustomItem> customList;
     Button btnGuardar, btnVolverObjetivos;
     EditText etNombre, etFecha, etCantidad;
-    TextView tvErrorCategoria;
+    TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
 
     @Override
@@ -41,6 +42,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         etCantidad = findViewById(R.id.etCantidad);
 
         tvErrorCategoria = findViewById(R.id.tvErrorCategoria);
+        tvErrorFecha = findViewById(R.id.tvErrorFecha);
 
         btnGuardar = findViewById(R.id.btnAddObjetivo);
         btnVolverObjetivos = findViewById(R.id.btnVolverObjetivos);
@@ -61,7 +63,6 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     }
 
     private ArrayList<CustomItem> getCustomList() {
-
         customList = new ArrayList<>();
         customList.add(new CustomItem("Seleccionar", 0));
         customList.add(new CustomItem("Viaje", R.drawable.avion));
@@ -115,9 +116,9 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         // Guardar en la base de datos
         if (spinnerCategoria.getSelectedItemId() != 0) {
             tvErrorCategoria.setVisibility(View.GONE);
-            if (stringIrakurri(etNombre.getText().toString(), etNombre)) {
-                if (zenbakiaIrakurri(etCantidad.getText().toString(), etCantidad)) {
-                    if (etFecha.getText().toString().length() != 0) {
+            if (leerString(etNombre.getText().toString(), etNombre)) {
+                if (leerNumero(etCantidad.getText().toString(), etCantidad)) {
+                    if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
                         Objetivos objetivo = new Objetivos();
                         objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
                         objetivo.setNombre(etNombre.getText().toString());
@@ -128,8 +129,6 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
                         db.objetivosDao().insertAll(objetivo);
 
                         finish();
-                    } else {
-                        etFecha.setError("Campo necesario");
                     }
                 }
             }
@@ -138,7 +137,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    private boolean stringIrakurri(String textua, EditText text){
+    private boolean leerString(String textua, EditText text){
         if( textua.length()==0 )  {
             text.setError("Campo necesario");
             return false;
@@ -150,7 +149,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    private boolean zenbakiaIrakurri(String textua, EditText text){
+    private boolean leerNumero(String textua, EditText text){
         if( textua.length()==0 ) {
             text.setError("Campo necesario");
             return false;
@@ -164,6 +163,33 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             text.setError("El numero es muy grande");
             return false;
         }else{
+            return true;
+        }
+    }
+
+    private boolean leerFecha(String textua, TextView text){
+        Date today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        Date fecha = new Date();
+        if (textua.length() != 0) {
+            String[] fechaSeparada = textua.split("/");
+            fecha.setYear(Integer.parseInt(fechaSeparada[2]) - 1900);
+            fecha.setMonth(Integer.parseInt(fechaSeparada[1]) - 1);
+            fecha.setDate(Integer.parseInt(fechaSeparada[0]));
+        }
+
+        if( textua.length() == 0 ) {
+            text.setText("Campo necesario");
+            text.setVisibility(View.VISIBLE);
+            return false;
+        }else if (fecha.before(today)) {
+            text.setText("La fecha no puede ser posterior a la actual");
+            text.setVisibility(View.VISIBLE);
+            return false;
+        } else {
+            text.setVisibility(View.GONE);
             return true;
         }
     }

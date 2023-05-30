@@ -1,4 +1,4 @@
-package com.savegoals.savegoals.Controlador.estadisticas;
+package com.savegoals.savegoals.controlador.estadisticas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +13,21 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.savegoals.savegoals.R;
+import com.savegoals.savegoals.data.entities.Entradas;
+import com.savegoals.savegoals.data.entities.Objetivos;
+import com.savegoals.savegoals.db.AppDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EstadisticasEstadisticasFragment extends Fragment {
 
     PieChart pieChart;
+    int id;
 
-    public EstadisticasEstadisticasFragment() {
+    public EstadisticasEstadisticasFragment(int id) {
         // Required empty public constructor
+        this.id = id;
     }
 
     @Override
@@ -33,6 +39,11 @@ public class EstadisticasEstadisticasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estadisticas_estadisticas, container, false);
+
+        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
+
+        Objetivos objetivo = appDatabase.objetivosDao().findById(id);
+        List<Entradas> entradas = appDatabase.entradasDao().findByIdObj(id);
 
         pieChart = view.findViewById(R.id.piechart);
         ArrayList<PieEntry> pieEntries = new ArrayList<>();

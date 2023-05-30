@@ -1,7 +1,8 @@
-package com.savegoals.savegoals.Controlador.menu;
+package com.savegoals.savegoals.controlador.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,10 +16,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.savegoals.savegoals.AddObjetivosActivity;
+import com.savegoals.savegoals.MainActivity;
 import com.savegoals.savegoals.R;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
-import com.savegoals.savegoals.AddObjetivosActivity;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -51,16 +53,16 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         btn_add_objetivo = view.findViewById(R.id.btnAdd);
 
         btn_add_objetivo.setOnClickListener(this);
+        linearLayoutObjetivos.setOnClickListener(this);
+        linearLayoutCumplidos.setOnClickListener(this);
 
         return view;
     }
 
-    // double con 2 decimales
     private static String obtieneDosDecimales(float value){
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(value);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -97,6 +99,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsGeneral.setMargins(30, 50, 30, 0);
                 linearLayoutGeneral.setLayoutParams(paramsGeneral);
                 linearLayoutGeneral.setOrientation(LinearLayout.VERTICAL);
+                linearLayoutGeneral.setId(objetivosSinCompletar.get(i).getId());
 
                 LinearLayout linearLayoutMedio = new LinearLayout(getContext());
                 linearLayoutMedio.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -123,6 +126,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsNombre.weight = 6;
                 nombre.setLayoutParams(paramsNombre);
                 nombre.setGravity(Gravity.CENTER);
+                nombre.setTextColor(Color.BLACK);
 
                 ImageView icono = new ImageView(getContext());
                 LinearLayout.LayoutParams paramsIcono = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -163,9 +167,11 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosSinCompletar.get(i).getFecha());
+                fecha.setTextColor(Color.BLACK);
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosSinCompletar.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosSinCompletar.get(i).getCantidad()) + "€");
+                cantidad.setTextColor(Color.BLACK);
 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -179,8 +185,10 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                     progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_rojo));
                 } else if (porcentajeInt < 75) {
                     progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_amarillo));
-                } else {
+                } else if (porcentajeInt < 100) {
                     progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_verde));
+                } else {
+                    progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_completado));
                 }
 
                 TextView porcentaje = new TextView(getContext());
@@ -190,6 +198,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
                 porcentaje.setGravity(Gravity.CENTER);
+                porcentaje.setTextColor(Color.BLACK);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);
@@ -206,6 +215,15 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 linearLayoutGeneral.addView(linearLayoutProgressBar);
                 linearLayoutObjetivos.addView(linearLayoutGeneral);
+
+                linearLayoutGeneral.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("id", linearLayoutGeneral.getId());
+                        startActivity(intent);
+                    }
+                });
             }
         } else {
             tv_objetivos.setVisibility(View.GONE);
@@ -221,6 +239,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsGeneral.setMargins(30, 50, 30, 0);
                 linearLayoutGeneral.setLayoutParams(paramsGeneral);
                 linearLayoutGeneral.setOrientation(LinearLayout.VERTICAL);
+                linearLayoutGeneral.setId(objetivosCompletados.get(i).getId());
 
                 LinearLayout linearLayoutMedio = new LinearLayout(getContext());
                 linearLayoutMedio.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -246,6 +265,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsNombre.width = 0;
                 paramsNombre.weight = 6;
                 nombre.setLayoutParams(paramsNombre);
+                nombre.setTextColor(Color.BLACK);
                 nombre.setGravity(Gravity.CENTER);
 
                 ImageView icono = new ImageView(getContext());
@@ -286,9 +306,11 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosCompletados.get(i).getFecha());
+                fecha.setTextColor(Color.BLACK);
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosCompletados.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosCompletados.get(i).getCantidad()) + "€");
+                cantidad.setTextColor(Color.BLACK);
 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -298,7 +320,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 progressBar.setLayoutParams(paramsProgress);
                 progressBar.setMax(100);
                 progressBar.setProgress(porcentajeInt);
-                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_verde));
+                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_completado));
 
                 TextView porcentaje = new TextView(getContext());
                 porcentaje.setText(porcentajeInt + "%");
@@ -307,6 +329,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
                 porcentaje.setGravity(Gravity.CENTER);
+                porcentaje.setTextColor(Color.BLACK);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);
@@ -323,6 +346,15 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 linearLayoutGeneral.addView(linearLayoutProgressBar);
                 linearLayoutCumplidos.addView(linearLayoutGeneral);
+
+                linearLayoutGeneral.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.putExtra("id", linearLayoutGeneral.getId());
+                        startActivity(intent);
+                    }
+                });
             }
         } else {
             tv_cumplidos.setVisibility(View.GONE);

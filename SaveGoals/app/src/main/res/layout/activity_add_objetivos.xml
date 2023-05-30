@@ -17,7 +17,8 @@
         android:ems="10"
         android:hint="Nombre de Objetivo"
         android:inputType="text"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black" />
 
     <Spinner
         android:id="@+id/spinnerCategoria"
@@ -46,7 +47,17 @@
         android:focusable="false"
         android:hint="Fecha"
         android:inputType="date"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvErrorFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/etCantidad"
@@ -56,7 +67,8 @@
         android:ems="10"
         android:hint="Cantidad"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"

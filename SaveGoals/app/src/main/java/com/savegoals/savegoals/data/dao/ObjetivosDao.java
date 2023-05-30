@@ -36,6 +36,9 @@ public interface ObjetivosDao {
     @Insert
     void insertAll(Objetivos... objetivos);
 
+    @Query("DELETE FROM objetivos WHERE id = :id")
+    void deleteById(int id);
+
     @Delete
     void delete(Objetivos objetivos);
 }

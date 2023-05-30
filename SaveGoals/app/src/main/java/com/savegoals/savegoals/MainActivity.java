@@ -7,8 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.savegoals.savegoals.Controlador.estadisticas.PagerController;
-import com.savegoals.savegoals.db.AppDatabase;
+import com.savegoals.savegoals.controlador.estadisticas.PagerController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppDatabase appDatabase = AppDatabase.getDatabase(getApplicationContext());
+        int id = getIntent().getIntExtra("id", 0);
 
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         tab2 = findViewById(R.id.tabEstadisticas);
         tab3 = findViewById(R.id.tabEntradas);
 
-        pagerAdapter = new PagerController(getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PagerController(getSupportFragmentManager(), tabLayout.getTabCount(), id);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             // @Override

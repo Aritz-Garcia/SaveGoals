@@ -7,8 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.savegoals.savegoals.Controlador.estadisticas.PagerController;
-import com.savegoals.savegoals.Controlador.menu.PagerControllerMenu;
+import com.savegoals.savegoals.controlador.menu.PagerControllerMenu;
 
 public class ObjetivosActivity extends AppCompatActivity {
 

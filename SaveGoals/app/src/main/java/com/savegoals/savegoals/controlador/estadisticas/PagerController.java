@@ -1,29 +1,31 @@
-package com.savegoals.savegoals.Controlador.menu;
+package com.savegoals.savegoals.controlador.estadisticas;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerControllerMenu extends FragmentPagerAdapter {
+public class PagerController extends FragmentPagerAdapter {
 
     int numftabs;
+    int id;
 
-    public PagerControllerMenu(@NonNull FragmentManager fm, int behavior) {
+    public PagerController(@NonNull FragmentManager fm, int behavior, int id) {
         super(fm, behavior);
         this.numftabs = behavior;
+        this.id = id;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
+        switch (position){
             case 0:
-                return new ObjetivosFragment();
+                return new EstadisticasResumenFragment(id);
             case 1:
-                return new EstadisticasFragment();
+                return new EstadisticasEstadisticasFragment(id);
             case 2:
-                return new ConfiguracionFragment();
+                return new EstadisticasEntradasFragment(id);
             default:
                 return null;
         }

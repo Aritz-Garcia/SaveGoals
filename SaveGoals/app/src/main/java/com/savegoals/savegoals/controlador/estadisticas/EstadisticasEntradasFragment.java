@@ -1,4 +1,4 @@
-package com.savegoals.savegoals.Controlador.estadisticas;
+package com.savegoals.savegoals.controlador.estadisticas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,11 @@ import com.savegoals.savegoals.R;
 
 public class EstadisticasEntradasFragment extends Fragment {
 
-    public EstadisticasEntradasFragment() {
+    int id;
+
+    public EstadisticasEntradasFragment(int id) {
         // Required empty public constructor
+        this.id = id;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.savegoals.savegoals.Controlador.menu;
+package com.savegoals.savegoals.controlador.menu;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment;
 
 import com.savegoals.savegoals.R;
 
-public class ConfiguracionFragment extends Fragment {
+public class EstadisticasFragment extends Fragment {
 
-    public ConfiguracionFragment() {
+    public EstadisticasFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class ConfiguracionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_configuracion, container, false);
+        View view = inflater.inflate(R.layout.fragment_estadisticas, container, false);
         // Inflate the layout for this fragment
         return view;
     }

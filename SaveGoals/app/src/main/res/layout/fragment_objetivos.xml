@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controlador.menu.ObjetivosFragment">
+    tools:context=".controlador.menu.ObjetivosFragment">
 
     <ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+        android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
         <LinearLayout
@@ -23,6 +22,7 @@
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="OBJETIVOS"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -41,6 +41,7 @@
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="CUMPLIDOS"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
