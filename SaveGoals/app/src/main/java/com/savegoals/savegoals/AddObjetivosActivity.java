@@ -122,7 +122,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
                         Objetivos objetivo = new Objetivos();
                         objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
                         objetivo.setNombre(etNombre.getText().toString());
-                        objetivo.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
+                        objetivo.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
                         objetivo.setFecha(etFecha.getText().toString());
                         objetivo.setAhorrado(0);
                         objetivo.setCompletado(false);
@@ -153,10 +153,10 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         if( textua.length()==0 ) {
             text.setError("Campo necesario");
             return false;
-        }else if(Integer.parseInt(textua)<0) {
+        }else if(Float.parseFloat(textua)<0) {
             text.setError("No puede ser un numero negativo");
             return false;
-        }else if((!textua.matches("[0-9]+\\.?")) ){
+        }else if((!textua.matches("([0-9]*[.])?[0-9]+")) ){
             text.setError("Solo numeros");
             return false;
         }else if (textua.length()>6) {

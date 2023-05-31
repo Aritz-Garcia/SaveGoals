@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.AddEntradasActivity;
+import com.savegoals.savegoals.EditEntradasActivity;
 import com.savegoals.savegoals.R;
 import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
@@ -166,6 +167,16 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             lyGeneral.addView(cantidad);
 
             lyEntradas.addView(lyGeneral);
+
+            lyGeneral.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), EditEntradasActivity.class);
+                    intent.putExtra("idO", id);
+                    intent.putExtra("idE", lyGeneral.getId());
+                    startActivity(intent);
+                }
+            });
 
 
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");

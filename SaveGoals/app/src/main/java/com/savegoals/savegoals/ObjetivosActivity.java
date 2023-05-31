@@ -1,6 +1,7 @@
 package com.savegoals.savegoals;
 
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -20,6 +21,8 @@ public class ObjetivosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_objetivos);
+
+
 
         tabLayout = findViewById(R.id.tabLayoutMenu);
         viewPager = findViewById(R.id.viewPagerMenu);

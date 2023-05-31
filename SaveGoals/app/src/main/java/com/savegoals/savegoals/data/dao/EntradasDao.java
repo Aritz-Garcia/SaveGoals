@@ -30,6 +30,9 @@ public interface EntradasDao {
     @Insert
     void insertAll(Entradas... entradas);
 
+    @Query("DELETE FROM entradas WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
+    void deleteByIds(int idObjetivos, int idEntrada);
+
     @Delete
     void delete(Entradas entradas);
 }

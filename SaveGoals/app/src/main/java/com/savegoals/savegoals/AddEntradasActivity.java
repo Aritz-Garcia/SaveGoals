@@ -139,10 +139,20 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
 
                         Entradas entradas = new Entradas();
                         entradas.setIdObjetivos(id);
-                        entradas.setIdEntrada(entradasList.size()+1);
+
+                        if (entradasList.size() == 0) {
+                            entradas.setIdEntrada(1);
+                        } else {
+                            for (int i = 0; i < entradasList.size(); i++) {
+                                if (i == entradasList.size() - 1) {
+                                    entradas.setIdEntrada(entradasList.get(i).getIdEntrada() + 1);
+                                }
+                            }
+                        }
+
                         entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
                         entradas.setNombre(etNombre.getText().toString());
-                        entradas.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
+                        entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
                         entradas.setFecha(etFecha.getText().toString());
 
                         db.entradasDao().insertAll(entradas);
@@ -172,10 +182,10 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         if( textua.length()==0 ) {
             text.setError("Campo necesario");
             return false;
-        }else if(Integer.parseInt(textua)<0) {
+        }else if(Float.parseFloat(textua)<0) {
             text.setError("No puede ser un numero negativo");
             return false;
-        }else if((!textua.matches("[0-9]+\\.?")) ){
+        }else if((!textua.matches("([0-9]*[.])?[0-9]+")) ){
             text.setError("Solo numeros");
             return false;
         }else if (textua.length()>6) {

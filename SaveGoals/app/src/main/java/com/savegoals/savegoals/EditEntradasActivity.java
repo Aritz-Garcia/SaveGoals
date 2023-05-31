@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
@@ -32,6 +33,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
     int idO, idE;
+    FloatingActionButton btnEliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,12 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
         spinnerCategoria = findViewById(R.id.spinnerEditCategoriaEntradas);
 
+        btnEliminar = findViewById(R.id.btnEliminarEntrada);
+
         etFecha.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
         btnVolverEntradas.setOnClickListener(this);
+        btnEliminar.setOnClickListener(this);
 
         customList = getCustomList();
         CustomAdapter adapter = new CustomAdapter(this, customList);
@@ -94,9 +99,13 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
             showDatePickerDialog();
         } else if (v.getId() == btnGuardar.getId()) {
             // Guardar en la base de datos los cambios
+            guardarBaseDeDatos();
         } else if (v.getId() == btnVolverEntradas.getId()) {
             // volver a la pantalla de entradas
             finish();
+        } else if (v.getId() == btnEliminar.getId()) {
+            // Eliminar entrada
+            eliminarEntrada();
         }
     }
 
@@ -148,16 +157,40 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
                             i++;
                         }
 
-                        if (entradas.getCantidad() != Integer.parseInt(etCantidad.getText().toString())) {
+                        if (entradas.getCantidad() != Float.parseFloat(etCantidad.getText().toString())) {
                             // Cambiar cantidad
-                            if (entradas.getCantidad() > Integer.parseInt(etCantidad.getText().toString())) {
+                            if (entradas.getCantidad() > Float.parseFloat(etCantidad.getText().toString())) {
                                 // Restar cantidad
+                                float ahorrado = objetivos.getAhorrado() - (entradas.getCantidad() - Float.parseFloat(etCantidad.getText().toString()));
+                                objetivos.setAhorrado(ahorrado);
                             } else {
                                 // Sumar cantidad
+                                float ahorrado = objetivos.getAhorrado() + (Float.parseFloat(etCantidad.getText().toString()) - entradas.getCantidad());
+                                objetivos.setAhorrado(ahorrado);
                             }
 
-                            entradas.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
+                            // Objetivo Completado
+                            if (objetivos.getAhorrado() >= objetivos.getCantidad()) {
+                                objetivos.setCompletado(true);
+                            } else {
+                                objetivos.setCompletado(false);
+                            }
+
+                            entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
                             i++;
+                        }
+
+                        if (!entradas.getFecha().equals(etFecha.getText().toString())) {
+                            // Cambiar fecha
+                            entradas.setFecha(etFecha.getText().toString());
+                            i++;
+                        }
+
+                        if (i > 0) {
+                            db.entradasDao().update(entradas.getIdObjetivos(), entradas.getIdEntrada(), entradas.getCategoria(),entradas.getFecha(), entradas.getNombre(), entradas.getCantidad());
+                            db.objetivosDao().update(objetivos.getId(), objetivos.getCategoria(), objetivos.getNombre(), objetivos.getFecha(), objetivos.getCantidad(), objetivos.getAhorrado(), objetivos.getCompletado());
+                        } else {
+                            // Alerta de que no cambia nada
                         }
 
                         finish();
@@ -185,10 +218,10 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         if( textua.length()==0 ) {
             text.setError("Campo necesario");
             return false;
-        }else if(Integer.parseInt(textua)<0) {
+        }else if(Float.parseFloat(textua)<0) {
             text.setError("No puede ser un numero negativo");
             return false;
-        }else if((!textua.matches("[0-9]+\\.?")) ){
+        }else if((!textua.matches("([0-9]*[.])?[0-9]+")) ){
             text.setError("Solo numeros");
             return false;
         }else if (textua.length()>6) {
@@ -269,5 +302,24 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
             default:
                 return 0;
         }
+    }
+
+    private void eliminarEntrada() {
+
+        Entradas entradas = db.entradasDao().findByIds(idO, idE);
+        Objetivos objetivos = db.objetivosDao().findById(idO);
+
+        db.objetivosDao().updateAhorrado(objetivos.getId(), (objetivos.getAhorrado() - entradas.getCantidad()));
+
+        objetivos = db.objetivosDao().findById(idO);
+
+        if (objetivos.getAhorrado() >= objetivos.getCantidad()) {
+            db.objetivosDao().updateCompletado(objetivos.getId(), true);
+        } else {
+            db.objetivosDao().updateCompletado(objetivos.getId(), false);
+        }
+
+        db.entradasDao().deleteByIds(idO, idE);
+        finish();
     }
 }

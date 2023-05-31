@@ -8,85 +8,110 @@
     tools:context=".EditEntradasActivity">
 
 
-    <EditText
-        android:id="@+id/etEditNombreEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Nombre de la Entrada"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
-
-    <Spinner
-        android:id="@+id/spinnerEditCategoriaEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:minHeight="48dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/tvEditErrorCategoriaEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Seleccione una categoría"
-        android:textColor="#FF0000"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-    <EditText
-        android:id="@+id/etEditFechaEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="Fecha"
-        android:inputType="date"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
-
-    <TextView
-        android:id="@+id/tvEditErrorFechaEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textColor="#FF0000"
-        android:textStyle="bold"
-        android:visibility="gone" />
-
-    <EditText
-        android:id="@+id/etEditCantidadEntradas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Cantidad"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnVolverEntradasFragment"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etEditNombreEntradas"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Cancelar" />
+            android:ems="10"
+            android:hint="Nombre de la Entrada"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColor="@color/black" />
 
-        <Button
-            android:id="@+id/btnSaveEntrada"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/spinnerEditCategoriaEntradas"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Guardar Entrada" />
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvEditErrorCategoriaEntradas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Seleccione una categoría"
+            android:textColor="#FF0000"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/etEditFechaEntradas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="Fecha"
+            android:inputType="date"
+            android:minHeight="48dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tvEditErrorFechaEntradas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="#FF0000"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/etEditCantidadEntradas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Cantidad"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnVolverEntradasFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/btnSaveEntrada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Guardar Entrada" />
+        </LinearLayout>
+
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnEliminarEntrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            app:backgroundTint="#FF0000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/basura"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

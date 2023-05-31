@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.R;
+import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 
 public class EstadisticasResumenFragment extends Fragment implements View.OnClickListener {
 
@@ -46,10 +48,6 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estadisticas_resumen, container, false);
-
-        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
-
-        Objetivos objetivo = appDatabase.objetivosDao().findById(id);
 
         tvNombre = view.findViewById(R.id.tvNombre);
         progressBar = view.findViewById(R.id.progressBar);
@@ -271,6 +269,12 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
 
     private void eliminarObjetivo() {
         AppDatabase db = AppDatabase.getDatabase(getContext());
+        List<Entradas> entradas = db.entradasDao().findByIdObj(id);
+        if (entradas.size() != 0) {
+            for (int i = 0; i < entradas.size(); i++) {
+                db.entradasDao().deleteByIds(id, entradas.get(i).getIdEntrada());
+            }
+        }
         db.objetivosDao().deleteById(id);
     }
 }
