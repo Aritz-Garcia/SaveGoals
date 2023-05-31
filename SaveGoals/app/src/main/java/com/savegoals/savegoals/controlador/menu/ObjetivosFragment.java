@@ -60,8 +60,8 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         linearLayoutObjetivos.removeAllViews();
         linearLayoutCumplidos.removeAllViews();
     }

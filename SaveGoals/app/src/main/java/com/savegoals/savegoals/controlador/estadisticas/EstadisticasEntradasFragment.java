@@ -24,8 +24,11 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class EstadisticasEntradasFragment extends Fragment implements View.OnClickListener {
@@ -49,6 +52,23 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estadisticas_entradas, container, false);
 
+        lyEntradas = view.findViewById(R.id.lyEntradas);
+        btnAddEntrada = view.findViewById(R.id.btnAddEntrada);
+
+        btnAddEntrada.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lyEntradas.removeAllViews();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
 
         Objetivos objetivo = appDatabase.objetivosDao().findById(id);
@@ -67,11 +87,6 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
                 }
             }
         });
-
-        lyEntradas = view.findViewById(R.id.lyEntradas);
-        btnAddEntrada = view.findViewById(R.id.btnAddEntrada);
-
-        btnAddEntrada.setOnClickListener(this);
 
         for (int i = 0; i < entradas.size(); i++) {
 
@@ -152,6 +167,24 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
 
             lyEntradas.addView(lyGeneral);
 
+
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaMetida = null;
+            Date fechaFin = null;
+
+            try {
+                fechaMetida = formato.parse(entradas.get(i).getFecha());
+                fechaFin = formato.parse(objetivo.getFecha());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (!getFueraDias(fechaMetida, fechaFin)) {
+                nombre.setTextColor(Color.RED);
+                fecha.setTextColor(Color.RED);
+                cantidad.setTextColor(Color.RED);
+            }
+
         }
 
         if (objetivo.getCompletado()) {
@@ -160,7 +193,6 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             btnAddEntrada.setVisibility(View.VISIBLE);
         }
 
-        return view;
     }
 
     @Override
@@ -175,5 +207,25 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
     private static String obtieneDosDecimales(float value){
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(value);
+    }
+
+    private boolean getFueraDias(Date fechaMetida, Date fechaFin) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate fechaMetidaLocal = fechaMetida.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinLocal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (fechaMetidaLocal.getYear() == fechaFinLocal.getYear() && fechaMetidaLocal.getMonth() == fechaFinLocal.getMonth() && fechaMetidaLocal.getDayOfMonth() == fechaFinLocal.getDayOfMonth()) {
+                // Mismo dia
+                return true;
+            } else if (fechaMetidaLocal.isAfter(fechaFinLocal)) {
+                // Despues
+                return false;
+            } else {
+                // antes
+                return true;
+            }
+
+        }
+        return true;
     }
 }

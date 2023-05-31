@@ -1,5 +1,7 @@
 package com.savegoals.savegoals;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 import com.savegoals.savegoals.dialog.DatePickerFragment;
@@ -20,38 +21,45 @@ import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class AddObjetivosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     Spinner spinnerCategoria;
     ArrayList<CustomItem> customList;
-    Button btnGuardar, btnVolverObjetivos;
+    Button btnGuardar, btnVolverEntradas;
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
+    int idO, idE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_objetivos);
+        setContentView(R.layout.activity_edit_entradas);
 
         db = AppDatabase.getDatabase(this);
 
-        etNombre = findViewById(R.id.etNombre);
-        etFecha = findViewById(R.id.etFecha);
-        etCantidad = findViewById(R.id.etCantidad);
+        idO = getIntent().getIntExtra("idO", 0);
+        idE = getIntent().getIntExtra("idE", 0);
 
-        tvErrorCategoria = findViewById(R.id.tvErrorCategoria);
-        tvErrorFecha = findViewById(R.id.tvErrorFecha);
+        Entradas entradas = db.entradasDao().findByIds(idO, idE);
 
-        btnGuardar = findViewById(R.id.btnAddObjetivo);
-        btnVolverObjetivos = findViewById(R.id.btnVolverObjetivos);
+        etNombre = findViewById(R.id.etEditNombreEntradas);
+        etFecha = findViewById(R.id.etEditFechaEntradas);
+        etCantidad = findViewById(R.id.etEditCantidadEntradas);
 
-        spinnerCategoria = findViewById(R.id.spinnerCategoria);
+        tvErrorCategoria = findViewById(R.id.tvEditErrorCategoriaEntradas);
+        tvErrorFecha = findViewById(R.id.tvEditErrorFechaEntradas);
+
+        btnGuardar = findViewById(R.id.btnSaveEntrada);
+        btnVolverEntradas = findViewById(R.id.btnVolverEntradasFragment);
+
+        spinnerCategoria = findViewById(R.id.spinnerEditCategoriaEntradas);
 
         etFecha.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
-        btnVolverObjetivos.setOnClickListener(this);
+        btnVolverEntradas.setOnClickListener(this);
 
         customList = getCustomList();
         CustomAdapter adapter = new CustomAdapter(this, customList);
@@ -60,23 +68,41 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             spinnerCategoria.setOnItemSelectedListener(this);
         }
 
+        etNombre.setText(entradas.getNombre());
+        etFecha.setText(entradas.getFecha());
+        etCantidad.setText(String.valueOf(entradas.getCantidad()));
+        spinnerCategoria.setSelection(getIdCategoria(entradas.getCategoria()));
     }
 
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
         customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Viaje", R.drawable.avion));
-        customList.add(new CustomItem("Ahorrar", R.drawable.hucha));
+        customList.add(new CustomItem("Cartera", R.drawable.cartera));
+        customList.add(new CustomItem("Hucha", R.drawable.hucha));
+        customList.add(new CustomItem("Trabajo", R.drawable.martillo));
         customList.add(new CustomItem("Regalo", R.drawable.regalo));
         customList.add(new CustomItem("Compras", R.drawable.carrito));
         customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Juego", R.drawable.mando));
         customList.add(new CustomItem("Otros", R.drawable.otros));
         return customList;
     }
 
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == etFecha.getId()) {
+            showDatePickerDialog();
+        } else if (v.getId() == btnGuardar.getId()) {
+            // Guardar en la base de datos los cambios
+        } else if (v.getId() == btnVolverEntradas.getId()) {
+            // volver a la pantalla de entradas
+            finish();
+        }
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     @Override
@@ -99,19 +125,6 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == btnGuardar.getId()) {
-            // Guardar en la base de datos
-            guardarBaseDeDatos();
-        } else if (v.getId() == etFecha.getId()) {
-            showDatePickerDialog();
-        } else if (v.getId() == btnVolverObjetivos.getId()) {
-            // Volver a la pantalla de objetivos
-            finish();
-        }
-    }
-
     private void guardarBaseDeDatos() {
         // Guardar en la base de datos
         if (spinnerCategoria.getSelectedItemId() != 0) {
@@ -119,14 +132,33 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             if (leerString(etNombre.getText().toString(), etNombre)) {
                 if (leerNumero(etCantidad.getText().toString(), etCantidad)) {
                     if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
-                        Objetivos objetivo = new Objetivos();
-                        objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
-                        objetivo.setNombre(etNombre.getText().toString());
-                        objetivo.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
-                        objetivo.setFecha(etFecha.getText().toString());
-                        objetivo.setAhorrado(0);
-                        objetivo.setCompletado(false);
-                        db.objetivosDao().insertAll(objetivo);
+                        // DATOS CORRECTOS
+                        int i = 0;
+                        Entradas entradas = db.entradasDao().findByIds(idO, idE);
+                        Objetivos objetivos = db.objetivosDao().findById(idO);
+                        if (spinnerCategoria.getSelectedItemId() != getIdCategoria(entradas.getCategoria())) {
+                            // Cambiar categoria
+                            entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                            i++;
+                        }
+
+                        if (!entradas.getNombre().equals(etNombre.getText().toString())) {
+                            // Cambiar nombre
+                            entradas.setNombre(etNombre.getText().toString());
+                            i++;
+                        }
+
+                        if (entradas.getCantidad() != Integer.parseInt(etCantidad.getText().toString())) {
+                            // Cambiar cantidad
+                            if (entradas.getCantidad() > Integer.parseInt(etCantidad.getText().toString())) {
+                                // Restar cantidad
+                            } else {
+                                // Sumar cantidad
+                            }
+
+                            entradas.setCantidad(Integer.parseInt(etCantidad.getText().toString()));
+                            i++;
+                        }
 
                         finish();
                     }
@@ -185,9 +217,8 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             text.setVisibility(View.VISIBLE);
             return false;
         } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
-            text.setText("La fecha no puede ser la actual");
-            text.setVisibility(View.VISIBLE);
-            return false;
+            text.setVisibility(View.GONE);
+            return true;
         } else if (fecha.before(today)) {
             text.setText("La fecha no puede ser posterior a la actual");
             text.setVisibility(View.VISIBLE);
@@ -201,21 +232,42 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     private String getCategoria(int posicion) {
         switch (posicion) {
             case 1:
-                return "Viaje";
+                return "Cartera";
             case 2:
-                return "Ahorrar";
+                return "Hucha";
             case 3:
-                return "Regalo";
+                return "Trabajo";
             case 4:
-                return "Compras";
+                return "Regalo";
             case 5:
-                return "Clase";
+                return "Compras";
             case 6:
-                return "Juego";
+                return "Clase";
             case 7:
                 return "Otros";
             default:
                 return "Seleccionar";
+        }
+    }
+
+    private int getIdCategoria(String categoria) {
+        switch (categoria) {
+            case "Cartera":
+                return 1;
+            case "Hucha":
+                return 2;
+            case "Trabajo":
+                return 3;
+            case "Regalo":
+                return 4;
+            case "Compras":
+                return 5;
+            case "Clase":
+                return 6;
+            case "Otros":
+                return 7;
+            default:
+                return 0;
         }
     }
 }

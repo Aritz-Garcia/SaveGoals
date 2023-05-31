@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddEntradasActivity">
+    tools:context=".EditEntradasActivity">
+
 
     <EditText
-        android:id="@+id/etNombreEntradas"
+        android:id="@+id/etEditNombreEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -19,7 +20,7 @@
         android:textColor="@color/black" />
 
     <Spinner
-        android:id="@+id/spinnerCategoriaEntradas"
+        android:id="@+id/spinnerEditCategoriaEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -27,7 +28,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/tvErrorCategoriaEntradas"
+        android:id="@+id/tvEditErrorCategoriaEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -37,7 +38,7 @@
         android:visibility="gone" />
 
     <EditText
-        android:id="@+id/etFechaEntradas"
+        android:id="@+id/etEditFechaEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -49,7 +50,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tvErrorFechaEntradas"
+        android:id="@+id/tvEditErrorFechaEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -58,7 +59,7 @@
         android:visibility="gone" />
 
     <EditText
-        android:id="@+id/etCantidadEntradas"
+        android:id="@+id/etEditCantidadEntradas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -75,18 +76,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnVolverEntradas"
+            android:id="@+id/btnVolverEntradasFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Cancelar" />
 
         <Button
-            android:id="@+id/btnAddEntradas"
+            android:id="@+id/btnSaveEntrada"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Añadir Entrada" />
+            android:text="Guardar Entrada" />
     </LinearLayout>
-
 </LinearLayout>

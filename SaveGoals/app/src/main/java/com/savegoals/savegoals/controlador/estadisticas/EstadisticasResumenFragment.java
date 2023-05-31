@@ -20,6 +20,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -74,6 +75,21 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
 
         btnEliminar = view.findViewById(R.id.btnEliminar);
         btnEliminar.setOnClickListener(this);
+        return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        progressBar.setProgress(1);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
+
+        Objetivos objetivo = appDatabase.objetivosDao().findById(id);
 
         if (objetivo != null) {
 
@@ -192,30 +208,22 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
                 tvPendiente.setVisibility(View.GONE);
             }
         }
-        return view;
     }
 
     private int getDias(Date hoy, Date fechaFin) {
-        LocalDate hoyLocal = null;
-        LocalDate fechaFinLocal = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            hoyLocal = LocalDate.of(hoy.getYear(), hoy.getMonth(), hoy.getDay());
-            fechaFinLocal = LocalDate.of(fechaFin.getYear(), fechaFin.getMonth(), fechaFin.getDay());
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate hoyLocal = hoy.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinLocal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             return (int) ChronoUnit.DAYS.between(hoyLocal, fechaFinLocal);
         }
         return 1;
     }
 
     private int getSemanas(Date hoy, Date fechaFin) {
-        LocalDate hoyLocal = null;
-        LocalDate fechaFinLocal = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            hoyLocal = LocalDate.of(hoy.getYear(), hoy.getMonth(), hoy.getDay());
-            fechaFinLocal = LocalDate.of(fechaFin.getYear(), fechaFin.getMonth(), fechaFin.getDay());
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate hoyLocal = hoy.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinLocal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
             long dias = ChronoUnit.DAYS.between(hoyLocal, fechaFinLocal);
             if (dias > 7) {
                 return (int) (dias / 7);
@@ -225,13 +233,10 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
     }
 
     private int getMeses(Date hoy, Date fechaFin) {
-        LocalDate hoyLocal = null;
-        LocalDate fechaFinLocal = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            hoyLocal = LocalDate.of(hoy.getYear(), hoy.getMonth(), hoy.getDay());
-            fechaFinLocal = LocalDate.of(fechaFin.getYear(), fechaFin.getMonth(), fechaFin.getDay());
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate hoyLocal = hoy.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinLocal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
             long dias = ChronoUnit.DAYS.between(hoyLocal, fechaFinLocal);
             if (dias > 30) {
                 return (int) (dias / 30);

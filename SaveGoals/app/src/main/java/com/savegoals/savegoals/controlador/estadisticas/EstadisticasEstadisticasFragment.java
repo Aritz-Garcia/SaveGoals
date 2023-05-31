@@ -53,16 +53,29 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estadisticas_estadisticas, container, false);
 
-        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
-
-        Objetivos objetivo = appDatabase.objetivosDao().findById(id);
-        List<Entradas> entradas = appDatabase.entradasDao().findByIdObj(id);
-
         pieChart = view.findViewById(R.id.piechart);
         tvNombre = view.findViewById(R.id.tvNombreEst);
         tvUltimasEntradas = view.findViewById(R.id.tvUltimasEntradas);
         tvErrorEntradas = view.findViewById(R.id.tvErrorEntradas);
         lyUltimasEntradas = view.findViewById(R.id.lyUltimasEntradas);
+
+
+        return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lyUltimasEntradas.removeAllViews();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
+
+        Objetivos objetivo = appDatabase.objetivosDao().findById(id);
+        List<Entradas> entradas = appDatabase.entradasDao().findByIdObj(id);
 
         if (objetivo != null) {
             tvNombre.setText(objetivo.getNombre());
@@ -192,8 +205,6 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                 }
             }
         }
-
-        return view;
     }
 
     private static String obtieneDosDecimales(float value){
