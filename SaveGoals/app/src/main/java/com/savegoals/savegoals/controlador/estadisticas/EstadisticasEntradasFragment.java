@@ -211,6 +211,7 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
         if (v.getId() == btnAddEntrada.getId()) {
             Intent intent = new Intent(getContext(), AddEntradasActivity.class);
             intent.putExtra("id", id);
+            intent.putExtra("restar", false);
             startActivity(intent);
         }
     }

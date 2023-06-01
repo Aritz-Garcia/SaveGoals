@@ -32,6 +32,7 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
     TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
     int id;
+    boolean restar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         db = AppDatabase.getDatabase(this);
 
         id = getIntent().getIntExtra("id", 0);
+        restar = getIntent().getBooleanExtra("restar", false);
 
         etNombre = findViewById(R.id.etNombreEntradas);
         etFecha = findViewById(R.id.etFechaEntradas);
@@ -57,6 +59,10 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         etFecha.setOnClickListener(this);
         btnGuardar.setOnClickListener(this);
         btnVolverEntradas.setOnClickListener(this);
+
+        if (restar) {
+            btnGuardar.setText("Restar");
+        }
 
         customList = getCustomList();
         CustomAdapter adapter = new CustomAdapter(this, customList);
@@ -131,7 +137,11 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
                         float ahorrado = objetivos.getAhorrado();
                         float cantidad = objetivos.getCantidad();
 
-                        ahorrado += Float.parseFloat(etCantidad.getText().toString());
+                        if (restar) {
+                            ahorrado -= Float.parseFloat(etCantidad.getText().toString());
+                        } else {
+                            ahorrado += Float.parseFloat(etCantidad.getText().toString());
+                        }
                         db.objetivosDao().updateAhorrado(id, ahorrado);
                         if (ahorrado >= cantidad) {
                             db.objetivosDao().updateCompletado(id, true);
@@ -152,7 +162,13 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
 
                         entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
                         entradas.setNombre(etNombre.getText().toString());
-                        entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
+                        if (restar) {
+                            float restado = 0;
+                            restado -= Float.parseFloat(etCantidad.getText().toString());
+                            entradas.setCantidad(restado);
+                        } else {
+                            entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
+                        }
                         entradas.setFecha(etFecha.getText().toString());
 
                         db.entradasDao().insertAll(entradas);

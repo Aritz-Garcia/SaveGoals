@@ -1,10 +1,14 @@
 package com.savegoals.savegoals.controlador.estadisticas;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,8 +16,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.savegoals.savegoals.AddEntradasActivity;
 import com.savegoals.savegoals.R;
-import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 
@@ -24,15 +28,17 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.List;
 
 public class EstadisticasResumenFragment extends Fragment implements View.OnClickListener {
 
     ProgressBar progressBar;
-    TextView tvNombre, tvPorcentaje, tvAhorradotxt, tvPendientetxt, tvTotaltxt, tvAhorrado, tvPendiente, tvTotal, tvText,
-            tvDiatxt, tvSemanatxt, tvMestxt, tvDia, tvSemana, tvMes;
+    TextView tvPorcentaje, tvAhorradotxt, tvPendientetxt, tvTotaltxt, tvAhorrado, tvPendiente, tvTotal, tvText,
+            tvDiatxt, tvSemanatxt, tvMestxt, tvDia, tvSemana, tvMes, tvFecha, tvCategoria;
     int id;
-    FloatingActionButton btnEliminar;
+    FloatingActionButton btnAñadirEntrada;
+    LinearLayout lyFecha, lyCategoria;
+    ImageView ivCategoria;
+
 
     public EstadisticasResumenFragment(int id) {
         // Required empty public constructor
@@ -49,7 +55,6 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_estadisticas_resumen, container, false);
 
-        tvNombre = view.findViewById(R.id.tvNombre);
         progressBar = view.findViewById(R.id.progressBar);
         tvPorcentaje = view.findViewById(R.id.tvPorcentaje);
 
@@ -71,8 +76,15 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
         tvSemana = view.findViewById(R.id.tvSemana);
         tvMes = view.findViewById(R.id.tvMes);
 
-        btnEliminar = view.findViewById(R.id.btnEliminar);
-        btnEliminar.setOnClickListener(this);
+        lyFecha = view.findViewById(R.id.lyFecha);
+        lyCategoria = view.findViewById(R.id.lyCategoria);
+        tvFecha = view.findViewById(R.id.tvFecha);
+        tvCategoria = view.findViewById(R.id.tvCategoria);
+        ivCategoria = view.findViewById(R.id.ivCategoria);
+
+        btnAñadirEntrada = view.findViewById(R.id.btnAñadirEntardaResumen);
+        btnAñadirEntrada.setOnClickListener(this);
+
         return view;
     }
 
@@ -196,7 +208,6 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
                 tvPorcentaje.setText(porcentajeCalc + "%");
             }
 
-            tvNombre.setText(objetivo.getNombre());
             tvAhorrado.setText(obtieneDosDecimales(objetivo.getAhorrado()) + "€");
             tvPendiente.setText(obtieneDosDecimales(pendiente) + "€");
             tvTotal.setText(obtieneDosDecimales(objetivo.getCantidad()) + "€");
@@ -204,7 +215,60 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             if (objetivo.getCompletado()) {
                 tvPendientetxt.setVisibility(View.GONE);
                 tvPendiente.setVisibility(View.GONE);
+                btnAñadirEntrada.setVisibility(View.GONE);
             }
+
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params2.width = 0;
+            params2.weight = 1;
+            lyFecha.setLayoutParams(params2);
+            lyCategoria.setLayoutParams(params2);
+            lyFecha.setGravity(Gravity.CENTER);
+            lyCategoria.setGravity(Gravity.CENTER);
+
+            tvFecha.setText(objetivo.getFecha());
+            tvFecha.setTextColor(Color.BLACK);
+            tvCategoria.setText(objetivo.getCategoria());
+            tvCategoria.setTextColor(Color.BLACK);
+            switch (objetivo.getCategoria()) {
+                case "Viaje":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.avion));
+                    break;
+
+                case "Ahorrar":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
+                    break;
+
+                case "Regalo":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
+                    break;
+
+                case "Compras":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
+                    break;
+
+                case "Clase":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.clase));
+                    break;
+
+                case "Juego":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.mando));
+                    break;
+
+                case "Otros":
+                    ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.otros));
+                    break;
+
+            }
+
+
+            if (!leerFecha(today, fechaFin)) {
+                tvFecha.setTextColor(Color.RED);
+            }
+
         }
     }
 
@@ -261,20 +325,11 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == btnEliminar.getId()) {
-            eliminarObjetivo();
-            getActivity().finish();
+        if (v.getId() == btnAñadirEntrada.getId()) {
+            Intent intent = new Intent(getContext(), AddEntradasActivity.class);
+            intent.putExtra("id", id);
+            intent.putExtra("restar", false);
+            startActivity(intent);
         }
-    }
-
-    private void eliminarObjetivo() {
-        AppDatabase db = AppDatabase.getDatabase(getContext());
-        List<Entradas> entradas = db.entradasDao().findByIdObj(id);
-        if (entradas.size() != 0) {
-            for (int i = 0; i < entradas.size(); i++) {
-                db.entradasDao().deleteByIds(id, entradas.get(i).getIdEntrada());
-            }
-        }
-        db.objetivosDao().deleteById(id);
     }
 }

@@ -1,7 +1,5 @@
 package com.savegoals.savegoals;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +8,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.data.entities.Entradas;
@@ -22,7 +23,6 @@ import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -31,6 +31,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     Button btnGuardar, btnVolverEntradas;
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
+    Switch swRestar;
     AppDatabase db;
     int idO, idE;
     FloatingActionButton btnEliminar;
@@ -54,6 +55,8 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         tvErrorCategoria = findViewById(R.id.tvEditErrorCategoriaEntradas);
         tvErrorFecha = findViewById(R.id.tvEditErrorFechaEntradas);
 
+        swRestar = findViewById(R.id.swRestarEdit);
+
         btnGuardar = findViewById(R.id.btnSaveEntrada);
         btnVolverEntradas = findViewById(R.id.btnVolverEntradasFragment);
 
@@ -75,7 +78,16 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
         etNombre.setText(entradas.getNombre());
         etFecha.setText(entradas.getFecha());
-        etCantidad.setText(String.valueOf(entradas.getCantidad()));
+
+        boolean negativo = String.valueOf(entradas.getCantidad()).contains("-");
+        if (negativo) {
+            swRestar.setChecked(true);
+            String[] cantidad = String.valueOf(entradas.getCantidad()).split("-");
+            etCantidad.setText(cantidad[1]);
+        } else {
+            swRestar.setChecked(false);
+            etCantidad.setText(String.valueOf(entradas.getCantidad()));
+        }
         spinnerCategoria.setSelection(getIdCategoria(entradas.getCategoria()));
     }
 
@@ -158,14 +170,42 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
                         }
 
                         if (entradas.getCantidad() != Float.parseFloat(etCantidad.getText().toString())) {
+                            boolean negativo = String.valueOf(entradas.getCantidad()).contains("-");
+                            if (negativo && swRestar.isChecked()) {
+                                // No cambia nada
+                            } else {
+                                // Cambiar cantidad
+                                if (entradas.getCantidad() > Float.parseFloat(etCantidad.getText().toString())) {
+                                    // Restar cantidad
+                                    float ahorrado = objetivos.getAhorrado() - (entradas.getCantidad() - Float.parseFloat(etCantidad.getText().toString()));
+                                    objetivos.setAhorrado(ahorrado);
+                                } else {
+                                    // Sumar cantidad
+                                    float ahorrado = objetivos.getAhorrado() + (Float.parseFloat(etCantidad.getText().toString()) - entradas.getCantidad());
+                                    objetivos.setAhorrado(ahorrado);
+                                }
+
+                                // Objetivo Completado
+                                if (objetivos.getAhorrado() >= objetivos.getCantidad()) {
+                                    objetivos.setCompletado(true);
+                                } else {
+                                    objetivos.setCompletado(false);
+                                }
+
+                                entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
+                                i++;
+                            }
+                        } else if (swRestar.isChecked()) {
                             // Cambiar cantidad
-                            if (entradas.getCantidad() > Float.parseFloat(etCantidad.getText().toString())) {
+                            float cantidad = 0;
+                            cantidad -= Float.parseFloat(etCantidad.getText().toString());
+                            if (entradas.getCantidad() > cantidad) {
                                 // Restar cantidad
-                                float ahorrado = objetivos.getAhorrado() - (entradas.getCantidad() - Float.parseFloat(etCantidad.getText().toString()));
+                                float ahorrado = objetivos.getAhorrado() - (entradas.getCantidad() - cantidad);
                                 objetivos.setAhorrado(ahorrado);
                             } else {
                                 // Sumar cantidad
-                                float ahorrado = objetivos.getAhorrado() + (Float.parseFloat(etCantidad.getText().toString()) - entradas.getCantidad());
+                                float ahorrado = objetivos.getAhorrado() + (cantidad - entradas.getCantidad());
                                 objetivos.setAhorrado(ahorrado);
                             }
 
@@ -176,7 +216,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
                                 objetivos.setCompletado(false);
                             }
 
-                            entradas.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
+                            entradas.setCantidad(cantidad);
                             i++;
                         }
 

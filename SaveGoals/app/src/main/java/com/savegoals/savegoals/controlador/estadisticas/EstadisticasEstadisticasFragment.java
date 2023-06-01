@@ -33,7 +33,7 @@ import java.util.List;
 
 public class EstadisticasEstadisticasFragment extends Fragment {
 
-    TextView tvNombre, tvUltimasEntradas, tvErrorEntradas;
+    TextView tvUltimasEntradas, tvErrorEntradas;
     LinearLayout lyUltimasEntradas;
     PieChart pieChart;
     int id;
@@ -54,7 +54,6 @@ public class EstadisticasEstadisticasFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_estadisticas_estadisticas, container, false);
 
         pieChart = view.findViewById(R.id.piechart);
-        tvNombre = view.findViewById(R.id.tvNombreEst);
         tvUltimasEntradas = view.findViewById(R.id.tvUltimasEntradas);
         tvErrorEntradas = view.findViewById(R.id.tvErrorEntradas);
         lyUltimasEntradas = view.findViewById(R.id.lyUltimasEntradas);
@@ -76,10 +75,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
 
         Objetivos objetivo = appDatabase.objetivosDao().findById(id);
         List<Entradas> entradas = appDatabase.entradasDao().findByIdObj(id);
-
-        if (objetivo != null) {
-            tvNombre.setText(objetivo.getNombre());
-        }
+        int z = 0;
 
         if (entradas.size() == 0) {
             pieChart.setVisibility(View.GONE);
@@ -107,23 +103,34 @@ public class EstadisticasEstadisticasFragment extends Fragment {
             ArrayList<PieEntry> pieEntries = new ArrayList<>();
 
             for (int i = 0; i < entradas.size(); i++) {
-                PieEntry pieEntry = new PieEntry(entradas.get(i).getCantidad(), entradas.get(i).getNombre());
+                boolean negativo = String.valueOf(entradas.get(i).getCantidad()).contains("-");
+                if (!negativo) {
+                    PieEntry pieEntry = new PieEntry(entradas.get(i).getCantidad(), entradas.get(i).getNombre());
 
-                pieEntries.add(pieEntry);
+                    pieEntries.add(pieEntry);
+                    z++;
+                }
             }
 
-            PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
-            pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-            pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-            pieDataSet.setSliceSpace(2);
-            pieDataSet.setValueTextSize(12);
-            pieChart.setData(new PieData(pieDataSet));
-            pieChart.setEntryLabelColor(R.color.black);
-            pieChart.setDrawEntryLabels(true);
-            pieChart.setUsePercentValues(false);
-            pieChart.setCenterText(objetivo.getNombre());
-            pieChart.animateXY(3000, 3000);
-            pieChart.getDescription().setEnabled(false);
+            if (z == 0) {
+                pieChart.setVisibility(View.GONE);
+                tvErrorEntradas.setText("Las entradas de este objetivo son negativas");
+                tvErrorEntradas.setVisibility(View.VISIBLE);
+            } else {
+                PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
+                pieDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+                pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                pieDataSet.setSliceSpace(2);
+                pieDataSet.setValueTextSize(12);
+                pieChart.setData(new PieData(pieDataSet));
+                pieChart.setEntryLabelColor(R.color.black);
+                pieChart.setDrawEntryLabels(true);
+                pieChart.setUsePercentValues(false);
+                pieChart.setCenterText(objetivo.getNombre());
+                pieChart.animateXY(3000, 3000);
+                pieChart.getDescription().setEnabled(false);
+            }
+
 
             for (int i = 0; i < entradas.size(); i++) {
                 if (i < 3) {
