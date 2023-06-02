@@ -22,7 +22,6 @@
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="OBJETIVOS"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -41,7 +40,6 @@
                 android:layout_marginTop="25dp"
                 android:gravity="center"
                 android:text="CUMPLIDOS"
-                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

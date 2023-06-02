@@ -15,8 +15,7 @@
         android:ems="10"
         android:hint="Nombre de la Entrada"
         android:inputType="text"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
+        android:minHeight="48dp" />
 
     <Spinner
         android:id="@+id/spinnerCategoriaEntradas"
@@ -45,8 +44,7 @@
         android:focusable="false"
         android:hint="Fecha"
         android:inputType="date"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
+        android:minHeight="48dp" />
 
     <TextView
         android:id="@+id/tvErrorFechaEntradas"
@@ -65,8 +63,7 @@
         android:ems="10"
         android:hint="Cantidad"
         android:inputType="numberDecimal"
-        android:minHeight="48dp"
-        android:textColor="@color/black" />
+        android:minHeight="48dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

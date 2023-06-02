@@ -230,9 +230,7 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             lyCategoria.setGravity(Gravity.CENTER);
 
             tvFecha.setText(objetivo.getFecha());
-            tvFecha.setTextColor(Color.BLACK);
             tvCategoria.setText(objetivo.getCategoria());
-            tvCategoria.setTextColor(Color.BLACK);
             switch (objetivo.getCategoria()) {
                 case "Viaje":
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.avion));

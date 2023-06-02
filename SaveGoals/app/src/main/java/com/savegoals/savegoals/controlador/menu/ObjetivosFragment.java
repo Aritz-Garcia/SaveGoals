@@ -2,7 +2,6 @@ package com.savegoals.savegoals.controlador.menu;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -66,6 +65,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         linearLayoutCumplidos.removeAllViews();
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onResume() {
         super.onResume();
@@ -113,7 +113,6 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsNombre.weight = 6;
                 nombre.setLayoutParams(paramsNombre);
                 nombre.setGravity(Gravity.CENTER);
-                nombre.setTextColor(Color.BLACK);
 
                 ImageView icono = new ImageView(getContext());
                 LinearLayout.LayoutParams paramsIcono = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -154,11 +153,9 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosSinCompletar.get(i).getFecha());
-                fecha.setTextColor(Color.BLACK);
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosSinCompletar.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosSinCompletar.get(i).getCantidad()) + "€");
-                cantidad.setTextColor(Color.BLACK);
 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -185,7 +182,6 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
                 porcentaje.setGravity(Gravity.CENTER);
-                porcentaje.setTextColor(Color.BLACK);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);
@@ -252,7 +248,6 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsNombre.width = 0;
                 paramsNombre.weight = 6;
                 nombre.setLayoutParams(paramsNombre);
-                nombre.setTextColor(Color.BLACK);
                 nombre.setGravity(Gravity.CENTER);
 
                 ImageView icono = new ImageView(getContext());
@@ -293,11 +288,9 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosCompletados.get(i).getFecha());
-                fecha.setTextColor(Color.BLACK);
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosCompletados.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosCompletados.get(i).getCantidad()) + "€");
-                cantidad.setTextColor(Color.BLACK);
 
                 ProgressBar progressBar = new ProgressBar(getContext(), null, android.R.attr.progressBarStyleHorizontal);
                 LinearLayout.LayoutParams paramsProgress = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -316,7 +309,6 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsPorcentaje.weight = 2;
                 porcentaje.setLayoutParams(paramsPorcentaje);
                 porcentaje.setGravity(Gravity.CENTER);
-                porcentaje.setTextColor(Color.BLACK);
 
                 // Add views
                 linearLayoutPeq.addView(cantidad);

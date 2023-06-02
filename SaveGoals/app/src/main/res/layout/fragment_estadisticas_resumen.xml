@@ -103,7 +103,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="AHORRADO"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -113,7 +112,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="PENDIENTE"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -123,7 +121,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="TOTAL"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -137,24 +134,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvPendiente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
         </LinearLayout>
 
         <TextView
@@ -164,7 +158,6 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:text="AHORRO NECESARIO"
-            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -180,7 +173,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="DIA"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -190,7 +182,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="SEMANA"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
@@ -200,7 +191,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="MES"
-                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -214,24 +204,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvSemana"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/tvMes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="@color/black" />
+                android:gravity="center" />
         </LinearLayout>
 
     </LinearLayout>

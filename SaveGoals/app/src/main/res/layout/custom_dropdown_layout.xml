@@ -15,7 +15,6 @@
         android:id="@+id/tvDropDownLayout"
         android:text="Prueba"
         android:textSize="20sp"
-        android:textColor="@android:color/black"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

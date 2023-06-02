@@ -140,7 +140,6 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             paramsfecha.weight = 4;
             fecha.setLayoutParams(paramsfecha);
             fecha.setText(entradas.get(i).getFecha());
-            fecha.setTextColor(Color.BLACK);
             fecha.setGravity(Gravity.CENTER);
 
             TextView nombre = new TextView(getContext());
@@ -149,7 +148,6 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             paramsNombre.weight = 5;
             nombre.setLayoutParams(paramsNombre);
             nombre.setText(entradas.get(i).getNombre());
-            nombre.setTextColor(Color.BLACK);
             nombre.setGravity(Gravity.CENTER);
 
             TextView cantidad = new TextView(getContext());
@@ -158,7 +156,6 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             paramsCantidad.weight = 3;
             cantidad.setLayoutParams(paramsCantidad);
             cantidad.setText(obtieneDosDecimales(entradas.get(i).getCantidad()) + "€");
-            cantidad.setTextColor(Color.BLACK);
             cantidad.setGravity(Gravity.CENTER);
 
             lyGeneral.addView(icono);

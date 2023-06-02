@@ -1,6 +1,5 @@
 package com.savegoals.savegoals.controlador.estadisticas;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -123,7 +122,6 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                 pieDataSet.setSliceSpace(2);
                 pieDataSet.setValueTextSize(12);
                 pieChart.setData(new PieData(pieDataSet));
-                pieChart.setEntryLabelColor(R.color.black);
                 pieChart.setDrawEntryLabels(true);
                 pieChart.setUsePercentValues(false);
                 pieChart.setCenterText(objetivo.getNombre());
@@ -190,16 +188,13 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                     paramsNombre.width = 0;
                     paramsNombre.weight = 6;
                     nombre.setLayoutParams(paramsNombre);
-                    nombre.setTextColor(Color.BLACK);
                     nombre.setGravity(Gravity.CENTER);
 
                     TextView fecha = new TextView(getContext());
                     fecha.setText("Fecha: " + entradas.get(i).getFecha());
-                    fecha.setTextColor(Color.BLACK);
 
                     TextView cantidad = new TextView(getContext());
                     cantidad.setText(obtieneDosDecimales(entradas.get(i).getCantidad()) + "€");
-                    cantidad.setTextColor(Color.BLACK);
 
                     // Add views
                     linearLayoutPeq.addView(cantidad);

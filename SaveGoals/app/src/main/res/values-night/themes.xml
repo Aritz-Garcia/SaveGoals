@@ -12,5 +12,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- Added -->
+        <item name="android:textColor">@color/white</item>
+        <item name="tint">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="android:tint">@color/white</item>
+        <!-- Fondo de pagina en grey -->
+        <item name="android:windowBackground">@color/grey</item>
+        <item name="tabBackground">@color/grey</item>
     </style>
 </resources>
