@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_objetivos"
+        android:icon="@drawable/diana"
+        android:title="Objetivos" />
+
+    <item
+        android:id="@+id/navigation_esatdisticas"
+        android:icon="@drawable/estadisticas"
+        android:title="Estadisticas" />
+
+    <item
+        android:id="@+id/navigation_configuracion"
+        android:icon="@drawable/ajustes"
+        android:title="Configuración" />
+
+</menu>

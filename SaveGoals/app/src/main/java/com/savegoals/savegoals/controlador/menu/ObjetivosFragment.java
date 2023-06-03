@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -18,7 +19,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.AddObjetivosActivity;
 import com.savegoals.savegoals.MainActivity;
 import com.savegoals.savegoals.R;
@@ -32,7 +32,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
     LinearLayout linearLayoutObjetivos, linearLayoutCumplidos;
     TextView tv_objetivos, tv_cumplidos;
-    FloatingActionButton btn_add_objetivo;
+    ImageButton btnadd;
     SharedPreferences settingssp;
 
     public ObjetivosFragment() {
@@ -56,9 +56,9 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         linearLayoutCumplidos = view.findViewById(R.id.cumplidos);
         tv_objetivos = view.findViewById(R.id.tv_objetivos);
         tv_cumplidos = view.findViewById(R.id.tv_cumplidos);
-        btn_add_objetivo = view.findViewById(R.id.btnAdd);
+        btnadd = view.findViewById(R.id.btnAddObj);
 
-        btn_add_objetivo.setOnClickListener(this);
+        btnadd.setOnClickListener(this);
         linearLayoutObjetivos.setOnClickListener(this);
         linearLayoutCumplidos.setOnClickListener(this);
 
@@ -363,10 +363,11 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == btn_add_objetivo.getId()) {
+        if (v.getId() == btnadd.getId()) {
             Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
             startActivity(intent);
         }
+
     }
 
     private void setDayNight() {

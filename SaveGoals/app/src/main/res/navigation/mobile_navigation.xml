@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_objetivos">
+
+    <fragment
+        android:id="@+id/navigation_objetivos"
+        android:name="com.savegoals.savegoals.controlador.menu.ObjetivosFragment"
+        tools:layout="@layout/fragment_objetivos" />
+
+    <fragment
+        android:id="@+id/navigation_esatdisticas"
+        android:name="com.savegoals.savegoals.controlador.menu.EstadisticasFragment"
+        tools:layout="@layout/fragment_estadisticas" />
+
+    <fragment
+        android:id="@+id/navigation_configuracion"
+        android:name="com.savegoals.savegoals.controlador.menu.ConfiguracionFragment"
+        tools:layout="@layout/fragment_configuracion" />
+</navigation>
