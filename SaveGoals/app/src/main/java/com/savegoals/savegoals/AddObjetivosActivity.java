@@ -1,6 +1,8 @@
 package com.savegoals.savegoals;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
@@ -29,6 +32,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
     AppDatabase db;
+    SharedPreferences settingssp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,9 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             spinnerCategoria.setAdapter(adapter);
             spinnerCategoria.setOnItemSelectedListener(this);
         }
+
+        settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
 
     }
 
@@ -216,6 +223,15 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
                 return "Otros";
             default:
                 return "Seleccionar";
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 }

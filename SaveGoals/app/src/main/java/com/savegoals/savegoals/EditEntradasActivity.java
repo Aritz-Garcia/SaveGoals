@@ -1,6 +1,8 @@
 package com.savegoals.savegoals;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.data.entities.Entradas;
@@ -33,6 +36,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     TextView tvErrorCategoria, tvErrorFecha;
     Switch swRestar;
     AppDatabase db;
+    SharedPreferences settingssp;
     int idO, idE;
     FloatingActionButton btnEliminar;
 
@@ -42,6 +46,9 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_edit_entradas);
 
         db = AppDatabase.getDatabase(this);
+
+        settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
 
         idO = getIntent().getIntExtra("idO", 0);
         idE = getIntent().getIntExtra("idE", 0);
@@ -345,7 +352,6 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void eliminarEntrada() {
-
         Entradas entradas = db.entradasDao().findByIds(idO, idE);
         Objetivos objetivos = db.objetivosDao().findById(idO);
 
@@ -361,5 +367,14 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
         db.entradasDao().deleteByIds(idO, idE);
         finish();
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }

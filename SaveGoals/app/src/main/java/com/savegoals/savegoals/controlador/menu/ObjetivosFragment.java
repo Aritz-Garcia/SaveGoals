@@ -1,7 +1,10 @@
 package com.savegoals.savegoals.controlador.menu;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,6 +33,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
     LinearLayout linearLayoutObjetivos, linearLayoutCumplidos;
     TextView tv_objetivos, tv_cumplidos;
     FloatingActionButton btn_add_objetivo;
+    SharedPreferences settingssp;
 
     public ObjetivosFragment() {
         // Required empty public constructor
@@ -37,6 +42,8 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingssp = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -149,7 +156,11 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                         break;
 
                 }
-
+                if (settingssp.getBoolean("oscuro", false)) {
+                    icono.setColorFilter(Color.WHITE);
+                } else {
+                    icono.setColorFilter(Color.BLACK);
+                }
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosSinCompletar.get(i).getFecha());
@@ -285,6 +296,11 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                         break;
 
                 }
+                if (settingssp.getBoolean("oscuro", false)) {
+                    icono.setColorFilter(Color.WHITE);
+                } else {
+                    icono.setColorFilter(Color.BLACK);
+                }
 
                 TextView fecha = new TextView(getContext());
                 fecha.setText("Fecha: " + objetivosCompletados.get(i).getFecha());
@@ -350,6 +366,15 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
         if (v.getId() == btn_add_objetivo.getId()) {
             Intent intent = new Intent(getContext(), AddObjetivosActivity.class);
             startActivity(intent);
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 }

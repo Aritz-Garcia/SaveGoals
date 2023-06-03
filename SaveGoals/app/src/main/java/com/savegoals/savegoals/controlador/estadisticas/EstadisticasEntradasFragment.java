@@ -1,6 +1,8 @@
 package com.savegoals.savegoals.controlador.estadisticas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +40,7 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
     int id;
     LinearLayout lyEntradas;
     FloatingActionButton btnAddEntrada;
+    SharedPreferences settingssp;
 
     public EstadisticasEntradasFragment(int id) {
         // Required empty public constructor
@@ -46,6 +50,8 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingssp = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
     }
 
     @Override
@@ -132,6 +138,11 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
                     break;
 
+            }
+            if (settingssp.getBoolean("oscuro", false)) {
+                icono.setColorFilter(Color.WHITE);
+            } else {
+                icono.setColorFilter(Color.BLACK);
             }
 
             TextView fecha = new TextView(getContext());
@@ -236,5 +247,14 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
 
         }
         return true;
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }

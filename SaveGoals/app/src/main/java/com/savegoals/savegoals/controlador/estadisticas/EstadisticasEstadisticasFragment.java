@@ -1,5 +1,8 @@
 package com.savegoals.savegoals.controlador.estadisticas;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -35,6 +39,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
     TextView tvUltimasEntradas, tvErrorEntradas;
     LinearLayout lyUltimasEntradas;
     PieChart pieChart;
+    SharedPreferences settingssp;
     int id;
 
     public EstadisticasEstadisticasFragment(int id) {
@@ -45,6 +50,8 @@ public class EstadisticasEstadisticasFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingssp = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
     }
 
     @Override
@@ -180,6 +187,11 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                             break;
 
                     }
+                    if (settingssp.getBoolean("oscuro", false)) {
+                        icono.setColorFilter(Color.WHITE);
+                    } else {
+                        icono.setColorFilter(Color.BLACK);
+                    }
 
                     TextView nombre = new TextView(getContext());
                     nombre.setText(entradas.get(i).getNombre());
@@ -212,5 +224,14 @@ public class EstadisticasEstadisticasFragment extends Fragment {
     private static String obtieneDosDecimales(float value){
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(value);
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }

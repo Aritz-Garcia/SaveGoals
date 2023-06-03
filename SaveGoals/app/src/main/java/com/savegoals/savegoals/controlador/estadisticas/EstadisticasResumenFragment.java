@@ -1,6 +1,8 @@
 package com.savegoals.savegoals.controlador.estadisticas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,6 +41,7 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
     FloatingActionButton btnAñadirEntrada;
     LinearLayout lyFecha, lyCategoria;
     ImageView ivCategoria;
+    SharedPreferences settingssp;
 
 
     public EstadisticasResumenFragment(int id) {
@@ -48,6 +52,8 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        settingssp = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
     }
 
     @Override
@@ -328,6 +334,15 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             intent.putExtra("id", id);
             intent.putExtra("restar", false);
             startActivity(intent);
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 }

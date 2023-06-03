@@ -1,6 +1,8 @@
 package com.savegoals.savegoals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     PagerController pagerAdapter;
     Toolbar toolbar;
     AppDatabase db;
+    SharedPreferences settingssp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("id", 0);
 
         db = AppDatabase.getDatabase(this);
+
+        settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
 
         Objetivos objetivo = db.objetivosDao().findById(id);
 
@@ -111,5 +118,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 }
