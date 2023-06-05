@@ -28,19 +28,19 @@
             android:id="@+id/tabResumen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RESUMEN" />
+            android:text="@string/resumen" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabEstadisticas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ESTADISTICAS" />
+            android:text="@string/estadisticas" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabEntradas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ENTRADAS" />
+            android:text="@string/entradas" />
     </com.google.android.material.tabs.TabLayout>
     
     <androidx.viewpager.widget.ViewPager

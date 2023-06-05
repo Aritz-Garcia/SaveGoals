@@ -4,17 +4,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/eliminarBtn"
-        android:title="Eliminar"
+        android:title="@string/eliminar"
         android:icon="@drawable/basura"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/retirarBtn"
-        android:title="Retirar"
+        android:title="@string/retirar"
         android:icon="@drawable/deshacer"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/editarBtn"
-        android:title="Editar"
+        android:title="@string/editar"
         android:icon="@drawable/pintar"
         app:showAsAction="ifRoom" />
 

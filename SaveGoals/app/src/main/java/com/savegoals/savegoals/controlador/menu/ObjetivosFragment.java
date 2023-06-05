@@ -163,7 +163,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 }
 
                 TextView fecha = new TextView(getContext());
-                fecha.setText("Fecha: " + objetivosSinCompletar.get(i).getFecha());
+                fecha.setText(getString(R.string.fecha) + objetivosSinCompletar.get(i).getFecha());
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosSinCompletar.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosSinCompletar.get(i).getCantidad()) + "€");
@@ -303,7 +303,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 }
 
                 TextView fecha = new TextView(getContext());
-                fecha.setText("Fecha: " + objetivosCompletados.get(i).getFecha());
+                fecha.setText(getString(R.string.fecha) + objetivosCompletados.get(i).getFecha());
 
                 TextView cantidad = new TextView(getContext());
                 cantidad.setText(obtieneDosDecimales(objetivosCompletados.get(i).getAhorrado()) + "€ / " + obtieneDosDecimales(objetivosCompletados.get(i).getCantidad()) + "€");

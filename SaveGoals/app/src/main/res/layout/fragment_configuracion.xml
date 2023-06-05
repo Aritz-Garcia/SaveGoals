@@ -14,7 +14,8 @@
             android:id="@+id/swNoche"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Noche" />
+            android:text="@string/modo_noche"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
     </LinearLayout>
 
 </FrameLayout>

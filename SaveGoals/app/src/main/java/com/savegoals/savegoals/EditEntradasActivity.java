@@ -15,19 +15,22 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 import com.savegoals.savegoals.dialog.DatePickerFragment;
+import com.savegoals.savegoals.dialog.ErrorDateAnteriorDialog;
+import com.savegoals.savegoals.dialog.ErrorDateDialog;
 import com.savegoals.savegoals.formularios.CustomAdapter;
 import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, ErrorDateDialog.ErrorDateDialogListener, ErrorDateAnteriorDialog.ErrorDateAnteriorDialogListener {
 
     Spinner spinnerCategoria;
     ArrayList<CustomItem> customList;
@@ -35,6 +38,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
     Switch swRestar;
+    ErrorDateDialog errorDateDialog;
     AppDatabase db;
     SharedPreferences settingssp;
     int idO, idE;
@@ -118,7 +122,43 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
             showDatePickerDialog();
         } else if (v.getId() == btnGuardar.getId()) {
             // Guardar en la base de datos los cambios
-            guardarBaseDeDatos();
+            String fechaObjetivos = db.objetivosDao().findById(idO).getFecha();
+
+            Date fecha = new Date();
+            if (etFecha.getText().toString().length() != 0) {
+                String[] fechaSeparada = etFecha.getText().toString().split("/");
+                fecha.setYear(Integer.parseInt(fechaSeparada[2]) - 1900);
+                fecha.setMonth(Integer.parseInt(fechaSeparada[1]) - 1);
+                fecha.setDate(Integer.parseInt(fechaSeparada[0]));
+            }
+
+            Date objetivos = new Date();
+            if (etFecha.getText().toString().length() != 0) {
+                String[] fechaSeparada = fechaObjetivos.split("/");
+                objetivos.setYear(Integer.parseInt(fechaSeparada[2]) - 1900);
+                objetivos.setMonth(Integer.parseInt(fechaSeparada[1]) - 1);
+                objetivos.setDate(Integer.parseInt(fechaSeparada[0]));
+                if (objetivos.before(fecha)) {
+                    // Dialogo fecha objetivo termianda
+                    ErrorDateDialog errorDateDialog = new ErrorDateDialog();
+                    errorDateDialog.show(getSupportFragmentManager(), "error date dialog");
+                } else {
+                    Date today = new Date();
+                    today.setHours(0);
+                    today.setMinutes(0);
+                    today.setSeconds(0);
+                    if (fecha.before(today)) {
+                        // Dialogo fecha anterior a la actual
+                        ErrorDateAnteriorDialog errorDateAnteriorDialog = new ErrorDateAnteriorDialog();
+                        errorDateAnteriorDialog.show(getSupportFragmentManager(), "ErrorDateAnteriorDialog");
+                    } else {
+                        guardarBaseDeDatos();
+                    }
+                }
+            } else {
+                guardarBaseDeDatos();
+            }
+
         } else if (v.getId() == btnVolverEntradas.getId()) {
             // volver a la pantalla de entradas
             finish();
@@ -251,10 +291,10 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
     private boolean leerString(String textua, EditText text){
         if( textua.length()==0 )  {
-            text.setError("Campo necesario");
+            text.setError(getString(R.string.necesario));
             return false;
         }else if((!textua.matches("[a-zA-Z ]+\\.?"))){
-            text.setError("Solo letras");
+            text.setError(getString(R.string.solo_letras));
             return false;
         }else{
             return true;
@@ -263,16 +303,16 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
     private boolean leerNumero(String textua, EditText text){
         if( textua.length()==0 ) {
-            text.setError("Campo necesario");
+            text.setError(getString(R.string.necesario));
             return false;
         }else if(Float.parseFloat(textua)<0) {
-            text.setError("No puede ser un numero negativo");
+            text.setError(getString(R.string.numero_negativo));
             return false;
         }else if((!textua.matches("([0-9]*[.])?[0-9]+")) ){
-            text.setError("Solo numeros");
+            text.setError(getString(R.string.solo_numero));
             return false;
         }else if (textua.length()>6) {
-            text.setError("El numero es muy grande");
+            text.setError(getString(R.string.numero_grande));
             return false;
         }else{
             return true;
@@ -293,20 +333,45 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         }
 
         if( textua.length() == 0 ) {
-            text.setText("Campo necesario");
+            text.setText(getString(R.string.necesario));
             text.setVisibility(View.VISIBLE);
             return false;
         } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
             text.setVisibility(View.GONE);
             return true;
-        } else if (fecha.before(today)) {
-            text.setText("La fecha no puede ser posterior a la actual");
-            text.setVisibility(View.VISIBLE);
-            return false;
         } else {
             text.setVisibility(View.GONE);
             return true;
         }
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Date today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+        today.setSeconds(0);
+        Date fecha = new Date();
+        if (etFecha.getText().toString().length() != 0) {
+            String[] fechaSeparada = etFecha.getText().toString().split("/");
+            fecha.setYear(Integer.parseInt(fechaSeparada[2]) - 1900);
+            fecha.setMonth(Integer.parseInt(fechaSeparada[1]) - 1);
+            fecha.setDate(Integer.parseInt(fechaSeparada[0]));
+            if (fecha.before(today)) {
+                // Dialogo fecha anterior a la actual
+                ErrorDateAnteriorDialog errorDateAnteriorDialog = new ErrorDateAnteriorDialog();
+                errorDateAnteriorDialog.show(getSupportFragmentManager(), "ErrorDateAnteriorDialog");
+            } else {
+                guardarBaseDeDatos();
+            }
+        } else {
+            guardarBaseDeDatos();
+        }
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // No hacer nada
     }
 
     private String getCategoria(int posicion) {
@@ -376,5 +441,15 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+    }
+
+    @Override
+    public void onDialogPositiveClickAnterior(DialogFragment dialog) {
+        guardarBaseDeDatos();
+    }
+
+    @Override
+    public void onDialogNegativeClickAnterior(DialogFragment dialog) {
+        // No hace nada
     }
 }

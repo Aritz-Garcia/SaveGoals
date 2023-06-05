@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Nombre de la Entrada"
+            android:hint="@string/entrada_nombre"
             android:inputType="text"
             android:minHeight="48dp" />
 
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Seleccione una categoría"
+            android:text="@string/seleccionar_cat"
             android:textColor="#FF0000"
             android:textStyle="bold"
             android:visibility="gone" />
@@ -48,7 +48,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:focusable="false"
-            android:hint="Fecha"
+            android:hint="@string/fecha_et"
             android:inputType="date"
             android:minHeight="48dp" />
 
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:hint="Cantidad"
+            android:hint="@string/cantidad_et"
             android:inputType="numberDecimal"
             android:minHeight="48dp" />
 
@@ -81,14 +81,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Restar Cantidad" />
+                android:text="@string/restarSw" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,14 +102,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Cancelar" />
+                android:text="@string/cancelar" />
 
             <Button
                 android:id="@+id/btnSaveEntrada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Editar Entrada" />
+                android:text="@string/edit_entrada" />
         </LinearLayout>
 
     </LinearLayout>

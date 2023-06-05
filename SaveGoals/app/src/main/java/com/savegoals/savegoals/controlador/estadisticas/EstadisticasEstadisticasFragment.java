@@ -203,7 +203,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                     nombre.setGravity(Gravity.CENTER);
 
                     TextView fecha = new TextView(getContext());
-                    fecha.setText("Fecha: " + entradas.get(i).getFecha());
+                    fecha.setText(getString(R.string.fecha) + entradas.get(i).getFecha());
 
                     TextView cantidad = new TextView(getContext());
                     cantidad.setText(obtieneDosDecimales(entradas.get(i).getCantidad()) + "€");

@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_objetivos"
         android:icon="@drawable/diana"
-        android:title="Objetivos" />
+        android:title="@string/menu_objetivos" />
 
     <item
         android:id="@+id/navigation_esatdisticas"
         android:icon="@drawable/estadisticas"
-        android:title="Estadisticas" />
+        android:title="@string/menu_estadisticas" />
 
     <item
         android:id="@+id/navigation_configuracion"
         android:icon="@drawable/ajustes"
-        android:title="Configuración" />
+        android:title="@string/menu_configuracion" />
 
 </menu>

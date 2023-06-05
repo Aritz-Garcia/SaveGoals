@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="No hay entardas en este objetivo"
+            android:text="@string/no_entardas"
             android:textColor="#FF0000"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginTop="25dp"
-            android:text="Ultimas entradas:"
+            android:text="@string/ultimas_entradas"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/lyUltimasEntradas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"/>
 
     </LinearLayout>
 

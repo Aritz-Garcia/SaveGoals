@@ -193,10 +193,10 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
 
     private boolean leerString(String textua, EditText text){
         if( textua.length()==0 )  {
-            text.setError("Campo necesario");
+            text.setError(getString(R.string.necesario));
             return false;
         }else if((!textua.matches("[a-zA-Z ]+\\.?"))){
-            text.setError("Solo letras");
+            text.setError(getString(R.string.solo_letras));
             return false;
         }else{
             return true;
@@ -205,16 +205,16 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
 
     private boolean leerNumero(String textua, EditText text){
         if( textua.length()==0 ) {
-            text.setError("Campo necesario");
+            text.setError(getString(R.string.necesario));
             return false;
         }else if(Float.parseFloat(textua)<0) {
-            text.setError("No puede ser un numero negativo");
+            text.setError(getString(R.string.numero_negativo));
             return false;
         }else if((!textua.matches("([0-9]*[.])?[0-9]+")) ){
-            text.setError("Solo numeros");
+            text.setError(getString(R.string.solo_numero));
             return false;
         }else if (textua.length()>6) {
-            text.setError("El numero es muy grande");
+            text.setError(getString(R.string.numero_grande));
             return false;
         }else{
             return true;
@@ -235,15 +235,15 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
         }
 
         if( textua.length() == 0 ) {
-            text.setText("Campo necesario");
+            text.setText(getString(R.string.necesario));
             text.setVisibility(View.VISIBLE);
             return false;
         } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
-            text.setText("La fecha no puede ser la actual");
+            text.setText(getString(R.string.error_misma_fecha));
             text.setVisibility(View.VISIBLE);
             return false;
         } else if (fecha.before(today)) {
-            text.setText("La fecha no puede ser posterior a la actual");
+            text.setText(getString(R.string.error_fecha_anterior));
             text.setVisibility(View.VISIBLE);
             return false;
         } else {

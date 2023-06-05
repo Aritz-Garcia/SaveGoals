@@ -35,8 +35,7 @@
                     android:id="@+id/tvFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -56,8 +55,7 @@
                     android:id="@+id/tvCategoria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TextView" />
+                    android:layout_weight="1"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -87,7 +85,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/progressBar"
                 app:layout_constraintStart_toStartOf="@+id/progressBar"
                 app:layout_constraintTop_toTopOf="@+id/progressBar"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -102,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="AHORRADO"
+                android:text="@string/ahorrado"
                 android:textStyle="bold" />
 
             <TextView
@@ -111,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="PENDIENTE"
+                android:text="@string/pendiente"
                 android:textStyle="bold" />
 
             <TextView
@@ -120,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TOTAL"
+                android:text="@string/total"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -157,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:gravity="center"
-            android:text="AHORRO NECESARIO"
+            android:text="@string/ahorro_nec"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -172,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="DIA"
+                android:text="@string/dia"
                 android:textStyle="bold" />
 
             <TextView
@@ -181,7 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="SEMANA"
+                android:text="@string/semana"
                 android:textStyle="bold" />
 
             <TextView
@@ -190,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="MES"
+                android:text="@string/mes"
                 android:textStyle="bold" />
         </LinearLayout>
 
