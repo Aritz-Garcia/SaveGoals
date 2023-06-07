@@ -99,19 +99,19 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
             swRestar.setChecked(false);
             etCantidad.setText(String.valueOf(entradas.getCantidad()));
         }
-        spinnerCategoria.setSelection(getIdCategoria(entradas.getCategoria()));
+        spinnerCategoria.setSelection(entradas.getCategoria());
     }
 
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
-        customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Cartera", R.drawable.cartera));
-        customList.add(new CustomItem("Hucha", R.drawable.hucha));
-        customList.add(new CustomItem("Trabajo", R.drawable.martillo));
-        customList.add(new CustomItem("Regalo", R.drawable.regalo));
-        customList.add(new CustomItem("Compras", R.drawable.carrito));
-        customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Otros", R.drawable.otros));
+        customList.add(new CustomItem(getString(R.string.categoria_seleccionar), 0));
+        customList.add(new CustomItem(getString(R.string.categoria_cartera), R.drawable.cartera));
+        customList.add(new CustomItem(getString(R.string.categoria_hucha), R.drawable.hucha));
+        customList.add(new CustomItem(getString(R.string.categoria_trabajo), R.drawable.martillo));
+        customList.add(new CustomItem(getString(R.string.categoria_regalo), R.drawable.regalo));
+        customList.add(new CustomItem(getString(R.string.categoria_compras), R.drawable.carrito));
+        customList.add(new CustomItem(getString(R.string.categoria_clase), R.drawable.clase));
+        customList.add(new CustomItem(getString(R.string.categoria_otros), R.drawable.otros));
         return customList;
     }
 
@@ -204,9 +204,9 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
                         int i = 0;
                         Entradas entradas = db.entradasDao().findByIds(idO, idE);
                         Objetivos objetivos = db.objetivosDao().findById(idO);
-                        if (spinnerCategoria.getSelectedItemId() != getIdCategoria(entradas.getCategoria())) {
+                        if (spinnerCategoria.getSelectedItemId() != entradas.getCategoria()) {
                             // Cambiar categoria
-                            entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                            entradas.setCategoria((int) spinnerCategoria.getSelectedItemId());
                             i++;
                         }
 
@@ -372,48 +372,6 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         // No hacer nada
-    }
-
-    private String getCategoria(int posicion) {
-        switch (posicion) {
-            case 1:
-                return "Cartera";
-            case 2:
-                return "Hucha";
-            case 3:
-                return "Trabajo";
-            case 4:
-                return "Regalo";
-            case 5:
-                return "Compras";
-            case 6:
-                return "Clase";
-            case 7:
-                return "Otros";
-            default:
-                return "Seleccionar";
-        }
-    }
-
-    private int getIdCategoria(String categoria) {
-        switch (categoria) {
-            case "Cartera":
-                return 1;
-            case "Hucha":
-                return 2;
-            case "Trabajo":
-                return 3;
-            case "Regalo":
-                return 4;
-            case "Compras":
-                return 5;
-            case "Clase":
-                return 6;
-            case "Otros":
-                return 7;
-            default:
-                return 0;
-        }
     }
 
     private void eliminarEntrada() {

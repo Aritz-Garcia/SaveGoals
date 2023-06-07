@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/addObjetivoBtn"
-        android:icon="@drawable/mas"
-        android:title="@string/menu_añadir_obj"
+        android:id="@+id/calcularBtn"
+        android:icon="@drawable/calculadora"
+        android:title="@string/calculadora_title"
         app:showAsAction="ifRoom" />
 
 </menu>

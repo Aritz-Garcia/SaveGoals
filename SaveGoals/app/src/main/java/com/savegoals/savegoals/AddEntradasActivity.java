@@ -84,14 +84,14 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
 
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
-        customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Cartera", R.drawable.cartera));
-        customList.add(new CustomItem("Hucha", R.drawable.hucha));
-        customList.add(new CustomItem("Trabajo", R.drawable.martillo));
-        customList.add(new CustomItem("Regalo", R.drawable.regalo));
-        customList.add(new CustomItem("Compras", R.drawable.carrito));
-        customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Otros", R.drawable.otros));
+        customList.add(new CustomItem(getString(R.string.categoria_seleccionar), 0));
+        customList.add(new CustomItem(getString(R.string.categoria_cartera), R.drawable.cartera));
+        customList.add(new CustomItem(getString(R.string.categoria_hucha), R.drawable.hucha));
+        customList.add(new CustomItem(getString(R.string.categoria_trabajo), R.drawable.martillo));
+        customList.add(new CustomItem(getString(R.string.categoria_regalo), R.drawable.regalo));
+        customList.add(new CustomItem(getString(R.string.categoria_compras), R.drawable.carrito));
+        customList.add(new CustomItem(getString(R.string.categoria_clase), R.drawable.clase));
+        customList.add(new CustomItem(getString(R.string.categoria_otros), R.drawable.otros));
         return customList;
     }
 
@@ -194,7 +194,7 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
                             }
                         }
 
-                        entradas.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                        entradas.setCategoria((int) spinnerCategoria.getSelectedItemId());
                         entradas.setNombre(etNombre.getText().toString());
                         if (restar) {
                             float restado = 0;
@@ -274,27 +274,6 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         } else {
             text.setVisibility(View.GONE);
             return true;
-        }
-    }
-
-    private String getCategoria(int posicion) {
-        switch (posicion) {
-            case 1:
-                return "Cartera";
-            case 2:
-                return "Hucha";
-            case 3:
-                return "Trabajo";
-            case 4:
-                return "Regalo";
-            case 5:
-                return "Compras";
-            case 6:
-                return "Clase";
-            case 7:
-                return "Otros";
-            default:
-                return "Seleccionar";
         }
     }
 

@@ -15,10 +15,12 @@
     <string name="numero_negativo">No puede ser un numero negativo</string>
     <string name="solo_numero">Solo numeros</string>
     <string name="numero_grande">El numero es muy grande</string>
+    <string name="cantidad_menor">La cantidad a ahorrar tiene que ser mayor a la cantidad ahorrada</string>
 
     <!-- Textos -->
     <string name="fecha">"Fecha: "</string>
     <string name="restar">Restar</string>
+    <string name="calculadora_text">"El objetivo se cumplirá el "</string>
 
     <!-- Layouts -->
     <string name="resumen">RESUMEN</string>
@@ -47,6 +49,13 @@
     <string name="mes">MES</string>
     <string name="objetivos">OBJETIVOS</string>
     <string name="cumplidos">CUMPLIDOS</string>
+    <string name="calculadora_title">Calculadora de fecha</string>
+    <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos dia</string>
+    <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
+    <string name="calculadora_dias">Cada cuantos dias</string>
+    <string name="calcualdora_cantidad">Cantidad ahorrado</string>
+    <string name="btn_calcular">Calcular</string>
+    <string name="text_crear_calc">Quieres crear un objetivo con esta fecha y esta cantidad?</string>
 
     <!-- Menu -->
     <string name="menu_objetivos">Objetivos</string>
@@ -56,4 +65,17 @@
     <string name="eliminar">Eliminar</string>
     <string name="retirar">Retirar</string>
     <string name="editar">Editar</string>
+
+    <!-- Categorias -->
+    <string name="categoria_viaje">Viaje</string>
+    <string name="categoria_ahorrar">Ahorrar</string>
+    <string name="categoria_regalo">Regalo</string>
+    <string name="categoria_compras">Compras</string>
+    <string name="categoria_clase">Clase</string>
+    <string name="categoria_juego">Juego</string>
+    <string name="categoria_otros">Otros</string>
+    <string name="categoria_seleccionar">Seleccionar</string>
+    <string name="categoria_cartera">Cartera</string>
+    <string name="categoria_hucha">Hucha</string>
+    <string name="categoria_trabajo">Trabajo</string>
 </resources>

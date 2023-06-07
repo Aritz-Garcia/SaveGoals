@@ -31,6 +31,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
     Button btnGuardar, btnVolverObjetivos;
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
+    boolean rDatos;
     AppDatabase db;
     SharedPreferences settingssp;
 
@@ -40,6 +41,8 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_add_objetivos);
 
         db = AppDatabase.getDatabase(this);
+
+        rDatos = getIntent().getBooleanExtra("rDatos", false);
 
         etNombre = findViewById(R.id.etNombre);
         etFecha = findViewById(R.id.etFecha);
@@ -64,6 +67,13 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             spinnerCategoria.setOnItemSelectedListener(this);
         }
 
+        if (rDatos) {
+            String fecha = getIntent().getStringExtra("fecha");
+            String cantidad = getIntent().getStringExtra("cantidad");
+            etFecha.setText(fecha);
+            etCantidad.setText(cantidad);
+        }
+
         settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
         setDayNight();
 
@@ -71,14 +81,14 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
 
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
-        customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Viaje", R.drawable.avion));
-        customList.add(new CustomItem("Ahorrar", R.drawable.hucha));
-        customList.add(new CustomItem("Regalo", R.drawable.regalo));
-        customList.add(new CustomItem("Compras", R.drawable.carrito));
-        customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Juego", R.drawable.mando));
-        customList.add(new CustomItem("Otros", R.drawable.otros));
+        customList.add(new CustomItem(getString(R.string.categoria_seleccionar), 0));
+        customList.add(new CustomItem(getString(R.string.categoria_viaje), R.drawable.avion));
+        customList.add(new CustomItem(getString(R.string.categoria_ahorrar), R.drawable.hucha));
+        customList.add(new CustomItem(getString(R.string.categoria_regalo), R.drawable.regalo));
+        customList.add(new CustomItem(getString(R.string.categoria_compras), R.drawable.carrito));
+        customList.add(new CustomItem(getString(R.string.categoria_clase), R.drawable.clase));
+        customList.add(new CustomItem(getString(R.string.categoria_juego), R.drawable.mando));
+        customList.add(new CustomItem(getString(R.string.categoria_otros), R.drawable.otros));
         return customList;
     }
 
@@ -127,7 +137,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
                 if (leerNumero(etCantidad.getText().toString(), etCantidad)) {
                     if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
                         Objetivos objetivo = new Objetivos();
-                        objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                        objetivo.setCategoria((int) spinnerCategoria.getSelectedItemId());
                         objetivo.setNombre(etNombre.getText().toString());
                         objetivo.setCantidad(Float.parseFloat(etCantidad.getText().toString()));
                         objetivo.setFecha(etFecha.getText().toString());
@@ -191,7 +201,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             text.setText(getString(R.string.necesario));
             text.setVisibility(View.VISIBLE);
             return false;
-        } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
+        } else if (fecha.getDate() == today.getDate() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
             text.setText(getString(R.string.error_misma_fecha));
             text.setVisibility(View.VISIBLE);
             return false;
@@ -202,27 +212,6 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         } else {
             text.setVisibility(View.GONE);
             return true;
-        }
-    }
-
-    private String getCategoria(int posicion) {
-        switch (posicion) {
-            case 1:
-                return "Viaje";
-            case 2:
-                return "Ahorrar";
-            case 3:
-                return "Regalo";
-            case 4:
-                return "Compras";
-            case 5:
-                return "Clase";
-            case 6:
-                return "Juego";
-            case 7:
-                return "Otros";
-            default:
-                return "Seleccionar";
         }
     }
 

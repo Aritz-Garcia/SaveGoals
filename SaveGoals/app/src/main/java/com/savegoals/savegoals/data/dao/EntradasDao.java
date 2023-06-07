@@ -22,7 +22,7 @@ public interface EntradasDao {
     Entradas findByIds(int idObjetivos, int idEntrada);
 
     @Query("UPDATE entradas SET categoria = :categoria, fecha = :fecha, nombre = :nombre, cantidad = :cantidad WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
-    void update(int idObjetivos, int idEntrada, String categoria, String fecha, String nombre, float cantidad);
+    void update(int idObjetivos, int idEntrada, int categoria, String fecha, String nombre, float cantidad);
 
     @Query("UPDATE entradas SET cantidad = :cantidad WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
     void updateCantidad(int idObjetivos, int idEntrada, float cantidad);

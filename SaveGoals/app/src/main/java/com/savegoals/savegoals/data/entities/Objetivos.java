@@ -10,7 +10,7 @@ public class Objetivos {
     @PrimaryKey(autoGenerate = true)
     public Integer id;
     @NonNull
-    public String categoria;
+    public int categoria;
     @NonNull
     public String nombre;
     @NonNull
@@ -24,7 +24,7 @@ public class Objetivos {
 
     public Objetivos() {}
 
-    public Objetivos(String categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado) {
+    public Objetivos(int categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado) {
         this.categoria = categoria;
         this.nombre = nombre;
         this.fecha = fecha;
@@ -41,11 +41,11 @@ public class Objetivos {
         this.id = id;
     }
 
-    public String getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 

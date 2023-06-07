@@ -14,7 +14,7 @@ public class Entradas {
     @NonNull
     public Integer idEntrada;
     @NonNull
-    public String categoria;
+    public Integer categoria;
     @NonNull
     public String fecha;
     @NonNull
@@ -25,7 +25,7 @@ public class Entradas {
 
     public Entradas() {}
 
-    public Entradas(int idObjetivos, int idEntrada, String categoria, String fecha, String nombre, float cantidad) {
+    public Entradas(int idObjetivos, int idEntrada, int categoria, String fecha, String nombre, float cantidad) {
         this.idObjetivos = idObjetivos;
         this.idEntrada = idEntrada;
         this.categoria = categoria;
@@ -50,11 +50,11 @@ public class Entradas {
         this.idEntrada = idEntrada;
     }
 
-    public String getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
 

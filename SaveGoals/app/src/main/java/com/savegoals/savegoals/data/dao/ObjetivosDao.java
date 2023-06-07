@@ -25,7 +25,7 @@ public interface ObjetivosDao {
     Objetivos findById(int id);
 
     @Query("UPDATE objetivos SET categoria = :categoria, nombre = :nombre, fecha = :fecha, cantidad = :cantidad, ahorrado = :ahorrado, completado = :completado WHERE id = :id")
-    void update(int id, String categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado);
+    void update(int id, int categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado);
 
     @Query("UPDATE objetivos SET ahorrado = :ahorrado WHERE id = :id")
     void updateAhorrado(int id, float ahorrado);

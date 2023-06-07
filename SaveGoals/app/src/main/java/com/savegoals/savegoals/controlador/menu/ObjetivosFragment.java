@@ -127,31 +127,31 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
                 switch (objetivosSinCompletar.get(i).getCategoria()) {
-                    case "Viaje":
+                    case 1:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.avion));
                         break;
 
-                    case "Ahorrar":
+                    case 2:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
                         break;
 
-                    case "Regalo":
+                    case 3:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
                         break;
 
-                    case "Compras":
+                    case 4:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
                         break;
 
-                    case "Clase":
+                    case 5:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.clase));
                         break;
 
-                    case "Juego":
+                    case 6:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.mando));
                         break;
 
-                    case "Otros":
+                    case 7:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
                         break;
 
@@ -267,31 +267,31 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
                 switch (objetivosCompletados.get(i).getCategoria()) {
-                    case "Viaje":
+                    case 1:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.avion));
                         break;
 
-                    case "Ahorrar":
+                    case 2:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
                         break;
 
-                    case "Regalo":
+                    case 3:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
                         break;
 
-                    case "Compras":
+                    case 4:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
                         break;
 
-                    case "Clase":
+                    case 5:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.clase));
                         break;
 
-                    case "Juego":
+                    case 6:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.mando));
                         break;
 
-                    case "Otros":
+                    case 7:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
                         break;
 

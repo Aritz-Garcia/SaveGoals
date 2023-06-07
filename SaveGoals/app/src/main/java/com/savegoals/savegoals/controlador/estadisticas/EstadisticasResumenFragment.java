@@ -236,33 +236,33 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             lyCategoria.setGravity(Gravity.CENTER);
 
             tvFecha.setText(objetivo.getFecha());
-            tvCategoria.setText(objetivo.getCategoria());
+            tvCategoria.setText(getCategoria(objetivo.getCategoria()));
             switch (objetivo.getCategoria()) {
-                case "Viaje":
+                case 1:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.avion));
                     break;
 
-                case "Ahorrar":
+                case 2:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
                     break;
 
-                case "Regalo":
+                case 3:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
                     break;
 
-                case "Compras":
+                case 4:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
                     break;
 
-                case "Clase":
+                case 5:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.clase));
                     break;
 
-                case "Juego":
+                case 6:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.mando));
                     break;
 
-                case "Otros":
+                case 7:
                     ivCategoria.setImageDrawable(getResources().getDrawable(R.drawable.otros));
                     break;
 
@@ -343,6 +343,27 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    private String getCategoria(int posicion) {
+        switch (posicion) {
+            case 1:
+                return getString(R.string.categoria_viaje);
+            case 2:
+                return getString(R.string.categoria_ahorrar);
+            case 3:
+                return getString(R.string.categoria_regalo);
+            case 4:
+                return getString(R.string.categoria_compras);
+            case 5:
+                return getString(R.string.categoria_clase);
+            case 6:
+                return getString(R.string.categoria_juego);
+            case 7:
+                return getString(R.string.categoria_otros);
+            default:
+                return getString(R.string.categoria_seleccionar);
         }
     }
 }

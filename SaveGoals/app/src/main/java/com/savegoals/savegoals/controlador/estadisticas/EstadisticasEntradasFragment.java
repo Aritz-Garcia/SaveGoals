@@ -110,31 +110,31 @@ public class EstadisticasEntradasFragment extends Fragment implements View.OnCli
             paramsIcono.weight = 1;
             icono.setLayoutParams(paramsIcono);
             switch (entradas.get(i).getCategoria()) {
-                case "Cartera":
+                case 1:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.cartera));
                     break;
 
-                case "Hucha":
+                case 2:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.hucha));
                     break;
 
-                case "Trabajo":
+                case 3:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.martillo));
                     break;
 
-                case "Regalo":
+                case 4:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.regalo));
                     break;
 
-                case "Compras":
+                case 5:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.carrito));
                     break;
 
-                case "Clase":
+                case 6:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.clase));
                     break;
 
-                case "Otros":
+                case 7:
                     icono.setImageDrawable(getResources().getDrawable(R.drawable.otros));
                     break;
 

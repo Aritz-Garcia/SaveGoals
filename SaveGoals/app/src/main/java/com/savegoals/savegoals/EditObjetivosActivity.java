@@ -80,19 +80,19 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
         etNombre.setText(objetivo.getNombre());
         etFecha.setText(objetivo.getFecha());
         etCantidad.setText(String.valueOf(objetivo.getCantidad()));
-        spinnerCategoria.setSelection(getIdCategoria(objetivo.getCategoria()));
+        spinnerCategoria.setSelection(objetivo.getCategoria());
     }
 
     private ArrayList<CustomItem> getCustomList() {
         customList = new ArrayList<>();
-        customList.add(new CustomItem("Seleccionar", 0));
-        customList.add(new CustomItem("Viaje", R.drawable.avion));
-        customList.add(new CustomItem("Ahorrar", R.drawable.hucha));
-        customList.add(new CustomItem("Regalo", R.drawable.regalo));
-        customList.add(new CustomItem("Compras", R.drawable.carrito));
-        customList.add(new CustomItem("Clase", R.drawable.clase));
-        customList.add(new CustomItem("Juego", R.drawable.mando));
-        customList.add(new CustomItem("Otros", R.drawable.otros));
+        customList.add(new CustomItem(getString(R.string.categoria_seleccionar), 0));
+        customList.add(new CustomItem(getString(R.string.categoria_viaje), R.drawable.avion));
+        customList.add(new CustomItem(getString(R.string.categoria_ahorrar), R.drawable.hucha));
+        customList.add(new CustomItem(getString(R.string.categoria_regalo), R.drawable.regalo));
+        customList.add(new CustomItem(getString(R.string.categoria_compras), R.drawable.carrito));
+        customList.add(new CustomItem(getString(R.string.categoria_clase), R.drawable.clase));
+        customList.add(new CustomItem(getString(R.string.categoria_juego), R.drawable.mando));
+        customList.add(new CustomItem(getString(R.string.categoria_otros), R.drawable.otros));
         return customList;
     }
 
@@ -146,9 +146,9 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
 
                         int i = 0;
 
-                        if (spinnerCategoria.getSelectedItemId() != getIdCategoria(objetivo.getCategoria())) {
+                        if (spinnerCategoria.getSelectedItemId() != objetivo.getCategoria()) {
                             // Cambiar categoria
-                            objetivo.setCategoria(getCategoria((int) spinnerCategoria.getSelectedItemId()));
+                            objetivo.setCategoria((int) spinnerCategoria.getSelectedItemId());
                             i++;
                         }
 
@@ -249,48 +249,6 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
         } else {
             text.setVisibility(View.GONE);
             return true;
-        }
-    }
-
-    private String getCategoria(int posicion) {
-        switch (posicion) {
-            case 1:
-                return "Viaje";
-            case 2:
-                return "Ahorrar";
-            case 3:
-                return "Regalo";
-            case 4:
-                return "Compras";
-            case 5:
-                return "Clase";
-            case 6:
-                return "Juego";
-            case 7:
-                return "Otros";
-            default:
-                return "Seleccionar";
-        }
-    }
-
-    private int getIdCategoria(String categoria) {
-        switch (categoria) {
-            case "Viaje":
-                return 1;
-            case "Ahorrar":
-                return 2;
-            case "Regalo":
-                return 3;
-            case "Compras":
-                return 4;
-            case "Clase":
-                return 5;
-            case "Juego":
-                return 6;
-            case "Otros":
-                return 7;
-            default:
-                return 0;
         }
     }
 
