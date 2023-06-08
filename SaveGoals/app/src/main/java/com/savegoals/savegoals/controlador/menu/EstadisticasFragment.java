@@ -22,6 +22,7 @@ public class EstadisticasFragment extends Fragment {
     ViewPager viewPager;
     TabItem tab1, tab2, tab3;
     PagerControllerEstObjetivos pagerAdapter;
+    int tabPosition = 0;
     SharedPreferences settingssp;
 
     public EstadisticasFragment() {
@@ -46,11 +47,12 @@ public class EstadisticasFragment extends Fragment {
         tab2 = view.findViewById(R.id.tabEstObjetivos);
         tab3 = view.findViewById(R.id.tabEstAhorros);
 
-        pagerAdapter = new PagerControllerEstObjetivos(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PagerControllerEstObjetivos(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             // @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                tabPosition = tab.getPosition();
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2) {
                     pagerAdapter.notifyDataSetChanged();
@@ -66,9 +68,48 @@ public class EstadisticasFragment extends Fragment {
             }
         });
 
+        viewPager.setCurrentItem(tabPosition);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        viewPager.removeAllViews();
+        pagerAdapter = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pagerAdapter = new PagerControllerEstObjetivos(getChildFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            // @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                tabPosition = tab.getPosition();
+                viewPager.setCurrentItem(tab.getPosition());
+                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2) {
+                    pagerAdapter.notifyDataSetChanged();
+                }
+            }
+
+            // @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            // @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+
+        viewPager.setCurrentItem(tabPosition);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
 
     private void setDayNight() {

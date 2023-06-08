@@ -34,6 +34,7 @@ public class EstEvolucionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_est_evolucion, container, false);
+
         tvPorcentaje = view.findViewById(R.id.tvPorcentajeEst);
         tvAhorrado = view.findViewById(R.id.tvAhorradoEst);
         tvPendiente = view.findViewById(R.id.tvPendienteEst);
@@ -50,65 +51,21 @@ public class EstEvolucionFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
-        List<Objetivos> objetivos = appDatabase.objetivosDao().getAll();
-        float total = 0;
-        float ahorrado = 0;
-        float pendiente = 0;
-        int porcentaje = 0;
-
-        if (objetivos.size() != 0) {
-            for (int i = 0; i < objetivos.size(); i++) {
-                total = total + objetivos.get(i).getCantidad();
-                ahorrado = ahorrado + objetivos.get(i).getAhorrado();
-            }
-
-            pendiente = total - ahorrado;
-
-            if (ahorrado == 0) {
-                porcentaje = 1;
-            } else {
-                porcentaje = (int) ((ahorrado * 100) / total);
-            }
-
-            if (porcentaje < 50) {
-                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.circle_rojo));
-            } else if (porcentaje < 75) {
-                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.circle_amarillo));
-            } else if (porcentaje < 100) {
-                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.circle_verde));
-            } else {
-                progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.circle_completado));
-            }
-            progressBar.setProgress(porcentaje);
-
-            tvPorcentaje.setText(porcentaje + "%");
-
-            if (ahorrado == 0) {
-                porcentaje = 0;
-                progressBar.setProgress(porcentaje);
-                tvPorcentaje.setText(porcentaje + "%");
-            }
-
-            tvAhorrado.setText(obtieneDosDecimales(ahorrado) + "€");
-            tvPendiente.setText(obtieneDosDecimales(pendiente) + "€");
-            tvTotal.setText(obtieneDosDecimales(total) + "€");
-
-        }
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
+
+        tvPorcentaje.setVisibility(View.VISIBLE);
+        tvAhorrado.setVisibility(View.VISIBLE);
+        tvPendiente.setVisibility(View.VISIBLE);
+        tvTotal.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
         AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
         List<Objetivos> objetivos = appDatabase.objetivosDao().getAll();
         float total = 0;
         float ahorrado = 0;
-        float pendiente = 0;
-        int porcentaje = 0;
+        float pendiente;
+        int porcentaje;
 
         if (objetivos.size() != 0) {
             for (int i = 0; i < objetivos.size(); i++) {
