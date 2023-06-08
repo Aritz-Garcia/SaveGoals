@@ -60,6 +60,8 @@
     <string name="calcualdora_cantidad">Cantidad ahorrado</string>
     <string name="btn_calcular">Calcular</string>
     <string name="text_crear_calc">Quieres crear un objetivo con esta fecha y esta cantidad?</string>
+    <string name="tab_evolucion">EVOLUCIÓN</string>
+    <string name="tab_ahorros">AHORROS</string>
 
     <!-- Menu -->
     <string name="menu_objetivos">Objetivos</string>

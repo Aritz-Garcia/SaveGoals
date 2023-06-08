@@ -21,6 +21,7 @@
     <string name="fecha">"Fecha: "</string>
     <string name="restar">Restar</string>
     <string name="calculadora_text">"El objetivo se cumplirá el "</string>
+    <string name="error_estadisticas_obj">Las entradas de este objetivo son negativas</string>
 
     <!-- Layouts -->
     <string name="resumen">RESUMEN</string>
@@ -56,6 +57,8 @@
     <string name="calcualdora_cantidad">Cantidad ahorrado</string>
     <string name="btn_calcular">Calcular</string>
     <string name="text_crear_calc">Quieres crear un objetivo con esta fecha y esta cantidad?</string>
+    <string name="tab_evolucion">EVOLUCIÓN</string>
+    <string name="tab_ahorros">AHORROS</string>
 
     <!-- Menu -->
     <string name="menu_objetivos">Objetivos</string>
