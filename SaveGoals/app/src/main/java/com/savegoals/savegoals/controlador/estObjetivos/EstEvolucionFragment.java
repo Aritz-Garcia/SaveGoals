@@ -18,7 +18,7 @@ import java.util.List;
 
 public class EstEvolucionFragment extends Fragment {
 
-    TextView tvPorcentaje, tvAhorrado, tvPendiente, tvTotal;
+    TextView tvPorcentaje, tvAhorrado, tvPendiente, tvTotal, tvAhorradotxt, tvPendientetxt, tvTotaltxt, tvError;
     ProgressBar progressBar;
 
     public EstEvolucionFragment() {
@@ -40,6 +40,10 @@ public class EstEvolucionFragment extends Fragment {
         tvPendiente = view.findViewById(R.id.tvPendienteEst);
         tvTotal = view.findViewById(R.id.tvTotalEst);
         progressBar = view.findViewById(R.id.progressBarEst);
+        tvAhorradotxt = view.findViewById(R.id.tvAhorradotxtEst);
+        tvPendientetxt = view.findViewById(R.id.tvPendientetxtEst);
+        tvTotaltxt = view.findViewById(R.id.tvTotaltxtEst);
+        tvError = view.findViewById(R.id.tvErrorEstEvolucion);
 
         return view;
     }
@@ -54,12 +58,6 @@ public class EstEvolucionFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        tvPorcentaje.setVisibility(View.VISIBLE);
-        tvAhorrado.setVisibility(View.VISIBLE);
-        tvPendiente.setVisibility(View.VISIBLE);
-        tvTotal.setVisibility(View.VISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-
         AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
         List<Objetivos> objetivos = appDatabase.objetivosDao().getAll();
         float total = 0;
@@ -68,6 +66,16 @@ public class EstEvolucionFragment extends Fragment {
         int porcentaje;
 
         if (objetivos.size() != 0) {
+            tvError.setVisibility(View.GONE);
+            tvPorcentaje.setVisibility(View.VISIBLE);
+            tvAhorrado.setVisibility(View.VISIBLE);
+            tvPendiente.setVisibility(View.VISIBLE);
+            tvTotal.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            tvAhorradotxt.setVisibility(View.VISIBLE);
+            tvPendientetxt.setVisibility(View.VISIBLE);
+            tvTotaltxt.setVisibility(View.VISIBLE);
+
             for (int i = 0; i < objetivos.size(); i++) {
                 total = total + objetivos.get(i).getCantidad();
                 ahorrado = ahorrado + objetivos.get(i).getAhorrado();
@@ -104,6 +112,16 @@ public class EstEvolucionFragment extends Fragment {
             tvPendiente.setText(obtieneDosDecimales(pendiente) + "€");
             tvTotal.setText(obtieneDosDecimales(total) + "€");
 
+        } else {
+            tvPorcentaje.setVisibility(View.GONE);
+            tvAhorrado.setVisibility(View.GONE);
+            tvPendiente.setVisibility(View.GONE);
+            tvTotal.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            tvAhorradotxt.setVisibility(View.GONE);
+            tvPendientetxt.setVisibility(View.GONE);
+            tvTotaltxt.setVisibility(View.GONE);
+            tvError.setVisibility(View.VISIBLE);
         }
 
     }

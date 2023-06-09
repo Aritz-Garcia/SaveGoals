@@ -3,6 +3,7 @@ package com.savegoals.savegoals.controlador.estadisticas;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -131,6 +132,12 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                 pieChart.setData(new PieData(pieDataSet));
                 pieChart.setDrawEntryLabels(true);
                 pieChart.setUsePercentValues(false);
+                if (settingssp.getBoolean("oscuro", false)) {
+                    pieChart.setEntryLabelColor(Color.WHITE);
+                    pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
+                } else {
+                    pieChart.setEntryLabelColor(Color.BLACK);
+                }
                 pieChart.setCenterText(objetivo.getNombre());
                 pieChart.animateXY(3000, 3000);
                 pieChart.getDescription().setEnabled(false);

@@ -5,10 +5,47 @@
     android:layout_height="match_parent"
     tools:context=".controlador.estObjetivos.EstObjetivosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tvErrorPieChartEstObjetivos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/error_pieChart_est_obj"
+            android:textColor="#FF0000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvTitleEstObjetivos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/txt_est_obj"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTotalEstObjetivos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechartEstObjetivos"
+            android:layout_width="match_parent"
+            android:layout_height="300sp"
+            android:layout_marginTop="25dp" />
+
+    </LinearLayout>
 </FrameLayout>
