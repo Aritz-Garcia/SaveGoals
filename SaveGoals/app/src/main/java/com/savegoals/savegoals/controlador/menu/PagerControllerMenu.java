@@ -23,6 +23,8 @@ public class PagerControllerMenu extends FragmentPagerAdapter {
             case 1:
                 return new EstadisticasFragment();
             case 2:
+                return new CalendarioFragment();
+            case 3:
                 return new ConfiguracionFragment();
             default:
                 return null;

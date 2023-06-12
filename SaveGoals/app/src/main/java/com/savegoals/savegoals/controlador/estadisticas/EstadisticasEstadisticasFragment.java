@@ -139,7 +139,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                     pieChart.setEntryLabelColor(Color.BLACK);
                 }
                 pieChart.setCenterText(objetivo.getNombre());
-                pieChart.animateXY(3000, 3000);
+                pieChart.animateXY(2000, 2000);
                 pieChart.getDescription().setEnabled(false);
             }
 

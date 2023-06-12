@@ -11,9 +11,13 @@
         tools:layout="@layout/fragment_objetivos" />
 
     <fragment
-        android:id="@+id/navigation_esatdisticas"
+        android:id="@+id/navigation_estadisticas"
         android:name="com.savegoals.savegoals.controlador.menu.EstadisticasFragment"
         tools:layout="@layout/fragment_estadisticas" />
+    <fragment
+        android:id="@+id/navigation_calendario"
+        android:name="com.savegoals.savegoals.controlador.menu.CalendarioFragment"
+        tools:layout="@layout/fragment_calendario" />
 
     <fragment
         android:id="@+id/navigation_configuracion"

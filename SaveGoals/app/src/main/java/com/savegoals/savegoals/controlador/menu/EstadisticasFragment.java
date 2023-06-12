@@ -85,6 +85,7 @@ public class EstadisticasFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         pagerAdapter = new PagerControllerEstObjetivos(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

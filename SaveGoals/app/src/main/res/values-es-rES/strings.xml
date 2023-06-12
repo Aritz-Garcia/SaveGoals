@@ -22,6 +22,7 @@
     <string name="restar">Restar</string>
     <string name="calculadora_text">"El objetivo se cumplirá el "</string>
     <string name="error_estadisticas_obj">Las entradas de este objetivo son negativas</string>
+    <string name="error_est_aho">NO HAY NADA AHORRADO EN LOS OBJETIVOS</string>
 
     <!-- Layouts -->
     <string name="resumen">RESUMEN</string>
@@ -61,6 +62,12 @@
     <string name="tab_ahorros">AHORROS</string>
     <string name="error_pieChart_est_obj">NO HAY OBJETIVOS</string>
     <string name="txt_est_obj">Cantidad total en objetivos:</string>
+    <string name="txt_est_aho">Cantidad total ahorrada en objetivos:</string>
+    <string name="error_pieChartEn_est_obj">NO HAY ENTRADAS</string>
+    <string name="txt_en_est_aho">Cantidad total ahorrada por entradas:</string>
+    <string name="entardas_minus">Entradas</string>
+    <string name="nombre_minus">Nombre</string>
+    <string name="categoria_minus">Categoría</string>
 
     <!-- Menu -->
     <string name="menu_objetivos">Objetivos</string>

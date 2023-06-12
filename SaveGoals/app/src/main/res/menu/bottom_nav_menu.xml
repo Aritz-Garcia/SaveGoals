@@ -7,9 +7,14 @@
         android:title="@string/menu_objetivos" />
 
     <item
-        android:id="@+id/navigation_esatdisticas"
+        android:id="@+id/navigation_estadisticas"
         android:icon="@drawable/estadisticas"
         android:title="@string/menu_estadisticas" />
+
+    <item
+        android:id="@+id/navigation_calendario"
+        android:icon="@drawable/calendario"
+        android:title="Calendario" />
 
     <item
         android:id="@+id/navigation_configuracion"
