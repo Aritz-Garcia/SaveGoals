@@ -68,6 +68,7 @@
     <string name="entardas_minus">Entradas</string>
     <string name="nombre_minus">Nombre</string>
     <string name="categoria_minus">Categoría</string>
+    <string name="hoy">HOY</string>
 
     <!-- Menu -->
     <string name="menu_objetivos">Objetivos</string>

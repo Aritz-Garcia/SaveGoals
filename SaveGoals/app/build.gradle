@@ -46,6 +46,9 @@ dependencies {
     // Chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    // Calendario
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
+
     // Room
     implementation 'androidx.room:room-common:2.5.1'
     implementation 'androidx.room:room-runtime:2.5.1'

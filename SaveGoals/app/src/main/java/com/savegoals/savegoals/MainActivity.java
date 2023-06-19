@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         int id = getIntent().getIntExtra("id", 0);
+        int tab = getIntent().getIntExtra("tab", 0);
 
         db = AppDatabase.getDatabase(this);
 
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+        viewPager.setCurrentItem(tab);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }

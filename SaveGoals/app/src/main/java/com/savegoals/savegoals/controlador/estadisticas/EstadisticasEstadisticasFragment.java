@@ -112,7 +112,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
             for (int i = 0; i < entradas.size(); i++) {
                 boolean negativo = String.valueOf(entradas.get(i).getCantidad()).contains("-");
                 if (!negativo) {
-                    PieEntry pieEntry = new PieEntry(entradas.get(i).getCantidad(), entradas.get(i).getNombre());
+                    PieEntry pieEntry = new PieEntry(entradas.get(i).getCantidad(), entradas.get(i).getNombre() + " (" + obtieneDosDecimales(entradas.get(i).getCantidad()) + "€)");
 
                     pieEntries.add(pieEntry);
                     z++;
@@ -131,7 +131,7 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                 pieDataSet.setValueTextSize(12);
                 pieChart.setData(new PieData(pieDataSet));
                 pieChart.setDrawEntryLabels(true);
-                pieChart.setUsePercentValues(false);
+                pieChart.setUsePercentValues(true);
                 if (settingssp.getBoolean("oscuro", false)) {
                     pieChart.setEntryLabelColor(Color.WHITE);
                     pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);

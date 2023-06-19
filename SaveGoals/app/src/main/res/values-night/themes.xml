@@ -21,6 +21,11 @@
         <item name="tint">@color/white</item>
         <item name="iconTint">@color/white</item>
         <item name="android:tint">@color/white</item>
+        <item name="compactCalendarBackgroundColor">@color/grey</item>
+        <item name="compactCalendarTextColor">@color/white</item>
+        <item name="compactCalendarCurrentSelectedDayBackgroundColor">@color/black</item>
+        <item name="compactCalendarCurrentSelectedDayTextColor">@color/white</item>
+        <item name="compactCalendarCurrentDayBackgroundColor">@color/azul</item>
         <!-- Fondo de pagina en grey -->
         <item name="android:windowBackground">@color/grey</item>
         <item name="tabBackground">@color/grey</item>

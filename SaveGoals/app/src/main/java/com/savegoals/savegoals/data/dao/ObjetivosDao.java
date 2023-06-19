@@ -24,6 +24,9 @@ public interface ObjetivosDao {
     @Query("SELECT * FROM objetivos WHERE id LIKE :id LIMIT 1")
     Objetivos findById(int id);
 
+    @Query("SELECT * FROM objetivos WHERE fecha LIKE :fecha")
+    List<Objetivos> findByFecha(String fecha);
+
     @Query("UPDATE objetivos SET categoria = :categoria, nombre = :nombre, fecha = :fecha, cantidad = :cantidad, ahorrado = :ahorrado, completado = :completado WHERE id = :id")
     void update(int id, int categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado);
 

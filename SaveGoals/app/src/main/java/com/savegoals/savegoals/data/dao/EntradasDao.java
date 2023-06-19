@@ -21,6 +21,9 @@ public interface EntradasDao {
     @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos AND idEntrada LIKE :idEntrada")
     Entradas findByIds(int idObjetivos, int idEntrada);
 
+    @Query("SELECT * FROM entradas WHERE fecha LIKE :fecha")
+    List<Entradas> findByFecha(String fecha);
+
     @Query("UPDATE entradas SET categoria = :categoria, fecha = :fecha, nombre = :nombre, cantidad = :cantidad WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
     void update(int idObjetivos, int idEntrada, int categoria, String fecha, String nombre, float cantidad);
 
