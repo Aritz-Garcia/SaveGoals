@@ -9,4 +9,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#3D3C3C</color>
     <color name="azul">#569DD3</color>
+    <!-- Colores temas -->
+    <color name="primario">#4169E1</color>
+    <color name="secundarioClaro">#6495ED</color>
+    <color name="secundarioOscuro">#191970</color>
+    <color name="terciarioClaro">#7FFFD4</color>
+    <color name="terciarioOscuro">#00CED1</color>
+    <color name="cuartoClaro">#F0F0F0</color>
+    <color name="cuartoOscuro">#D3D3D3</color>
+    <color name="fondoClaro">#FFFFFF</color>
+    <color name="fondoOscuro">#333333</color>
 </resources>

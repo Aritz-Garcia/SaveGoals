@@ -2,11 +2,11 @@
     <!-- Base application theme. -->
     <style name="Theme.SaveGoals" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/primario</item>
+        <item name="colorPrimaryVariant">@color/secundarioOscuro</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/secundarioOscuro</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -27,7 +27,7 @@
         <item name="compactCalendarCurrentSelectedDayTextColor">@color/white</item>
         <item name="compactCalendarCurrentDayBackgroundColor">@color/azul</item>
         <!-- Fondo de pagina en grey -->
-        <item name="android:windowBackground">@color/grey</item>
-        <item name="tabBackground">@color/grey</item>
+        <item name="android:windowBackground">@color/fondoOscuro</item>
+        <item name="tabBackground">@color/fondoOscuro</item>
     </style>
 </resources>
