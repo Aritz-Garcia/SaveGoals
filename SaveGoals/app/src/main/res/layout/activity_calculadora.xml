@@ -55,6 +55,24 @@
         android:hint="@string/calculadora_ahorrar"
         android:inputType="numberDecimal" />
 
+    <Switch
+        android:id="@+id/swInicioCalc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/calculadora_cantidad_inical"
+        tools:ignore="TouchTargetSizeCheck,UseSwitchCompatOrMaterialXml"/>
+
+    <EditText
+        android:id="@+id/etCantidadInicialCalc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:hint="@string/calculadora_cantidad_inical"
+        android:inputType="numberDecimal"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btnCalcular"
         android:layout_width="match_parent"

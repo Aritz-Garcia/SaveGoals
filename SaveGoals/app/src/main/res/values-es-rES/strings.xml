@@ -56,6 +56,7 @@
     <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
     <string name="calculadora_dias">Cada cuantos dias</string>
     <string name="calcualdora_cantidad">Cantidad ahorrado</string>
+    <string name="calculadora_cantidad_inical">Cantidad inicial</string>
     <string name="btn_calcular">Calcular</string>
     <string name="text_crear_calc">Quieres crear un objetivo con esta fecha y esta cantidad?</string>
     <string name="tab_evolucion">EVOLUCIÓN</string>
