@@ -40,6 +40,6 @@ public class AlarmNotification extends BroadcastReceiver {
         if (manager != null) {
             manager.notify(NOTIFICATION_ID, builder.build());
         }
-        Log.d("TAG", "createSimpleNotification");
+        Log.d("TAG", "Notificacion creada");
     }
 }

@@ -95,4 +95,16 @@
     <string name="categoria_cartera">Cartera</string>
     <string name="categoria_hucha">Hucha</string>
     <string name="categoria_trabajo">Trabajo</string>
+
+    <!-- Notificaciones -->
+    <string name="lunes_semana">Lunes</string>
+    <string name="martes_semana">Martes</string>
+    <string name="miercoles_semana">Miercoles</string>
+    <string name="jueves_semana">Jueves</string>
+    <string name="viernes_semana">Viernes</string>
+    <string name="sabado_semana">Sabado</string>
+    <string name="domingo_semana">Domingo</string>
+    <string name="seleccionar_hora">Selecciona la hora</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="act_noti">Activar notificaciones</string>
 </resources>
