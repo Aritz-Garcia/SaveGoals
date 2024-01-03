@@ -142,6 +142,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             spNotiSemana.setVisibility(View.VISIBLE);
             etNotiHora.setVisibility(View.VISIBLE);
             btnGuardar.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                notificacion(0, spNotiSemana.getSelectedItemPosition(), etNotiHora.getText().toString());
+            }
         } else {
             editor.putBoolean("notificacion", false);
             spNotiSemana.setVisibility(View.GONE);
