@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Seleccionar el objetivo" />
+        android:text="@string/widget_config_text" />
 
     <Spinner
         android:id="@+id/sp_objetivos"
@@ -23,14 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Seleccionar objetivo" />
+        android:text="@string/widget_config_select_obj" />
 
     <TextView
         android:id="@+id/tv_noObjWidget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="No hay ningun objetivo sin cumplir"
+        android:text="@string/widget_config_text2"
         android:visibility="gone" />
 
     <Button
@@ -38,6 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Salir"
+        android:text="@string/salir"
         android:visibility="gone" />
 </LinearLayout>

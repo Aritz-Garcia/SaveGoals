@@ -102,4 +102,8 @@
     <string name="seleccionar_hora">Selecciona la hora</string>
     <string name="btn_guardar">Guardar</string>
     <string name="act_noti">Activar notificaciones</string>
+    <string name="widget_config_text">Seleccionar el objetivo</string>
+    <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
+    <string name="salir">Salir</string>
+    <string name="widget_config_select_obj">Seleccionar objetivo</string>
 </resources>
