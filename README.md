@@ -1,11 +1,16 @@
 # SaveGoals
 <div align="center">
-    [![GitHub issues](https://img.shields.io/github/issues/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/issues)
-    [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-    [![GitHub PRs](https://img.shields.io/github/issues-pr/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/pulls)
+    
+[![GitHub issues](https://img.shields.io/github/issues/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/issues)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GitHub PRs](https://img.shields.io/github/issues-pr/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/pulls)
+    
 </div>
-
-<img src="img/SaveGoals.png" alt="SaveGoals logo" style="width:200px" align="center">
+<div align="center">
+    
+<img src="img/SaveGoals.png" alt="SaveGoals logo" style="width:200px">
+    
+</div>
 
 ## Descripción 📝
 **SaveGoals** es una aplicación diseñada para ayudarte a cumplir tus metas financieras de una manera organizada y eficiente. Con SaveGoals, puedes establecer objetivos de ahorro personalizados, indicando el nombre del objetivo, la cantidad de dinero que deseas acumular y la fecha límite para alcanzarlo. La aplicación se encarga de mostrarte el progreso hacia tu meta, proporcionándote una visión clara de cuánto dinero has ahorrado hasta el momento y cuánto te falta por ahorrar.
