@@ -1,7 +1,7 @@
 # SaveGoals
 <div align="center">
     
-[![Platform](https://img.shields.io/badge/platform-android-%2334A853?logo=android&logoColor=%23FFFFFF)](https://github.com/Aritz-Garcia/SaveGoals/issues)
+[![Platform](https://img.shields.io/badge/platform-android-%2334A853?logo=android&logoColor=%23FFFFFF)](https://github.com/Aritz-Garcia/SaveGoals)
 [![GitHub issues](https://img.shields.io/github/issues/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/issues)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md)
 [![GitHub PRs](https://img.shields.io/github/issues-pr/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/pulls)
@@ -25,6 +25,7 @@
 ## Instalación 🚀
 
 ## Contribución 🧩
+Lea [CONTRIBUTING.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/CONTRIBUTING.md) para obtener detalles sobre el código de conducta y el proceso para enviar solicitudes de extracción.
 
 ## Licencia 📄
 La mayoría de este proyecto está bajo la licencia MIT - puedes ver el archivo [LICENSE.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md) para más información. Además de la licencia MIT hay parte del código que está bajo la licencia [Apache 2.0](https://github.com/PhilJay/MPAndroidChart/blob/master/LICENSE). Dicho código está sacado del repositorio [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) de [PhilJay](https://github.com/PhilJay).
