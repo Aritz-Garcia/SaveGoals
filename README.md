@@ -28,7 +28,12 @@
 Lea [CONTRIBUTING.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/CONTRIBUTING.md) para obtener detalles sobre el código de conducta y el proceso para enviar solicitudes de extracción.
 
 ## Licencia 📄
-La mayoría de este proyecto está bajo la licencia MIT - puedes ver el archivo [LICENSE.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md) para más información. Además de la licencia MIT hay parte del código que está bajo la licencia [Apache 2.0](https://github.com/PhilJay/MPAndroidChart/blob/master/LICENSE). Dicho código está sacado del repositorio [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) de [PhilJay](https://github.com/PhilJay).
+Este proyecto incorpora múltiples licencias debido a la diversidad de componentes y su origen. A continuación, se detalla la información específica sobre las licencias y los componentes correspondientes:
+
+- **Licencia MIT:** La mayoría de este proyecto está bajo la licencia MIT. Puedes ver el archivo [LICENSE.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md) para más información. Bajo esta licencia tambien recae la parte del codigo correspondiente al calendario, el cual se ha adaptado del repositorio [CompactCalendarView](https://github.com/SundeepK/CompactCalendarView) de [SundeepK](https://github.com/SundeepK).
+- **Licencia Apache 2.0:** Además de la licencia MIT hay parte del código que está bajo la licencia [Apache 2.0](https://github.com/PhilJay/MPAndroidChart/blob/master/LICENSE). Este componente en específico proviene del repositorio [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) de [PhilJay](https://github.com/PhilJay).
+
+Para más información sobre cada licencia y las obligaciones que conlleva, por favor, consulte los archivos de licencia correspondientes y las referencias a los repositorios de origen.
 
 ## Donaciones 💰
 Si quieres contribuir al proyecto puedes hacerlo de las siguientes maneras:
