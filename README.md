@@ -2,7 +2,7 @@
 <div align="center">
     
 [![GitHub issues](https://img.shields.io/github/issues/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/issues)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md)
 [![GitHub PRs](https://img.shields.io/github/issues-pr/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/pulls)
     
 </div>
@@ -28,3 +28,7 @@
 ## Licencia 📄
 
 ## Donaciones 💰
+Si quieres contribuir al proyecto puedes hacerlo de las siguientes maneras:
+
+[![Ko-fi](https://img.shields.io/badge/BUY%20ME%20A%20COFFEE-%23FF5E5B?style=for-the-badge&logo=kofi&logoColor=%23FFFFFF)](https://ko-fi.com/aritzgarcia)
+[![PayPal](https://img.shields.io/badge/PAYPAL-%23003087?style=for-the-badge&logo=PayPal&logoColor=%23FFFFFF)](https://www.paypal.com/paypalme/aritzgarcia30)
