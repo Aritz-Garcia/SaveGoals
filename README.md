@@ -23,6 +23,15 @@
 - **Planificación eficaz:** La aplicación calcula y te informa cuánto necesitas ahorrar diaria, semanal o mensualmente para cumplir con tu objetivo en el tiempo establecido.
 
 ## Instalación 🚀
+Para instalar y ejecutar este proyecto en tu entorno de desarrollo, sigue estos pasos:
+
+1. **Clonar el repositorio:** Primero, necesitas clonar el repositorio a tu máquina local. Abre una terminal o línea de comandos y ejecuta el siguiente comando: `git clone https://github.com/Aritz-Garcia/SaveGoals`. Esto descargará una copia del proyecto en tu equipo.
+
+2. **Ejecutar el código:** Una vez clonado el repositorio, abre el proyecto descargado con Android Studio. Para hacerlo, inicia Android Studio, selecciona 'Open an existing Android Studio project', y navega hasta la ubicación donde clonaste el proyecto.
+    
+    Después de abrir el proyecto en Android Studio, espera a que el IDE complete la indexación y la construcción del gradle. Luego, puedes ejecutar el proyecto haciendo clic en el botón "▶" (Run) en la barra de herramientas de Android Studio.
+
+Si encuentras algún problema al seguir estos pasos, asegúrate de tener instalada la última versión de Android Studio y el JDK adecuado para el proyecto.
 
 ## Contribución 🧩
 Lea [CONTRIBUTING.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/CONTRIBUTING.md) para obtener detalles sobre el código de conducta y el proceso para enviar solicitudes de extracción.
