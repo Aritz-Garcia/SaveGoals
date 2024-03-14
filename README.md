@@ -1,7 +1,7 @@
 # SaveGoals
 <div align="center">
     
-[![Platform](https://img.shields.io/badge/platform-android-%2334A853logo=android&logoColor=%23FFFFFF)](https://github.com/Aritz-Garcia/SaveGoals/issues)
+[![Platform](https://img.shields.io/badge/platform-android-%2334A853?logo=android&logoColor=%23FFFFFF)](https://github.com/Aritz-Garcia/SaveGoals/issues)
 [![GitHub issues](https://img.shields.io/github/issues/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/issues)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md)
 [![GitHub PRs](https://img.shields.io/github/issues-pr/Aritz-Garcia/SaveGoals)](https://github.com/Aritz-Garcia/SaveGoals/pulls)
