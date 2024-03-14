@@ -8,7 +8,7 @@
 </div>
 <div align="center">
     
-<img src="img/SaveGoals.png" alt="SaveGoals logo" style="width:200px">
+<img src="img/SaveGoals.png" alt="SaveGoals logo" style="width:200px; border-radius:15px">
     
 </div>
 
