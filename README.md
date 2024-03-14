@@ -26,6 +26,7 @@
 ## Contribución 🧩
 
 ## Licencia 📄
+La mayoría de este proyecto está bajo la licencia MIT - puedes ver el archivo [LICENSE.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/LICENSE.md) para más información. Además de la licencia MIT hay parte del código que está bajo la licencia [Apache 2.0](https://github.com/PhilJay/MPAndroidChart/blob/master/LICENSE). Dicho código está sacado del repositorio [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) de [PhilJay](https://github.com/PhilJay).
 
 ## Donaciones 💰
 Si quieres contribuir al proyecto puedes hacerlo de las siguientes maneras:
