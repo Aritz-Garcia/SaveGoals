@@ -16,7 +16,7 @@
 ## Descripción 📝
 **SaveGoals** es una aplicación diseñada para ayudarte a cumplir tus metas financieras de una manera organizada y eficiente. Con SaveGoals, puedes establecer objetivos de ahorro personalizados, indicando el nombre del objetivo, la cantidad de dinero que deseas acumular y la fecha límite para alcanzarlo. La aplicación se encarga de mostrarte el progreso hacia tu meta, proporcionándote una visión clara de cuánto dinero has ahorrado hasta el momento y cuánto te falta por ahorrar.
 
-### Características principales:
+### Características principales: 🔑
 - **Creación de objetivos financieros:** Establece metas de ahorro personalizadas, incluyendo el nombre del objetivo, la cantidad deseada y la fecha límite.
 - **Seguimiento del ahorro:** Añade fondos a tus objetivos, con la opción de incluir una descripción de la fuente de ingreso, permitiéndote ver el crecimiento de tu ahorro de manera detallada.
 - **Visualización del progreso:** Observa de un vistazo cómo avanzas hacia tu meta a través de una representación gráfica en forma de rosca, que muestra el porcentaje de dinero ahorrado.
@@ -40,12 +40,12 @@ Si encuentras algún problema al seguir estos pasos, asegúrate de tener instala
 
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
 
-<img src="img/mockup/modo_claro/Claro_1.png" alt="modo claro 1" />
-<img src="img/mockup/modo_claro/Claro_2.png" alt="modo claro 2" />
-<img src="img/mockup/modo_claro/Claro_3.png" alt="modo claro 3" />
-<img src="img/mockup/modo_claro/Claro_4.png" alt="modo claro 4" />
-<img src="img/mockup/modo_claro/Claro_5.png" alt="modo claro 5" />
-<img src="img/mockup/modo_claro/Claro_6.png" alt="modo claro 6" />
+<img src="img/mockup/modo_claro/Claro_1.png" alt="modo claro 1" style="width:150px" />
+<img src="img/mockup/modo_claro/Claro_2.png" alt="modo claro 2" style="width:150px" />
+<img src="img/mockup/modo_claro/Claro_3.png" alt="modo claro 3" style="width:150px" />
+<img src="img/mockup/modo_claro/Claro_4.png" alt="modo claro 4" style="width:150px" />
+<img src="img/mockup/modo_claro/Claro_5.png" alt="modo claro 5" style="width:150px" />
+<img src="img/mockup/modo_claro/Claro_6.png" alt="modo claro 6" style="width:150px" />
 
 </div>
 
@@ -54,12 +54,12 @@ Si encuentras algún problema al seguir estos pasos, asegúrate de tener instala
 
 <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
 
-<img src="img/mockup/modo_oscuro/Oscuro_1.png" alt="modo oscuro 1" />
-<img src="img/mockup/modo_oscuro/Oscuro_2.png" alt="modo oscuro 2" />
-<img src="img/mockup/modo_oscuro/Oscuro_3.png" alt="modo oscuro 3" />
-<img src="img/mockup/modo_oscuro/Oscuro_4.png" alt="modo oscuro 4" />
-<img src="img/mockup/modo_oscuro/Oscuro_5.png" alt="modo oscuro 5" />
-<img src="img/mockup/modo_oscuro/Oscuro_6.png" alt="modo oscuro 6" />
+<img src="img/mockup/modo_oscuro/Oscuro_1.png" alt="modo oscuro 1" style="width:150px" />
+<img src="img/mockup/modo_oscuro/Oscuro_2.png" alt="modo oscuro 2" style="width:150px" />
+<img src="img/mockup/modo_oscuro/Oscuro_3.png" alt="modo oscuro 3" style="width:150px" />
+<img src="img/mockup/modo_oscuro/Oscuro_4.png" alt="modo oscuro 4" style="width:150px" />
+<img src="img/mockup/modo_oscuro/Oscuro_5.png" alt="modo oscuro 5" style="width:150px" />
+<img src="img/mockup/modo_oscuro/Oscuro_6.png" alt="modo oscuro 6" style="width:150px" />
 
 </div>
 
