@@ -36,31 +36,39 @@ Si encuentras algún problema al seguir estos pasos, asegúrate de tener instala
 ## Galeria 🖼
 ### Modo claro: ☀
 
-<div align="center" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-content: center;">
+<div align="center">
 
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
-
-<img src="img/mockup/modo_claro/Claro_1.png" alt="modo claro 1" style="width:150px" />
-<img src="img/mockup/modo_claro/Claro_2.png" alt="modo claro 2" style="width:150px" />
-<img src="img/mockup/modo_claro/Claro_3.png" alt="modo claro 3" style="width:150px" />
-<img src="img/mockup/modo_claro/Claro_4.png" alt="modo claro 4" style="width:150px" />
-<img src="img/mockup/modo_claro/Claro_5.png" alt="modo claro 5" style="width:150px" />
-<img src="img/mockup/modo_claro/Claro_6.png" alt="modo claro 6" style="width:150px" />
-
+<table>
+    <tr>
+        <td><img src="img/mockup/modo_claro/Claro_1.png" alt="modo claro 1" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_claro/Claro_2.png" alt="modo claro 2" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_claro/Claro_3.png" alt="modo claro 3" style="width:150px" /></td>
+    </tr>
+    <tr>
+        <td><img src="img/mockup/modo_claro/Claro_4.png" alt="modo claro 4" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_claro/Claro_5.png" alt="modo claro 5" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_claro/Claro_6.png" alt="modo claro 6" style="width:150px" /></td>
+    </tr>
+</table>
+    
 </div>
 
 ### Modo oscuro: 🌙
-<div align="center" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-content: center;">
+<div align="center">
 
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
-
-<img src="img/mockup/modo_oscuro/Oscuro_1.png" alt="modo oscuro 1" style="width:150px" />
-<img src="img/mockup/modo_oscuro/Oscuro_2.png" alt="modo oscuro 2" style="width:150px" />
-<img src="img/mockup/modo_oscuro/Oscuro_3.png" alt="modo oscuro 3" style="width:150px" />
-<img src="img/mockup/modo_oscuro/Oscuro_4.png" alt="modo oscuro 4" style="width:150px" />
-<img src="img/mockup/modo_oscuro/Oscuro_5.png" alt="modo oscuro 5" style="width:150px" />
-<img src="img/mockup/modo_oscuro/Oscuro_6.png" alt="modo oscuro 6" style="width:150px" />
-
+<table>
+    <tr>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_1.png" alt="modo oscuro 1" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_2.png" alt="modo oscuro 2" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_3.png" alt="modo oscuro 3" style="width:150px" /></td>
+    </tr>
+    <tr>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_4.png" alt="modo oscuro 4" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_5.png" alt="modo oscuro 5" style="width:150px" /></td>
+        <td><img src="img/mockup/modo_oscuro/Oscuro_6.png" alt="modo oscuro 6" style="width:150px" /></td>
+    </tr>
+</table>
+    
 </div>
 
 ## Contribución 🧩
