@@ -33,6 +33,36 @@ Para instalar y ejecutar este proyecto en tu entorno de desarrollo, sigue estos 
 
 Si encuentras algún problema al seguir estos pasos, asegúrate de tener instalada la última versión de Android Studio y el JDK adecuado para el proyecto.
 
+## Galeria 🖼
+### Modo claro: ☀
+
+<div align="center" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-content: center;">
+
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
+
+<img src="img/mockup/modo_claro/Claro_1.png" alt="modo claro 1" />
+<img src="img/mockup/modo_claro/Claro_2.png" alt="modo claro 2" />
+<img src="img/mockup/modo_claro/Claro_3.png" alt="modo claro 3" />
+<img src="img/mockup/modo_claro/Claro_4.png" alt="modo claro 4" />
+<img src="img/mockup/modo_claro/Claro_5.png" alt="modo claro 5" />
+<img src="img/mockup/modo_claro/Claro_6.png" alt="modo claro 6" />
+
+</div>
+
+### Modo oscuro: 🌙
+<div align="center" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; justify-content: center;">
+
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="visibility: hidden;" />
+
+<img src="img/mockup/modo_oscuro/Oscuro_1.png" alt="modo oscuro 1" />
+<img src="img/mockup/modo_oscuro/Oscuro_2.png" alt="modo oscuro 2" />
+<img src="img/mockup/modo_oscuro/Oscuro_3.png" alt="modo oscuro 3" />
+<img src="img/mockup/modo_oscuro/Oscuro_4.png" alt="modo oscuro 4" />
+<img src="img/mockup/modo_oscuro/Oscuro_5.png" alt="modo oscuro 5" />
+<img src="img/mockup/modo_oscuro/Oscuro_6.png" alt="modo oscuro 6" />
+
+</div>
+
 ## Contribución 🧩
 Lea [CONTRIBUTING.md](https://github.com/Aritz-Garcia/SaveGoals/tree/main/CONTRIBUTING.md) para obtener detalles sobre el código de conducta y el proceso para enviar solicitudes de extracción.
 
