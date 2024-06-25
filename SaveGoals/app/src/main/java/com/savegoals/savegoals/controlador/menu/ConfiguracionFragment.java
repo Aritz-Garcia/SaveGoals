@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,11 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TimePicker;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -33,13 +29,11 @@ import java.util.Calendar;
 
 public class ConfiguracionFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    public static final String MY_CHANNEL_ID = "myChannel";
+    public static final String MY_CHANNEL_ID = "meterDinero";
     SharedPreferences settingssp;
     SharedPreferences.Editor editor;
     Switch swOscuro, swNotificaciones;
-    EditText etNotiHora;
-    Spinner spNotiSemana;
-    Button btnGuardar;
+    Spinner spNotiHora;
 
     public ConfiguracionFragment() {
         // Required empty public constructor
@@ -67,39 +61,28 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
         swOscuro.setOnClickListener(this);
 
-        etNotiHora = view.findViewById(R.id.etNotiHora);
-        etNotiHora.setText(settingssp.getString("hora", "00:00"));
-        etNotiHora.setOnClickListener(this);
-
-        spNotiSemana = view.findViewById(R.id.spinnerNotiSemana);
+        spNotiHora = view.findViewById(R.id.spinnerNotiHora);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 getContext(),
-                R.array.opciones_spinner_semanal,
+                R.array.opciones_spinner_horas,
                 android.R.layout.simple_spinner_item
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        if (spNotiSemana != null) {
-            spNotiSemana.setAdapter(adapter);
-            spNotiSemana.setOnItemSelectedListener(this);
+        if (spNotiHora != null) {
+            spNotiHora.setAdapter(adapter);
+            spNotiHora.setOnItemSelectedListener(this);
         }
 
-        spNotiSemana.setSelection(settingssp.getInt("semana", 0));
-
-        btnGuardar = view.findViewById(R.id.btnGuardarNoti);
-        btnGuardar.setOnClickListener(this);
+        spNotiHora.setSelection(settingssp.getInt("hora", 0));
 
         swNotificaciones = view.findViewById(R.id.swNotificacion);
 
         if (settingssp.getBoolean("notificacion", false)) {
             swNotificaciones.setChecked(true);
-            spNotiSemana.setVisibility(View.VISIBLE);
-            etNotiHora.setVisibility(View.VISIBLE);
-            btnGuardar.setVisibility(View.VISIBLE);
+            spNotiHora.setVisibility(View.VISIBLE);
         } else {
             swNotificaciones.setChecked(false);
-            spNotiSemana.setVisibility(View.GONE);
-            etNotiHora.setVisibility(View.GONE);
-            btnGuardar.setVisibility(View.GONE);
+            spNotiHora.setVisibility(View.GONE);
         }
 
         swNotificaciones.setOnClickListener(this);
@@ -127,55 +110,27 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         } else if (v.getId() == swNotificaciones.getId()) {
             notiSwitch();
             editor.commit();
-        } else if (v.getId() == etNotiHora.getId()) {
-            mostrarDialogoHora();
-        } else if (v.getId() == btnGuardar.getId()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                notificacion(0, spNotiSemana.getSelectedItemPosition(), etNotiHora.getText().toString());
-            }
         }
     }
 
     private void notiSwitch() {
         if (swNotificaciones.isChecked()) {
             editor.putBoolean("notificacion", true);
-            spNotiSemana.setVisibility(View.VISIBLE);
-            etNotiHora.setVisibility(View.VISIBLE);
-            btnGuardar.setVisibility(View.VISIBLE);
+            spNotiHora.setVisibility(View.VISIBLE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                notificacion(0, spNotiSemana.getSelectedItemPosition(), etNotiHora.getText().toString());
+                notificacion(0, spNotiHora.getSelectedItemPosition());
             }
         } else {
             editor.putBoolean("notificacion", false);
-            spNotiSemana.setVisibility(View.GONE);
-            etNotiHora.setVisibility(View.GONE);
-            btnGuardar.setVisibility(View.GONE);
+            spNotiHora.setVisibility(View.GONE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                notificacion(1, 0, "");
+                notificacion(1, 0);
             }
         }
     }
 
-    private void mostrarDialogoHora() {
-        final Calendar calendario = Calendar.getInstance();
-        int hora = calendario.get(Calendar.HOUR_OF_DAY);
-        int minuto = calendario.get(Calendar.MINUTE);
 
-        TimePickerDialog dialogoHora = new TimePickerDialog(getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        // Manejar la hora seleccionada
-                        String horaSeleccionada = String.format("%02d:%02d", hourOfDay, minute);
-                        etNotiHora.setText(horaSeleccionada);
-                    }
-                }, hora, minuto, true);
-
-        dialogoHora.show();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void notificacion(int i, int semana, String hora) {
+    private void notificacion(int i, int hora) {
         Intent intent = new Intent(requireContext().getApplicationContext(), AlarmNotification.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 requireContext().getApplicationContext(),
@@ -188,52 +143,66 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
         if (alarmManager != null) {
             if (i == 0) {
-                editor.putInt("semana", semana);
-                editor.putString("hora", hora);
+                editor.putInt("hora", hora);
                 editor.commit();
                 // alarmManager.setExact(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + 3000, pendingIntent);
-                // Notifiaciones todos los domingos a las 19:00
                 Calendar calendar = Calendar.getInstance();
-                switch (semana) {
+                calendar.setTimeZone(Calendar.getInstance().getTimeZone());
+                switch (hora) {
                     case 0:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                        Log.d("TAG", "notificacion: lunes");
+                        // 17:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 17);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 1:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                        Log.d("TAG", "notificacion: martes");
+                        // 18:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 18);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 2:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                        Log.d("TAG", "notificacion: miercoles");
+                        // 19:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 19);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 3:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                        Log.d("TAG", "notificacion: jueves");
+                        // 20:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 20);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 4:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                        Log.d("TAG", "notificacion: viernes");
+                        // 21:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 21);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 5:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                        Log.d("TAG", "notificacion: sabado");
+                        // 22:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 22);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                     case 6:
-                        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                        Log.d("TAG", "notificacion: domingo");
+                        // 23:00
+                        calendar.set(Calendar.HOUR_OF_DAY, 23);
+                        calendar.set(Calendar.MINUTE, 0);
+                        calendar.set(Calendar.SECOND, 0);
+                        calendar.set(Calendar.MILLISECOND, 0);
                         break;
                 }
-
-                String horaSeparada[] = hora.split(":");
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(horaSeparada[0]));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(horaSeparada[1]));
-                calendar.set(Calendar.SECOND, 0);
-                /* Quitar 7 dias a calendar */
-                calendar.add(Calendar.DAY_OF_YEAR, -7);
                 // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60 * 24 * 7, pendingIntent);
-                Log.d("TAG", "notificacion: " + semana + " " + horaSeparada[0] + " " + horaSeparada[1]);
+                // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 5, pendingIntent);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                Log.d("TAG", "notificacion: " + hora);
                 Log.d("TAG", "notificacion: " + calendar.getTimeInMillis() + " " + calendar.getTimeZone());
             } else {
                 alarmManager.cancel(pendingIntent);
@@ -248,7 +217,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     private void createChannel() {
         NotificationChannel channel = new NotificationChannel(
                 MY_CHANNEL_ID,
-                "MySuperChannel",
+                "Meter Dinero",
                 NotificationManager.IMPORTANCE_DEFAULT
         );
 
@@ -273,7 +242,11 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        if (swNotificaciones.isChecked()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                notificacion(0, spNotiHora.getSelectedItemPosition());
+            }
+        }
     }
 
     @Override

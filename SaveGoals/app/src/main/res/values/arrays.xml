@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="opciones_spinner_semanal">
-        <item>@string/lunes_semana</item>
-        <item>@string/martes_semana</item>
-        <item>@string/miercoles_semana</item>
-        <item>@string/jueves_semana</item>
-        <item>@string/viernes_semana</item>
-        <item>@string/sabado_semana</item>
-        <item>@string/domingo_semana</item>
+    <string-array name="opciones_spinner_horas">
+        <item>@string/hora_1</item>
+        <item>@string/hora_2</item>
+        <item>@string/hora_3</item>
+        <item>@string/hora_4</item>
+        <item>@string/hora_5</item>
+        <item>@string/hora_6</item>
+        <item>@string/hora_7</item>
     </string-array>
 </resources>
