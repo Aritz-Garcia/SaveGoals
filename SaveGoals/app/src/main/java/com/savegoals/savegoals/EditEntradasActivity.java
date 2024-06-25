@@ -22,7 +22,6 @@ import com.savegoals.savegoals.data.entities.Entradas;
 import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 import com.savegoals.savegoals.dialog.DatePickerFragment;
-import com.savegoals.savegoals.dialog.ErrorDateAnteriorDialog;
 import com.savegoals.savegoals.dialog.ErrorDateDialog;
 import com.savegoals.savegoals.formularios.CustomAdapter;
 import com.savegoals.savegoals.formularios.CustomItem;
@@ -30,7 +29,7 @@ import com.savegoals.savegoals.formularios.CustomItem;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, ErrorDateDialog.ErrorDateDialogListener, ErrorDateAnteriorDialog.ErrorDateAnteriorDialogListener {
+public class EditEntradasActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, ErrorDateDialog.ErrorDateDialogListener {
 
     Spinner spinnerCategoria;
     ArrayList<CustomItem> customList;
@@ -38,7 +37,6 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
     EditText etNombre, etFecha, etCantidad;
     TextView tvErrorCategoria, tvErrorFecha;
     Switch swRestar;
-    ErrorDateDialog errorDateDialog;
     AppDatabase db;
     SharedPreferences settingssp;
     int idO, idE;
@@ -143,17 +141,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
                     ErrorDateDialog errorDateDialog = new ErrorDateDialog();
                     errorDateDialog.show(getSupportFragmentManager(), "error date dialog");
                 } else {
-                    Date today = new Date();
-                    today.setHours(0);
-                    today.setMinutes(0);
-                    today.setSeconds(0);
-                    if (fecha.before(today)) {
-                        // Dialogo fecha anterior a la actual
-                        ErrorDateAnteriorDialog errorDateAnteriorDialog = new ErrorDateAnteriorDialog();
-                        errorDateAnteriorDialog.show(getSupportFragmentManager(), "ErrorDateAnteriorDialog");
-                    } else {
-                        guardarBaseDeDatos();
-                    }
+                    guardarBaseDeDatos();
                 }
             } else {
                 guardarBaseDeDatos();
@@ -293,10 +281,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         if( textua.length()==0 )  {
             text.setError(getString(R.string.necesario));
             return false;
-        }else if((!textua.matches("[a-zA-Z ]+\\.?"))){
-            text.setError(getString(R.string.solo_letras));
-            return false;
-        }else{
+        } else{
             return true;
         }
     }
@@ -347,26 +332,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        Date today = new Date();
-        today.setHours(0);
-        today.setMinutes(0);
-        today.setSeconds(0);
-        Date fecha = new Date();
-        if (etFecha.getText().toString().length() != 0) {
-            String[] fechaSeparada = etFecha.getText().toString().split("/");
-            fecha.setYear(Integer.parseInt(fechaSeparada[2]) - 1900);
-            fecha.setMonth(Integer.parseInt(fechaSeparada[1]) - 1);
-            fecha.setDate(Integer.parseInt(fechaSeparada[0]));
-            if (fecha.before(today)) {
-                // Dialogo fecha anterior a la actual
-                ErrorDateAnteriorDialog errorDateAnteriorDialog = new ErrorDateAnteriorDialog();
-                errorDateAnteriorDialog.show(getSupportFragmentManager(), "ErrorDateAnteriorDialog");
-            } else {
-                guardarBaseDeDatos();
-            }
-        } else {
             guardarBaseDeDatos();
-        }
     }
 
     @Override
@@ -399,15 +365,5 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-    }
-
-    @Override
-    public void onDialogPositiveClickAnterior(DialogFragment dialog) {
-        guardarBaseDeDatos();
-    }
-
-    @Override
-    public void onDialogNegativeClickAnterior(DialogFragment dialog) {
-        // No hace nada
     }
 }
