@@ -220,6 +220,9 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         if( textua.length()==0 )  {
             text.setError(getString(R.string.necesario));
             return false;
+        } else if (textua.length()>30) {
+            text.setError(getString(R.string.largo));
+            return false;
         } else{
             return true;
         }

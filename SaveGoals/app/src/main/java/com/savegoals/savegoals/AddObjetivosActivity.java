@@ -158,7 +158,10 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         if( textua.length()==0 )  {
             text.setError(getString(R.string.necesario));
             return false;
-        } else{
+        } else if (textua.length()>30) {
+            text.setError(getString(R.string.largo));
+            return false;
+        } else {
             return true;
         }
     }
