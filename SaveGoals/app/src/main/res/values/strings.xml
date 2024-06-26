@@ -112,5 +112,6 @@
     <string name="widget_config_text">Seleccionar el objetivo</string>
     <string name="widget_config_select_obj">Seleccionar objetivo</string>
     <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
+    <sting name="widget_config_text3">No hay mas de dos objetivos</sting>
     <string name="salir">Salir</string>
 </resources>

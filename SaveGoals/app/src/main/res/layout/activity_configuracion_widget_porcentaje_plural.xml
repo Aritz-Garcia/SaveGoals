@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/widget_config_text2"
+        android:text="@string/widget_config_text3"
         android:visibility="gone" />
 
     <Button
