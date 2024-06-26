@@ -22,7 +22,6 @@ import java.util.List;
 
 public class ConfiguracionWidgetPorcentajeActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     int appWidgetId;
     SharedPreferences settingssp;
     Button btnObjetivo, btnSalir;
@@ -103,13 +102,6 @@ public class ConfiguracionWidgetPorcentajeActivity extends AppCompatActivity imp
             resultValue.putExtra("manual", true);
             getApplicationContext().sendBroadcast(resultValue);
             setResult(RESULT_OK, resultValue);
-
-
-//        Intent updateIntent = new Intent(getApplicationContext(), MiWidgetPorcentaje.class);
-//        updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-//        int[] widgetIds = {appWidgetId};
-//        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
-//        getApplicationContext().sendBroadcast(updateIntent);
 
             finish();
         } else if (v.getId() == btnSalir.getId()) {

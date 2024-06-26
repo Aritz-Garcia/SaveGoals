@@ -1,6 +1,7 @@
 package com.savegoals.savegoals;
 
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -16,15 +17,15 @@ import com.savegoals.savegoals.db.AppDatabase;
 
 import java.text.DecimalFormat;
 
-public class MiWidgetPorcentaje extends AppWidgetProvider {
+public class MiWidgetPorcentajePlural extends AppWidgetProvider {
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
 
         eliminarCosas(context, appWidgetManager, appWidgetId);
-        int objetivoIdSeleccionado = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getInt("objetivo_" + appWidgetId, -1);
-        updateAppWidgets(context, appWidgetManager, appWidgetId, objetivoIdSeleccionado);
+        String objetivosIdSeleccionados = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("objetivoPlural_" + appWidgetId, "-1");
+        updateAppWidgets(context, appWidgetManager, appWidgetId, objetivosIdSeleccionados);
     }
 
     @Override
@@ -33,10 +34,10 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         for (int appWidgetId : appWidgetIds) {
-            Log.d("MiWidgetPorcentaje", "onUpdate called");
-            int objetivoIdSeleccionado = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getInt("objetivo_" + appWidgetId, -1);
+            Log.d("MiWidgetPorcentajePlural", "onUpdate called");
+            String objetivosIdSeleccionados = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("objetivoPlural_" + appWidgetId, "-1");
             eliminarCosas(context, appWidgetManager, appWidgetId);
-            updateAppWidgets(context, appWidgetManager, appWidgetId, objetivoIdSeleccionado);
+            updateAppWidgets(context, appWidgetManager, appWidgetId, objetivosIdSeleccionados);
         }
     }
 
@@ -48,10 +49,10 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
             boolean manual = intent.getBooleanExtra("manual", false);
             if (manual) {
-                Log.d("MiWidgetPorcentaje", "onReceive called");
-                int objetivoIdSeleccionado = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getInt("objetivo_" + appWidgetId, -1);
+                Log.d("MiWidgetPorcentajePlural", "onReceive called");
+                String objetivosIdSeleccionados = context.getSharedPreferences("settings", Context.MODE_PRIVATE).getString("objetivoPlural_" + appWidgetId, "-1");
                 eliminarCosas(context, AppWidgetManager.getInstance(context), appWidgetId);
-                updateAppWidgets(context, AppWidgetManager.getInstance(context), appWidgetId, objetivoIdSeleccionado);
+                updateAppWidgets(context, AppWidgetManager.getInstance(context), appWidgetId, objetivosIdSeleccionados);
             }
         }
     }
@@ -60,7 +61,7 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
         for (int appWidgetId : appWidgetIds) {
-            context.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().remove("objetivo_" + appWidgetId).apply();
+            context.getSharedPreferences("settings", Context.MODE_PRIVATE).edit().remove("objetivoPlural_" + appWidgetId).apply();
             Log.d("MiWidgetPorcentajePlural", "onDeleted called");
         }
     }
@@ -72,58 +73,64 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    public void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int objetivoIdSeleccionado) {
+    public void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int appWidgetId, String objetivosIdSeleccionados) {
 
-        if (objetivoIdSeleccionado != -1) {
-            Log.d("MiWidgetPorcentaje", "updateAppWidget called");
+        if (objetivosIdSeleccionados != "-1") {
+            Log.d("MiWidgetPorcentajePlural", "updateAppWidget called");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widgets_layout_porcentaje);
 
+            String [] objetivosIdSeleccionadosArray = objetivosIdSeleccionados.split(";");
             AppDatabase appDatabase = AppDatabase.getDatabase(context);
-            Objetivos objetivo = appDatabase.objetivosDao().findById(objetivoIdSeleccionado);
+            Objetivos objetivo1 = appDatabase.objetivosDao().findById(Integer.parseInt(objetivosIdSeleccionadosArray[0]));
+            Objetivos objetivo2 = appDatabase.objetivosDao().findById(Integer.parseInt(objetivosIdSeleccionadosArray[1]));
             RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_text);
-            switch (objetivo.getCategoria()) {
-                case 1:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
-                    break;
+            if (objetivo1.getCategoria() != objetivo2.getCategoria()) {
+                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
+            } else {
+                switch (objetivo1.getCategoria()) {
+                    case 1:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
+                        break;
 
-                case 2:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
-                    break;
+                    case 2:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
+                        break;
 
-                case 3:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
-                    break;
+                    case 3:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
+                        break;
 
-                case 4:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
-                    break;
+                    case 4:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
+                        break;
 
-                case 5:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
-                    break;
+                    case 5:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
+                        break;
 
-                case 6:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
-                    break;
+                    case 6:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
+                        break;
 
-                case 7:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
-                    break;
+                    case 7:
+                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
+                        break;
 
+                }
             }
 
-
-
-            text.setTextViewText(R.id.tv_texto_widget, objetivo.getNombre());
-            text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(objetivo.getAhorrado()) + "€ / " + obtieneDosDecimales(objetivo.getCantidad()) + "€");
+            text.setTextViewText(R.id.tv_texto_widget, objetivo1.getNombre() + " // " + objetivo2.getNombre());
+            float totalAhorrado = objetivo1.getAhorrado() + objetivo2.getAhorrado();
+            float totalCantidad = objetivo1.getCantidad() + objetivo2.getCantidad();
+            text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(totalAhorrado) + "€ / " + obtieneDosDecimales(totalCantidad) + "€");
             views.addView(R.id.ll_contenedor, text);
 
             int porcentajeCalc;
 
-            if (objetivo.getAhorrado() == 0) {
+            if (totalAhorrado == 0) {
                 porcentajeCalc = 1;
             } else {
-                porcentajeCalc = (int) ((objetivo.getAhorrado() * 100) / objetivo.getCantidad());
+                porcentajeCalc = (int) ((totalAhorrado * 100) / totalCantidad);
             }
 
             RemoteViews progressBar = null;
@@ -142,7 +149,7 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
 
             progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
 
-            if (objetivo.getAhorrado() == 0) {
+            if (totalAhorrado == 0) {
                 porcentajeCalc = 0;
                 progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
                 progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
