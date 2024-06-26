@@ -25,9 +25,8 @@ public class ConfiguracionWidgetPorcentajeActivity extends AppCompatActivity imp
     int appWidgetId;
     SharedPreferences settingssp;
     Button btnObjetivo, btnSalir;
-    TextView tvNoObjetivos;
+    TextView tvNoObjetivos, tvTituloWidget;
     Spinner spinner;
-    int posicionSelect = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class ConfiguracionWidgetPorcentajeActivity extends AppCompatActivity imp
         btnObjetivo = findViewById(R.id.btnGuardarObjWidg);
         btnSalir = findViewById(R.id.btnSalirObjWidg);
         tvNoObjetivos = findViewById(R.id.tv_noObjWidget);
+        tvTituloWidget = findViewById(R.id.tv_titulo_widget_1);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -62,11 +62,12 @@ public class ConfiguracionWidgetPorcentajeActivity extends AppCompatActivity imp
             tvNoObjetivos.setVisibility(View.GONE);
             btnObjetivo.setVisibility(View.VISIBLE);
             spinner.setVisibility(View.VISIBLE);
+            tvTituloWidget.setVisibility(View.VISIBLE);
         } else {
             btnSalir.setVisibility(View.VISIBLE);
             tvNoObjetivos.setVisibility(View.VISIBLE);
             btnObjetivo.setVisibility(View.GONE);
-            spinner.setVisibility(View.GONE);
+            tvTituloWidget.setVisibility(View.GONE);
         }
 
         btnObjetivo.setOnClickListener(this);

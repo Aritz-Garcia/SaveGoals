@@ -26,10 +26,9 @@ public class ConfiguracionWidgetPorcentajePluralActivity extends AppCompatActivi
     int appWidgetId;
     SharedPreferences settingssp;
     Button btnObjetivo, btnSalir;
-    TextView tvNoObjetivos;
+    TextView tvNoObjetivos, tvTituloWidget;
     Spinner spinner1, spinner2;
     List<String> listaObj = new ArrayList<>();
-    int numeroObj = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +43,7 @@ public class ConfiguracionWidgetPorcentajePluralActivity extends AppCompatActivi
         btnObjetivo = findViewById(R.id.btnGuardarObPluWidg);
         btnSalir = findViewById(R.id.btnSalirObjPluWidg);
         tvNoObjetivos = findViewById(R.id.tv_noObjPluWidget);
+        tvTituloWidget = findViewById(R.id.tv_titulo_widget_2);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -70,30 +70,33 @@ public class ConfiguracionWidgetPorcentajePluralActivity extends AppCompatActivi
             btnObjetivo.setVisibility(View.VISIBLE);
             spinner1.setVisibility(View.VISIBLE);
             spinner2.setVisibility(View.VISIBLE);
+            tvTituloWidget.setVisibility(View.VISIBLE);
+
+            if (spinner1.getSelectedItemPosition() == 0) {
+                btnObjetivo.setEnabled(false);
+                spinner2.setEnabled(false);
+            } else {
+                spinner2.setEnabled(true);
+            }
+
+            if (spinner2.getSelectedItemPosition() == 0) {
+                btnObjetivo.setEnabled(false);
+            } else {
+                btnObjetivo.setEnabled(true);
+            }
+
+            spinner1.setOnItemSelectedListener(this);
+            spinner2.setOnItemSelectedListener(this);
+
         } else {
             btnSalir.setVisibility(View.VISIBLE);
             tvNoObjetivos.setVisibility(View.VISIBLE);
             btnObjetivo.setVisibility(View.GONE);
-            spinner1.setVisibility(View.GONE);
-            spinner2.setVisibility(View.GONE);
-        }
-        if (spinner1.getSelectedItemPosition() == 0) {
-            btnObjetivo.setEnabled(false);
-            spinner2.setEnabled(false);
-        } else {
-            spinner2.setEnabled(true);
-        }
-
-        if (spinner2.getSelectedItemPosition() == 0) {
-            btnObjetivo.setEnabled(false);
-        } else {
-            btnObjetivo.setEnabled(true);
+            tvTituloWidget.setVisibility(View.GONE);
         }
 
         btnObjetivo.setOnClickListener(this);
         btnSalir.setOnClickListener(this);
-        spinner1.setOnItemSelectedListener(this);
-        spinner2.setOnItemSelectedListener(this);
 
         // Meter cosas en listaObj
         listaObj.add("Selecciona un objetivo");

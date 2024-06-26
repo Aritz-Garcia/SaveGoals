@@ -5,7 +5,7 @@
     android:minHeight="110dp"
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/widgets_layout_porcentaje"
-    android:previewImage="@drawable/widget_objetivo_porcentaje"
+    android:previewImage="@drawable/widget_objetivo_porcentaje_singular"
     android:resizeMode="horizontal|vertical"
     android:configure="com.savegoals.savegoals.ConfiguracionWidgetPorcentajeActivity"
     android:widgetCategory="home_screen">

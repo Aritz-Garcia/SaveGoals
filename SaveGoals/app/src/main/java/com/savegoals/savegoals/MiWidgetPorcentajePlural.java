@@ -16,6 +16,7 @@ import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class MiWidgetPorcentajePlural extends AppWidgetProvider {
 
@@ -75,7 +76,7 @@ public class MiWidgetPorcentajePlural extends AppWidgetProvider {
 
     public void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int appWidgetId, String objetivosIdSeleccionados) {
 
-        if (objetivosIdSeleccionados != "-1") {
+        if (!objetivosIdSeleccionados.equals("-1")) {
             Log.d("MiWidgetPorcentajePlural", "updateAppWidget called");
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widgets_layout_porcentaje);
 

@@ -8,6 +8,7 @@
     tools:context=".ConfiguracionWidgetPorcentajePluralActivity">
 
     <TextView
+        android:id="@+id/tv_titulo_widget_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -17,13 +18,15 @@
         android:id="@+id/sp_objetivosPlu1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:visibility="gone" />
 
     <Spinner
         android:id="@+id/sp_objetivosPlu2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnGuardarObPluWidg"
