@@ -176,7 +176,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
                 progressBar.setLayoutParams(paramsProgress);
                 progressBar.setMax(100);
                 progressBar.setProgress(porcentajeInt);
-                if (porcentajeInt < 25) {
+                if (porcentajeInt < 50) {
                     progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_rojo));
                 } else if (porcentajeInt < 75) {
                     progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.custom_progressbar_amarillo));

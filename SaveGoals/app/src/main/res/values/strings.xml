@@ -97,13 +97,13 @@
     <string name="categoria_trabajo">Trabajo</string>
 
     <!-- Notificaciones -->
-    <string name="lunes_semana">Lunes</string>
-    <string name="martes_semana">Martes</string>
-    <string name="miercoles_semana">Miercoles</string>
-    <string name="jueves_semana">Jueves</string>
-    <string name="viernes_semana">Viernes</string>
-    <string name="sabado_semana">Sabado</string>
-    <string name="domingo_semana">Domingo</string>
+    <string name="hora_1" translatable="false">17:00</string>
+    <string name="hora_2" translatable="false">18:00</string>
+    <string name="hora_3" translatable="false">19:00</string>
+    <string name="hora_4" translatable="false">20:00</string>
+    <string name="hora_5" translatable="false">21:00</string>
+    <string name="hora_6" translatable="false">22:00</string>
+    <string name="hora_7" translatable="false">23:00</string>
     <string name="seleccionar_hora">Selecciona la hora</string>
     <string name="btn_guardar">Guardar</string>
     <string name="act_noti">Activar notificaciones</string>

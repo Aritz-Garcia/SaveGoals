@@ -158,10 +158,7 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
         if( textua.length()==0 )  {
             text.setError(getString(R.string.necesario));
             return false;
-        }else if((!textua.matches("[a-zA-Z ]+\\.?"))){
-            text.setError(getString(R.string.solo_letras));
-            return false;
-        }else{
+        } else{
             return true;
         }
     }

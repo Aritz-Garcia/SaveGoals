@@ -27,7 +27,7 @@
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Spinner
-            android:id="@+id/spinnerNotiSemana"
+            android:id="@+id/spinnerNotiHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -35,20 +35,6 @@
             android:visibility="gone"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <EditText
-            android:id="@+id/etNotiHora"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:hint="@string/seleccionar_hora"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btnGuardarNoti"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_guardar"
-            android:visibility="gone" />
     </LinearLayout>
 
 </FrameLayout>

@@ -220,10 +220,7 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         if( textua.length()==0 )  {
             text.setError(getString(R.string.necesario));
             return false;
-        }else if((!textua.matches("[a-zA-Z ]+\\.?"))){
-            text.setError(getString(R.string.solo_letras));
-            return false;
-        }else{
+        } else{
             return true;
         }
     }
@@ -266,11 +263,6 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         } else if (fecha.getDay() == today.getDay() && fecha.getMonth() == today.getMonth() && fecha.getYear() == today.getYear()) {
             text.setVisibility(View.GONE);
             return true;
-        } else if (fecha.before(today)) {
-            // Dialogo fecha anterior a la actual
-            text.setText(getString(R.string.error_fecha_anterior));
-            text.setVisibility(View.VISIBLE);
-            return false;
         } else {
             text.setVisibility(View.GONE);
             return true;
