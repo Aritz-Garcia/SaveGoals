@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/widget_config_select_obj" />
+        android:text="@string/widget_config_select_obj"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tv_noObjWidget"
@@ -40,6 +41,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="#FF0000"
         android:text="@string/salir"
+        android:textColor="#FFFFFF"
         android:visibility="gone" />
 </LinearLayout>
