@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="110dp"
+    android:minWidth="180dp"
     android:minHeight="110dp"
     android:updatePeriodMillis="1800000"
     android:initialLayout="@layout/widgets_layout_porcentaje"
-    android:previewImage="@drawable/widget_objetivo_porcentaje_singular"
+    android:previewImage="@drawable/widget_objetivo_porcentaje_plural"
     android:resizeMode="horizontal|vertical"
-    android:configure="com.savegoals.savegoals.ConfiguracionWidgetPorcentajeActivity"
+    android:configure="com.savegoals.savegoals.ConfiguracionWidgetPorcentajePluralActivity"
     android:widgetCategory="home_screen">
 </appwidget-provider>

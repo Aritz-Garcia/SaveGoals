@@ -12,6 +12,7 @@
 
     <!-- Errores -->
     <string name="necesario">Campo necesario</string>
+    <string name="largo">El campo es demasiado largo. Menos de 30 caracteres</string>
     <string name="solo_letras">Solo letras</string>
     <string name="error_misma_fecha">La fecha no puede ser la actual</string>
     <string name="error_fecha_anterior">La fecha no puede ser anterior a la actual</string>
@@ -112,5 +113,6 @@
     <string name="widget_config_text">Seleccionar el objetivo</string>
     <string name="widget_config_select_obj">Seleccionar objetivo</string>
     <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
+    <string name="widget_config_text3">No hay dos objetivos o mas sin cumplir</string>
     <string name="salir">Salir</string>
 </resources>

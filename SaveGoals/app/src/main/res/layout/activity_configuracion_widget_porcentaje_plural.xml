@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ConfiguracionWidgetPorcentajeActivity">
+    tools:context=".ConfiguracionWidgetPorcentajePluralActivity">
 
     <TextView
-        android:id="@+id/tv_titulo_widget_1"
+        android:id="@+id/tv_titulo_widget_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/widget_config_text" />
 
     <Spinner
-        android:id="@+id/sp_objetivos"
+        android:id="@+id/sp_objetivosPlu1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/sp_objetivosPlu2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:visibility="gone" />
 
     <Button
-        android:id="@+id/btnGuardarObjWidg"
+        android:id="@+id/btnGuardarObPluWidg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -29,15 +37,15 @@
         android:textColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/tv_noObjWidget"
+        android:id="@+id/tv_noObjPluWidget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="@string/widget_config_text2"
+        android:text="@string/widget_config_text3"
         android:visibility="gone" />
 
     <Button
-        android:id="@+id/btnSalirObjWidg"
+        android:id="@+id/btnSalirObjPluWidg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -45,4 +53,5 @@
         android:text="@string/salir"
         android:textColor="#FFFFFF"
         android:visibility="gone" />
+
 </LinearLayout>
