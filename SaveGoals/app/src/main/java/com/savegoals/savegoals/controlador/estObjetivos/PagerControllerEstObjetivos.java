@@ -24,6 +24,8 @@ public class PagerControllerEstObjetivos extends FragmentPagerAdapter {
                 return new EstObjetivosFragment();
             case 2:
                 return new EstAhorrosFragment();
+            case 3:
+                return new EstGraficoFragment();
             default:
                 return null;
         }

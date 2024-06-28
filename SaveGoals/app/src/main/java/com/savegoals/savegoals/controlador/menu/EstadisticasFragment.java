@@ -20,7 +20,7 @@ public class EstadisticasFragment extends Fragment {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TabItem tab1, tab2, tab3;
+    TabItem tab1, tab2, tab3, tab4;
     PagerControllerEstObjetivos pagerAdapter;
     int tabPosition = 0;
     SharedPreferences settingssp;
@@ -46,6 +46,7 @@ public class EstadisticasFragment extends Fragment {
         tab1 = view.findViewById(R.id.tabEstEvolucion);
         tab2 = view.findViewById(R.id.tabEstObjetivos);
         tab3 = view.findViewById(R.id.tabEstAhorros);
+        tab4 = view.findViewById(R.id.tabEstGrafico);
 
         pagerAdapter = new PagerControllerEstObjetivos(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);

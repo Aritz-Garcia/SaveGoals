@@ -65,6 +65,7 @@
     <string name="text_crear_calc">Quieres crear un objetivo con esta fecha y esta cantidad?</string>
     <string name="tab_evolucion">EVOLUCIÓN</string>
     <string name="tab_ahorros">AHORROS</string>
+    <string name="tab_grafico">GRAFICO</string>
     <string name="error_pieChart_est_obj">NO HAY OBJETIVOS</string>
     <string name="txt_est_obj">Cantidad total en objetivos:</string>
     <string name="txt_est_aho">Cantidad total ahorrada en objetivos:</string>
