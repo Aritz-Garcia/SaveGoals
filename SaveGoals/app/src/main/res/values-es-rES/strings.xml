@@ -13,9 +13,9 @@
     <string name="solo_letras">Solo letras</string>
     <string name="error_misma_fecha">La fecha no puede ser la actual</string>
     <string name="error_fecha_anterior">La fecha no puede ser anterior a la actual</string>
-    <string name="numero_negativo">No puede ser un numero negativo</string>
-    <string name="solo_numero">Solo numeros</string>
-    <string name="numero_grande">El numero es muy grande</string>
+    <string name="numero_negativo">No puede ser un número negativo</string>
+    <string name="solo_numero">Solo números</string>
+    <string name="numero_grande">El número es muy grande</string>
     <string name="cantidad_menor">La cantidad a ahorrar tiene que ser mayor a la cantidad ahorrada</string>
 
     <!-- Textos -->
@@ -27,7 +27,7 @@
 
     <!-- Layouts -->
     <string name="resumen">RESUMEN</string>
-    <string name="estadisticas">ESTADISTICAS</string>
+    <string name="estadisticas">ESTADÍSTICAS</string>
     <string name="entradas">ENTRADAS</string>
     <string name="entrada_nombre">Nombre de la Entrada</string>
     <string name="objetivo_nombre">Nombre de Objetivo</string>
@@ -42,7 +42,7 @@
     <string name="edit_objetivo">Editar Objetivo</string>
     <string name="modo_noche">Modo noche</string>
     <string name="no_entardas">No hay entradas en este objetivo</string>
-    <string name="ultimas_entradas">Ultimas entradas:</string>
+    <string name="ultimas_entradas">Últimas entradas:</string>
     <string name="ahorrado">AHORRADO</string>
     <string name="pendiente">PENDIENTE</string>
     <string name="total">TOTAL</string>
@@ -53,7 +53,7 @@
     <string name="objetivos">OBJETIVOS</string>
     <string name="cumplidos">CUMPLIDOS</string>
     <string name="calculadora_title">Calculadora de fecha</string>
-    <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos dia</string>
+    <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos dias</string>
     <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
     <string name="calculadora_dias">Cada cuantos dias</string>
     <string name="calcualdora_cantidad">Cantidad ahorrado</string>
@@ -70,6 +70,8 @@
     <string name="entardas_minus">Entradas</string>
     <string name="nombre_minus">Nombre</string>
     <string name="categoria_minus">Categoría</string>
+    <string name="todos_minus">Todos</string>
+    <string name="objetivos_minus">Objetivos</string>
     <string name="hoy">HOY</string>
 
     <!-- Menu -->
@@ -100,6 +102,7 @@
     <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
     <string name="salir">Salir</string>
     <string name="widget_config_select_obj">Seleccionar objetivo</string>
-    <string name="widget_config_text3">No hay dos objetivos o mas sin cumplir</string>
+    <string name="widget_config_text3">No hay dos objetivos o más sin cumplir</string>
     <string name="tab_grafico">GRÁFICO</string>
+    <string name="txt_est_graf">Gráfico de últimos 15 días</string>
 </resources>

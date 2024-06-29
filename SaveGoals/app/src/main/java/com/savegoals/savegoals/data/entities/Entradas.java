@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity(primaryKeys = {"idObjetivos", "idEntrada"}, foreignKeys = @ForeignKey(entity = Objetivos.class,
                                                                                 parentColumns = "id",
                                                                                 childColumns = "idObjetivos",
@@ -80,5 +84,15 @@ public class Entradas {
 
     public void setCantidad(float cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public Date getFechaAsDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return dateFormat.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

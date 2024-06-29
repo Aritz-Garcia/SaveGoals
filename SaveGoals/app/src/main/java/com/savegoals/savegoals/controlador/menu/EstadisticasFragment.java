@@ -55,7 +55,7 @@ public class EstadisticasFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 tabPosition = tab.getPosition();
                 viewPager.setCurrentItem(tab.getPosition());
-                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2) {
+                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2 || tab.getPosition() == 3) {
                     pagerAdapter.notifyDataSetChanged();
                 }
             }
@@ -94,7 +94,7 @@ public class EstadisticasFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 tabPosition = tab.getPosition();
                 viewPager.setCurrentItem(tab.getPosition());
-                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2) {
+                if (tab.getPosition() == 0 || tab.getPosition() == 1 || tab.getPosition() == 2 || tab.getPosition() == 3) {
                     pagerAdapter.notifyDataSetChanged();
                 }
             }
