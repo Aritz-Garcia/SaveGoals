@@ -126,9 +126,9 @@ public class EstGraficoFragment extends Fragment {
             numeroRandom = (int) (Math.random() * 5);
             lineDataSet.setDrawFilled(true);
             lineDataSet.setFillColor(ColorTemplate.VORDIPLOM_COLORS[numeroRandom]);
-            lineDataSet.setColor(ColoresHighLight.coloresGet_VORDIPLOM_COLORS().get(numeroRandom));
+            lineDataSet.setColor(ColoresHighLight.COLORESGET_VORDIPLOM_COLORS[numeroRandom]);
             lineDataSet.setCircleColor(Color.DKGRAY);
-            lineDataSet.setHighLightColor(ColoresHighLight.coloresGet_VORDIPLOM_COLORS().get(numeroRandom));
+            lineDataSet.setHighLightColor(ColoresHighLight.COLORESGET_VORDIPLOM_COLORS[numeroRandom]);
             lineDataSet.setValueTextSize(12);
             if (settingssp.getBoolean("oscuro", false)) {
                 lineDataSet.setValueTextColor(Color.WHITE);
