@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.savegoals.savegoals.AddObjetivosActivity;
 import com.savegoals.savegoals.MainActivity;
 import com.savegoals.savegoals.R;
@@ -32,7 +32,7 @@ public class ObjetivosFragment extends Fragment implements View.OnClickListener 
 
     LinearLayout linearLayoutObjetivos, linearLayoutCumplidos;
     TextView tv_objetivos, tv_cumplidos;
-    ImageButton btnadd;
+    FloatingActionButton btnadd;
     SharedPreferences settingssp;
 
     public ObjetivosFragment() {
