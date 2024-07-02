@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "553932914908",
+    "project_id": "savegoals-63f16",
+    "storage_bucket": "savegoals-63f16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553932914908:android:f4fa23dd5fd10420937419",
+        "android_client_info": {
+          "package_name": "com.savegoals.savegoals"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6wik3acn-r0mn5O37Bx_MAubE4LYl4yA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
