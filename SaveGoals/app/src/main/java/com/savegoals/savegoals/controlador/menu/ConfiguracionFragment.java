@@ -147,6 +147,8 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                 editor.commit();
                 // alarmManager.setExact(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + 3000, pendingIntent);
                 Calendar calendar = Calendar.getInstance();
+                Calendar hoy = Calendar.getInstance();
+                hoy.setTimeZone(Calendar.getInstance().getTimeZone());
                 calendar.setTimeZone(Calendar.getInstance().getTimeZone());
                 switch (hora) {
                     case 0:
@@ -199,9 +201,15 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
                         calendar.set(Calendar.MILLISECOND, 0);
                         break;
                 }
-                // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60, pendingIntent);
-                // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 5, pendingIntent);
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                if (hoy.before(calendar)) {
+                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                    Log.d("TAG", "notificacion: Sin sumar");
+                } else {
+                    calendar.add(Calendar.DAY_OF_MONTH, 1);
+                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+                    Log.d("TAG", "notificacion: Sumando");
+                }
+
                 Log.d("TAG", "notificacion: " + hora);
                 Log.d("TAG", "notificacion: " + calendar.getTimeInMillis() + " " + calendar.getTimeZone());
             } else {
@@ -210,7 +218,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             }
 
         }
-        /*Log.d("TAG", "notificacion: ");*/
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
