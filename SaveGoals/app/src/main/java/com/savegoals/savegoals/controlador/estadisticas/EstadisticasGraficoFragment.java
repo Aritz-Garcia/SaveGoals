@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -166,7 +167,7 @@ public class EstadisticasGraficoFragment extends Fragment {
                 lineChart.getLegend().setTextColor(Color.BLACK);
             }
             lineChart.setData(new LineData(lineDataSet));
-            lineChart.animateXY(2000, 2000);
+            lineChart.animateXY(3000, 2000, Easing.EaseInOutBack, Easing.EaseInOutBack);
             lineChart.getDescription().setEnabled(false);
         }
     }

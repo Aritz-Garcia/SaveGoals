@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -204,7 +205,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                     lineChart.getLegend().setTextColor(Color.BLACK);
                 }
                 lineChart.setData(new LineData(lineDataSet));
-                lineChart.animateXY(2000, 2000);
+                lineChart.animateXY(3000, 2000, Easing.EaseInOutBack, Easing.EaseInOutBack);
                 lineChart.getDescription().setEnabled(false);
             }
         } else {
@@ -342,7 +343,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                     lineChart.getLegend().setTextColor(Color.BLACK);
                 }
                 lineChart.setData(new LineData(listLineDataSet));
-                lineChart.animateXY(2000, 2000);
+                lineChart.animateXY(3000, 2000, Easing.EaseInOutBack, Easing.EaseInOutBack);
                 lineChart.getDescription().setEnabled(false);
             }
         }
