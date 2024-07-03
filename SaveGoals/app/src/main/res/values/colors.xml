@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#3D3C3C</color>
     <color name="azul">#569DD3</color>
+    <color name="rojo">#FF0000</color>
     <!-- Colores temas -->
     <color name="primario">#4169E1</color>
     <color name="secundarioClaro">#6495ED</color>

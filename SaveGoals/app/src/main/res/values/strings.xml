@@ -119,4 +119,23 @@
     <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
     <string name="widget_config_text3">No hay dos objetivos o más sin cumplir</string>
     <string name="salir">Salir</string>
+
+    <!-- Configuracion -->
+    <string name="iniciar_sesion">INICIAR SESIÓN</string>
+    <string name="cuenta">CUENTA</string>
+    <string name="configuracion">CONFIGURACIÓN</string>
+    <string name="google_is">Google</string>
+    <string name="cuenta_is">Correo Electrónico</string>
+    <string name="pass_is">Contraseña</string>
+    <string name="title_is_correo">Inicio de sesión con correo electrónico</string>
+    <string name="registrar">No tienes cuenta? Registrate</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="title_is_registro">Registro con correo electrónico</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="error_IS">Error al Iniciar Sesión</string>
+    <string name="eliminar_cuenta">Eliminar Cuenta</string>
+    <string name="text_toast_eliminar_cuenta">Cuenta Eliminada</string>
+    <string name="dialog_message_eliminar_cuenta">Estas seguro de que quieres eliminar tu cuenta?</string>
+    <string name="error_eliminar_cuenta">Error al eliminar la cuenta</string>
+    <string name="default_web_client_id" translatable="false">553932914908-n602kusf9l5djnj3i02g7qkh19jqosb2.apps.googleusercontent.com</string>
 </resources>
