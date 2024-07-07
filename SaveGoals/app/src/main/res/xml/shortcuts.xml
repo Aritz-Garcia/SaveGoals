@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="crearObjetivo"
+        android:enabled="true"
+        android:icon="@drawable/mas"
+        android:shortcutShortLabel="@string/shortcut1_texto_corto"
+        android:shortcutLongLabel="@string/shortcut1_texto_corto"
+        android:shortcutDisabledMessage="@string/shortcut1_texto_error">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.savegoals.savegoals"
+            android:targetClass="com.savegoals.savegoals.AddObjetivosActivity" />
+    </shortcut>
+</shortcuts>
