@@ -52,44 +52,37 @@
             android:paddingStart="20sp"
             android:paddingTop="10sp"
             android:paddingEnd="20sp"
-            android:paddingBottom="10sp" />
+            android:paddingBottom="10sp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey" />
 
-        <TextView
-            android:id="@+id/tvCerrarSesion"
+        <Button
+            android:id="@+id/btnCerrarSesion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
             android:paddingStart="20sp"
             android:paddingTop="10sp"
             android:paddingEnd="20sp"
             android:paddingBottom="10sp"
             android:text="@string/cerrar_sesion" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey" />
-
-        <TextView
-            android:id="@+id/tvEliminarCuenta"
+        <Button
+            android:id="@+id/btnEliminarCuenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/rojo"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/rojo"
             android:paddingStart="20sp"
             android:paddingTop="10sp"
             android:paddingEnd="20sp"
             android:paddingBottom="10sp"
-            android:text="@string/eliminar_cuenta"
-            android:textColor="@color/white" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey" />
+            android:text="@string/eliminar_cuenta" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,8 @@ import java.util.List;
 public class CuentaActivity extends AppCompatActivity implements View.OnClickListener, EliminarCuentaDialog.EliminarCuentaDialogListener, TextoDialog.TextoDialogListener {
 
     FloatingActionButton btnAtras;
-    TextView tvCuentaCorreo, tvCerrarSesion, tvEliminarCuenta;
+    TextView tvCuentaCorreo;
+    Button btnCerrarSesion, btnEliminarCuenta;
     SharedPreferences settingssp;
     AppDatabase dbLocal;
     boolean errorEliminar = false;
@@ -58,14 +60,14 @@ public class CuentaActivity extends AppCompatActivity implements View.OnClickLis
 
         btnAtras = findViewById(R.id.btnAtrasCuenta);
         tvCuentaCorreo = findViewById(R.id.tvCuentaCorreo);
-        tvCerrarSesion = findViewById(R.id.tvCerrarSesion);
-        tvEliminarCuenta = findViewById(R.id.tvEliminarCuenta);
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+        btnEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
 
         tvCuentaCorreo.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
         btnAtras.setOnClickListener(this);
-        tvCerrarSesion.setOnClickListener(this);
-        tvEliminarCuenta.setOnClickListener(this);
+        btnCerrarSesion.setOnClickListener(this);
+        btnEliminarCuenta.setOnClickListener(this);
 
     }
 
@@ -74,11 +76,11 @@ public class CuentaActivity extends AppCompatActivity implements View.OnClickLis
         if (v.getId() == btnAtras.getId()) {
             finish();
 
-        } else if (v.getId() == tvCerrarSesion.getId()) {
+        } else if (v.getId() == btnCerrarSesion.getId()) {
             TextoDialog dialog = new TextoDialog(getString(R.string.cerrar_sesion_dialog), getString(R.string.cerrar_sesion));
             dialog.show(getSupportFragmentManager(), "TextoDialog");
 
-        } else if (v.getId() == tvEliminarCuenta.getId()) {
+        } else if (v.getId() == btnEliminarCuenta.getId()) {
             EliminarCuentaDialog dialog = new EliminarCuentaDialog();
             dialog.show(getSupportFragmentManager(), "EliminarCuentaDialog");
 
