@@ -22,7 +22,7 @@ import com.savegoals.savegoals.R;
 
 public class CorreoInicioSesionActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tvRegistro, tvTitulo;
+    TextView tvRegistro, tvTitulo, tvOlvidarPass;
     EditText etEmail, etPass, etPass2;
     FloatingActionButton btnAtras;
     Button btnIniciarSesionIS;
@@ -46,10 +46,12 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         etPass2 = findViewById(R.id.etPassIS2);
         btnIniciarSesionIS = findViewById(R.id.btnIniciarSesionIS);
         tvRegistro = findViewById(R.id.tvRegistroIS);
+        tvOlvidarPass = findViewById(R.id.tvOlvidarPassIS);
 
         btnAtras.setOnClickListener(this);
         btnIniciarSesionIS.setOnClickListener(this);
         tvRegistro.setOnClickListener(this);
+        tvOlvidarPass.setOnClickListener(this);
 
     }
 
@@ -67,6 +69,9 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
             }
         } else if (view.getId() == tvRegistro.getId()) {
             registro();
+        } else if (view.getId() == tvOlvidarPass.getId()) {
+            // Olvidar contraseña
+            olvidarContrasena();
         }
     }
 
@@ -129,6 +134,7 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         btnIniciarSesionIS.setText(R.string.registrarse);
         tvTitulo.setText(R.string.title_is_registro);
         tvRegistro.setVisibility(View.GONE);
+        tvOlvidarPass.setVisibility(View.GONE);
         etPass2.setVisibility(View.VISIBLE);
     }
 
@@ -150,5 +156,26 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
             return false;
         }
 
+    }
+
+    private void olvidarContrasena() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailAddress = etEmail.getText().toString();
+        if (emailAddress.isEmpty()) {
+            etEmail.setError(getString(R.string.necesario));
+        } else {
+            auth.sendPasswordResetEmail(emailAddress)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(CorreoInicioSesionActivity.this, R.string.correo_olvidado_ok, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(CorreoInicioSesionActivity.this, R.string.correo_olvidado_ko, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+        }
     }
 }
