@@ -145,4 +145,7 @@
     <string name="cerrar_sesion_dialog">Estás seguro de que quieres cerrar sesión?</string>
     <string name="eliminar_disp_dialog">Quieres eliminarán también del dispositivo los objetivos.</string>
     <string name="eliminar_disp_dialog_title">Eliminar del dispositivo</string>
+    <string name="correo_olvidado_ok">Correo enviado</string>
+    <string name="correo_olvidado_ko">Error al mandar correo</string>
+    <string name="correo_olvidado">Has olvidado la contraseña? Haz click aquí</string>
 </resources>

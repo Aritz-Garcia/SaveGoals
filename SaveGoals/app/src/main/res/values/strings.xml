@@ -164,4 +164,5 @@
     <string name="eliminar_disp_dialog_title">Eliminar del dispositivo</string>
     <string name="correo_olvidado_ok">Correo enviado</string>
     <string name="correo_olvidado_ko">Error al mandar correo</string>
+    <string name="correo_olvidado">Has olvidado la contraseña? Haz click aquí</string>
 </resources>
