@@ -3,6 +3,7 @@ package com.savegoals.savegoals;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -167,6 +168,11 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
                     if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
 
                         List<Entradas> entradasList = db.entradasDao().findByIdObj(id);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            entradasList.sort((o1, o2) -> o1.getIdEntrada() - o2.getIdEntrada());
+                        }
+
                         Objetivos objetivos = db.objetivosDao().findById(id);
                         float ahorrado = objetivos.getAhorrado();
                         float cantidad = objetivos.getCantidad();

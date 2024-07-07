@@ -23,7 +23,7 @@ import com.savegoals.savegoals.R;
 public class CorreoInicioSesionActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvRegistro, tvTitulo;
-    EditText etEmail, etPass;
+    EditText etEmail, etPass, etPass2;
     FloatingActionButton btnAtras;
     Button btnIniciarSesionIS;
     boolean inicioSesion = true;
@@ -43,6 +43,7 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         tvTitulo = findViewById(R.id.tvTituloIS);
         etEmail = findViewById(R.id.etEmailIS);
         etPass = findViewById(R.id.etPassIS);
+        etPass2 = findViewById(R.id.etPassIS2);
         btnIniciarSesionIS = findViewById(R.id.btnIniciarSesionIS);
         tvRegistro = findViewById(R.id.tvRegistroIS);
 
@@ -101,8 +102,9 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         mAuth = FirebaseAuth.getInstance();
         String email = etEmail.getText().toString();
         String password = etPass.getText().toString();
+        String password2 = etPass2.getText().toString();
 
-        if (leerString(email, etEmail) && leerString(password, etPass)) {
+        if (leerString(email, etEmail) && leerString(password, etPass) && leerString(password2, etPass2) && mismaContrasena(password, password2, etPass, etPass2)) {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -127,6 +129,7 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         btnIniciarSesionIS.setText(R.string.registrarse);
         tvTitulo.setText(R.string.title_is_registro);
         tvRegistro.setVisibility(View.GONE);
+        etPass2.setVisibility(View.VISIBLE);
     }
 
     private boolean leerString(String textua, EditText text){
@@ -136,5 +139,16 @@ public class CorreoInicioSesionActivity extends AppCompatActivity implements Vie
         } else{
             return true;
         }
+    }
+
+    private boolean mismaContrasena(String pass1, String pass2, EditText etPass, EditText etPass2){
+        if( pass1.equals(pass2) ){
+            return true;
+        } else{
+            etPass.setError(getString(R.string.contrasenas_no_coinciden));
+            etPass2.setError(getString(R.string.contrasenas_no_coinciden));
+            return false;
+        }
+
     }
 }

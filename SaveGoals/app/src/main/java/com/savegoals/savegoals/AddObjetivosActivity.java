@@ -3,6 +3,7 @@ package com.savegoals.savegoals;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import com.savegoals.savegoals.formularios.CustomItem;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AddObjetivosActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
@@ -136,7 +138,22 @@ public class AddObjetivosActivity extends AppCompatActivity implements AdapterVi
             if (leerString(etNombre.getText().toString(), etNombre)) {
                 if (leerNumero(etCantidad.getText().toString(), etCantidad)) {
                     if (leerFecha(etFecha.getText().toString(), tvErrorFecha)) {
+                        List<Objetivos> objetivosList = db.objetivosDao().getAll();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            objetivosList.sort((o1, o2) -> o1.getId() - o2.getId());
+                        }
+
                         Objetivos objetivo = new Objetivos();
+                        if (objetivosList.isEmpty()) {
+                            objetivo.setId(1);
+                        } else {
+                            for (int i = 0; i < objetivosList.size(); i++) {
+                                if (i == objetivosList.size() - 1) {
+                                    objetivo.setId(objetivosList.get(i).getId() + 1);
+                                }
+                            }
+                        }
                         objetivo.setCategoria((int) spinnerCategoria.getSelectedItemId());
                         objetivo.setNombre(etNombre.getText().toString());
                         objetivo.setCantidad(Float.parseFloat(etCantidad.getText().toString()));

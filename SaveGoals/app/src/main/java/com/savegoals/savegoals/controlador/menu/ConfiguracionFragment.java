@@ -29,7 +29,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,35 +37,28 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.savegoals.savegoals.AlarmNotification;
+import com.savegoals.savegoals.CuentaActivity;
 import com.savegoals.savegoals.R;
+import com.savegoals.savegoals.RespaldoActivity;
 import com.savegoals.savegoals.controlador.inicioSesion.CorreoInicioSesionActivity;
-import com.savegoals.savegoals.controlador.inicioSesion.EliminarCuentaDialog;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-public class ConfiguracionFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, EliminarCuentaDialog.EliminarCuentaDialogListener {
+public class ConfiguracionFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     public static final String MY_CHANNEL_ID = "meterDinero";
     SharedPreferences settingssp;
     SharedPreferences.Editor editor;
     Switch swOscuro, swNotificaciones;
     Spinner spNotiHora;
-    View vwLineaNoti, vwLineaCuenta;
-    TextView tvISGoogle, tvISCorreo, tvCerrarSesion, tvEliminarCuenta, tvCorreoText, tvISTitulo;
-    boolean errorEliminar = false;
+    View vwLineaNoti, vwLineaCuenta, vwLineaRespaldo;
+    TextView tvISGoogle, tvISCorreo, tvCorreoText, tvISTitulo, tvRespaldo, tvCuentaIS;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -98,19 +90,25 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         swOscuro = view.findViewById(R.id.swNoche);
         tvISGoogle = view.findViewById(R.id.tvISGoogle);
         tvISCorreo = view.findViewById(R.id.tvISCorreo);
-        tvCerrarSesion = view.findViewById(R.id.tvCerrarSesion);
-        tvEliminarCuenta = view.findViewById(R.id.tvEliminarCuenta);
         tvCorreoText = view.findViewById(R.id.tvCorreoTextIS);
         tvISTitulo = view.findViewById(R.id.tvISTit);
+        tvRespaldo = view.findViewById(R.id.tvRespaldoTextIS);
+        tvCuentaIS = view.findViewById(R.id.tvCuentaIS);
 
         if (settingssp.getBoolean("oscuro", false)) {
             swOscuro.setChecked(true);
             tvISGoogle.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
             tvISCorreo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
+            tvRespaldo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
+            tvCuentaIS.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
+
         } else {
             swOscuro.setChecked(false);
             tvISGoogle.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
             tvISCorreo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
+            tvRespaldo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
+            tvCuentaIS.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
+
         }
 
         swOscuro.setOnClickListener(this);
@@ -118,6 +116,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         spNotiHora = view.findViewById(R.id.spinnerNotiHora);
         vwLineaNoti = view.findViewById(R.id.vwLineaNoti);
         vwLineaCuenta = view.findViewById(R.id.vwLineaCuenta);
+        vwLineaRespaldo = view.findViewById(R.id.vwLineaRespaldo);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 getContext(),
@@ -128,6 +127,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         if (spNotiHora != null) {
             spNotiHora.setAdapter(adapter);
             spNotiHora.setOnItemSelectedListener(this);
+
         }
 
         spNotiHora.setSelection(settingssp.getInt("hora", 0));
@@ -152,8 +152,8 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
         tvISGoogle.setOnClickListener(this);
         tvISCorreo.setOnClickListener(this);
-        tvCerrarSesion.setOnClickListener(this);
-        tvEliminarCuenta.setOnClickListener(this);
+        tvRespaldo.setOnClickListener(this);
+        tvCuentaIS.setOnClickListener(this);
 
         if (settingssp.getString("uid", "").isEmpty()) {
             // SIN INICIAR SESION
@@ -162,8 +162,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISGoogle.setVisibility(View.VISIBLE);
             tvCorreoText.setVisibility(View.GONE);
             vwLineaCuenta.setVisibility(View.GONE);
-            tvCerrarSesion.setVisibility(View.GONE);
-            tvEliminarCuenta.setVisibility(View.GONE);
+            tvRespaldo.setVisibility(View.GONE);
+            vwLineaRespaldo.setVisibility(View.GONE);
+            tvCuentaIS.setVisibility(View.GONE);
         } else {
             // INICIADO SESION
             tvISTitulo.setText(R.string.cuenta);
@@ -171,8 +172,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISGoogle.setVisibility(View.GONE);
             tvCorreoText.setVisibility(View.VISIBLE);
             vwLineaCuenta.setVisibility(View.VISIBLE);
-            tvCerrarSesion.setVisibility(View.VISIBLE);
-            tvEliminarCuenta.setVisibility(View.VISIBLE);
+            tvRespaldo.setVisibility(View.VISIBLE);
+            vwLineaRespaldo.setVisibility(View.VISIBLE);
+            tvCuentaIS.setVisibility(View.VISIBLE);
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }
@@ -191,8 +193,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISGoogle.setVisibility(View.VISIBLE);
             tvCorreoText.setVisibility(View.GONE);
             vwLineaCuenta.setVisibility(View.GONE);
-            tvCerrarSesion.setVisibility(View.GONE);
-            tvEliminarCuenta.setVisibility(View.GONE);
+            tvRespaldo.setVisibility(View.GONE);
+            vwLineaRespaldo.setVisibility(View.GONE);
+            tvCuentaIS.setVisibility(View.GONE);
         } else {
             // INICIADO SESION
             tvISTitulo.setText(R.string.cuenta);
@@ -200,8 +203,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISGoogle.setVisibility(View.GONE);
             tvCorreoText.setVisibility(View.VISIBLE);
             vwLineaCuenta.setVisibility(View.VISIBLE);
-            tvCerrarSesion.setVisibility(View.VISIBLE);
-            tvEliminarCuenta.setVisibility(View.VISIBLE);
+            tvRespaldo.setVisibility(View.VISIBLE);
+            vwLineaRespaldo.setVisibility(View.VISIBLE);
+            tvCuentaIS.setVisibility(View.VISIBLE);
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }
@@ -232,96 +236,15 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             Intent intent = new Intent(getContext(), CorreoInicioSesionActivity.class);
             startActivity(intent);
 
-        } else if (v.getId() == tvCerrarSesion.getId()) {
-            FirebaseAuth.getInstance().signOut();
-            mGoogleSignInClient.signOut();
-            settingssp.edit().remove("uid").commit();
-            onResume();
+        } else if (v.getId() == tvRespaldo.getId()) {
+            Intent intent = new Intent(getContext(), RespaldoActivity.class);
+            startActivity(intent);
 
-        } else if (v.getId() == tvEliminarCuenta.getId()) {
-            EliminarCuentaDialog dialog = new EliminarCuentaDialog();
-            dialog.show(getChildFragmentManager(), "EliminarCuentaDialog");
+        } else if (v.getId() == tvCuentaIS.getId()) {
+            Intent intent = new Intent(getContext(), CuentaActivity.class);
+            startActivity(intent);
 
         }
-    }
-
-    private void eliminarBD() {
-        // Eliminar base de datos
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        List<Integer> idsObj = new ArrayList<>();
-        db.collection("objetivos").whereEqualTo("uid", settingssp.getString("uid", "")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        idsObj.add(document.getLong("id").intValue());
-                    }
-                    for (int i = 0; i < idsObj.size(); i++) {
-                        db.collection("entradas").whereEqualTo("idObjetivos", idsObj.get(i)).whereEqualTo("uid", settingssp.getString("uid", "")).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        if (!errorEliminar) {
-                                            db.collection("entradas").document(document.getId()).delete()
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(getContext(), R.string.error_eliminar_cuenta, Toast.LENGTH_SHORT).show();
-                                                            errorEliminar = true;
-                                                        }
-                                                    });
-                                        }
-                                    }
-                                }
-                            }
-                        });
-
-                    }
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (!errorEliminar) {
-                            db.collection("objetivos").document(document.getId()).delete()
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(getContext(), R.string.error_eliminar_cuenta, Toast.LENGTH_SHORT).show();
-                                            errorEliminar = true;
-                                        }
-                                    });;
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    private void eliminarCuenta() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(getContext(), R.string.text_toast_eliminar_cuenta, Toast.LENGTH_SHORT).show();
-                    settingssp.edit().remove("uid").commit();
-                    mGoogleSignInClient.signOut();
-                    onResume();
-                } else {
-                    Toast.makeText(getContext(), R.string.error_eliminar_cuenta, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void iniciarSesionGoogle() {
@@ -464,20 +387,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        errorEliminar = false;
-        eliminarBD();
-        if (!errorEliminar) {
-            eliminarCuenta();
-        }
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
 
     }
 

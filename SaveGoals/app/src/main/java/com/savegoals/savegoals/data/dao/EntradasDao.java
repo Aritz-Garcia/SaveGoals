@@ -36,6 +36,9 @@ public interface EntradasDao {
     @Query("DELETE FROM entradas WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
     void deleteByIds(int idObjetivos, int idEntrada);
 
+    @Query("DELETE FROM entradas")
+    void deleteAll();
+
     @Delete
     void delete(Entradas entradas);
 }

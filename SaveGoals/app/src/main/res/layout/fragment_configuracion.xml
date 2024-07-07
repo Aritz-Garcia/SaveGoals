@@ -115,6 +115,25 @@
             android:visibility="gone" />
 
         <TextView
+            android:id="@+id/tvRespaldoTextIS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/respaldo"
+            app:drawableEndCompat="@drawable/fecha_derecha"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/vwLineaRespaldo"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/tvISGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,17 +143,6 @@
             android:paddingBottom="10sp"
             android:text="@string/google_is"
             app:drawableEndCompat="@drawable/fecha_derecha" />
-
-        <TextView
-            android:id="@+id/tvCerrarSesion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20sp"
-            android:paddingTop="10sp"
-            android:paddingEnd="20sp"
-            android:paddingBottom="10sp"
-            android:text="@string/cerrar_sesion"
-            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
@@ -153,17 +161,16 @@
             app:drawableEndCompat="@drawable/fecha_derecha" />
 
         <TextView
-            android:id="@+id/tvEliminarCuenta"
+            android:id="@+id/tvCuentaIS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/rojo"
             android:paddingStart="20sp"
             android:paddingTop="10sp"
             android:paddingEnd="20sp"
             android:paddingBottom="10sp"
-            android:text="@string/eliminar_cuenta"
-            android:textColor="@color/white"
-            android:visibility="gone" />
+            android:text="@string/cuenta_minuscula"
+            app:drawableEndCompat="@drawable/fecha_derecha"
+            android:visibility="gone"/>
 
         <View
             android:layout_width="match_parent"

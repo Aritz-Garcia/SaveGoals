@@ -59,6 +59,18 @@
             android:hint="@string/pass_is"
             android:inputType="textPassword" />
 
+        <EditText
+            android:id="@+id/etPassIS2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginBottom="10sp"
+            android:ems="10"
+            android:hint="@string/pass_is_rep"
+            android:inputType="textPassword"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btnIniciarSesionIS"
             android:layout_width="match_parent"

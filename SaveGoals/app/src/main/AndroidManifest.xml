@@ -20,6 +20,12 @@
         android:theme="@style/Theme.SaveGoals"
         tools:targetApi="34">
         <activity
+            android:name=".CuentaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RespaldoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConfiguracionWidgetPorcentajePluralActivity"
             android:exported="false">
             <intent-filter>
@@ -114,7 +120,7 @@
         </activity>
         <activity
             android:name=".controlador.inicioSesion.CorreoInicioSesionActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

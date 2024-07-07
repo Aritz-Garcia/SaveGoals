@@ -127,6 +127,7 @@
     <string name="google_is">Google</string>
     <string name="cuenta_is">Correo Electrónico</string>
     <string name="pass_is">Contraseña</string>
+    <string name="pass_is_rep">Repetir la contraseña</string>
     <string name="title_is_correo">Inicio de sesión con correo electrónico</string>
     <string name="registrar">No tienes cuenta? Registrate</string>
     <string name="registrarse">Registrarse</string>
@@ -138,4 +139,27 @@
     <string name="dialog_message_eliminar_cuenta">Estas seguro de que quieres eliminar tu cuenta?</string>
     <string name="error_eliminar_cuenta">Error al eliminar la cuenta</string>
     <string name="default_web_client_id" translatable="false">553932914908-n602kusf9l5djnj3i02g7qkh19jqosb2.apps.googleusercontent.com</string>
+    <string name="respaldo">Respaldo</string>
+    <string name="copia_de_seguridad">COPIA DE SEGURIDAD</string>
+    <string name="recuperar_copia">RESTAURAR ÚLTIMA COPIA</string>
+    <string name="copia_restautar_titl">COPIA / RESTAURAR</string>
+    <string name="ultima_cop_seg">Última copia de seguridad: Hace&#160;</string>
+    <string name="mes_cop_seg">&#160;mes</string>
+    <string name="meses_cop_seg">&#160;meses</string>
+    <string name="dia_cop_seg">&#160;día</string>
+    <string name="dias_cop_seg">&#160;días</string>
+    <string name="hora_cop_seg">&#160;hora</string>
+    <string name="horas_cop_seg">&#160;horas</string>
+    <string name="minuto_cop_seg">&#160;minuto</string>
+    <string name="minutos_cop_seg">&#160;minutos</string>
+    <string name="y_cop_seg">&#160;y&#160;</string>
+    <string name="no_hay_copias">No hay copias de seguridad</string>
+    <string name="copia_restaurada">Copia restaurada</string>
+    <string name="cuenta_minuscula">Cuenta</string>
+    <string name="contrasenas_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="restaurar_copia">Estás seguro de que quieres restaurar la última copia de seguridad? Se eliminará todo lo hecho después de la última copia.</string>
+    <string name="restaurar_copia_titulo">Restaurar copia</string>
+    <string name="cerrar_sesion_dialog">Estás seguro de que quieres cerrar sesión?</string>
+    <string name="eliminar_disp_dialog">Quieres eliminarán también del dispositivo los objetivos.</string>
+    <string name="eliminar_disp_dialog_title">Eliminar del dispositivo</string>
 </resources>
