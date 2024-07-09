@@ -57,9 +57,9 @@
     <string name="cumplidos">CUMPLIDOS ✅</string>
     <string name="fecha_pasada">FECHA PASADA 📅</string>
     <string name="calculadora_title">Calculadora de fecha</string>
-    <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos dias</string>
+    <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos días</string>
     <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
-    <string name="calculadora_dias">Cada cuantos dias</string>
+    <string name="calculadora_dias">Cada cuantos días</string>
     <string name="calcualdora_cantidad">Cantidad ahorrado</string>
     <string name="calculadora_cantidad_inical">Cantidad inicial</string>
     <string name="btn_calcular">Calcular</string>
@@ -117,7 +117,7 @@
     <!-- Widgets -->
     <string name="widget_config_text">Seleccionar el objetivo</string>
     <string name="widget_config_select_obj">Seleccionar objetivo</string>
-    <string name="widget_config_text2">No hay ningun objetivo sin cumplir</string>
+    <string name="widget_config_text2">No hay ningún objetivo sin cumplir</string>
     <string name="widget_config_text3">No hay dos objetivos o más sin cumplir</string>
     <string name="salir">Salir</string>
 
