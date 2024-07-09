@@ -57,7 +57,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     SharedPreferences.Editor editor;
     Switch swOscuro, swNotificaciones;
     Spinner spNotiHora;
-    View vwLineaNoti, vwLineaCuenta, vwLineaRespaldo;
+    View vwLineaNoti, vwLineaCuenta;
     TextView tvISGoogle, tvISCorreo, tvCorreoText, tvISTitulo, tvRespaldo, tvCuentaIS;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
@@ -116,7 +116,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         spNotiHora = view.findViewById(R.id.spinnerNotiHora);
         vwLineaNoti = view.findViewById(R.id.vwLineaNoti);
         vwLineaCuenta = view.findViewById(R.id.vwLineaCuenta);
-        vwLineaRespaldo = view.findViewById(R.id.vwLineaRespaldo);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 getContext(),
@@ -163,7 +162,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvCorreoText.setVisibility(View.GONE);
             vwLineaCuenta.setVisibility(View.GONE);
             tvRespaldo.setVisibility(View.GONE);
-            vwLineaRespaldo.setVisibility(View.GONE);
             tvCuentaIS.setVisibility(View.GONE);
         } else {
             // INICIADO SESION
@@ -173,7 +171,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvCorreoText.setVisibility(View.VISIBLE);
             vwLineaCuenta.setVisibility(View.VISIBLE);
             tvRespaldo.setVisibility(View.VISIBLE);
-            vwLineaRespaldo.setVisibility(View.VISIBLE);
             tvCuentaIS.setVisibility(View.VISIBLE);
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -194,7 +191,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvCorreoText.setVisibility(View.GONE);
             vwLineaCuenta.setVisibility(View.GONE);
             tvRespaldo.setVisibility(View.GONE);
-            vwLineaRespaldo.setVisibility(View.GONE);
             tvCuentaIS.setVisibility(View.GONE);
         } else {
             // INICIADO SESION
@@ -204,7 +200,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvCorreoText.setVisibility(View.VISIBLE);
             vwLineaCuenta.setVisibility(View.VISIBLE);
             tvRespaldo.setVisibility(View.VISIBLE);
-            vwLineaRespaldo.setVisibility(View.VISIBLE);
             tvCuentaIS.setVisibility(View.VISIBLE);
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());

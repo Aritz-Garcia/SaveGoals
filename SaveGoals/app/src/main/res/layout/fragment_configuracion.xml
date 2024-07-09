@@ -126,13 +126,6 @@
             app:drawableEndCompat="@drawable/fecha_derecha"
             android:visibility="gone" />
 
-        <View
-            android:id="@+id/vwLineaRespaldo"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grey"
-            android:visibility="gone" />
-
         <TextView
             android:id="@+id/tvISGoogle"
             android:layout_width="match_parent"
