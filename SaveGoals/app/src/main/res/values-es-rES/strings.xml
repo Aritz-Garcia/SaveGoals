@@ -50,9 +50,10 @@
     <string name="dia">DIA</string>
     <string name="semana">SEMANA</string>
     <string name="mes">MES</string>
-    <string name="objetivos">OBJETIVOS 🎯</string>
-    <string name="cumplidos">CUMPLIDOS 🏆</string>
-    <string name="fecha_pasada">FECHA PASADA ⏳</string>
+    <string name="objetivos">OBJETIVOS</string>
+    <string name="objetivos_emoji">OBJETIVOS 🎯</string>
+    <string name="cumplidos_emoji">CUMPLIDOS 🏆</string>
+    <string name="fecha_pasada_emoji">FECHA PASADA ⏳</string>
     <string name="calculadora_title">Calculadora de fecha</string>
     <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos días</string>
     <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
