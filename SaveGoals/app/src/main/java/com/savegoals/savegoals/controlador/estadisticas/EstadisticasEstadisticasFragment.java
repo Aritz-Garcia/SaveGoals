@@ -129,15 +129,17 @@ public class EstadisticasEstadisticasFragment extends Fragment {
                 pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                 pieDataSet.setSliceSpace(2);
                 pieDataSet.setValueTextSize(12);
-                pieChart.setData(new PieData(pieDataSet));
-                pieChart.setDrawEntryLabels(true);
-                pieChart.setUsePercentValues(true);
                 if (settingssp.getBoolean("oscuro", false)) {
                     pieChart.setEntryLabelColor(Color.WHITE);
                     pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
+                    pieChart.getLegend().setTextColor(Color.WHITE);
                 } else {
                     pieChart.setEntryLabelColor(Color.BLACK);
+                    pieChart.getLegend().setTextColor(Color.BLACK);
                 }
+                pieChart.setData(new PieData(pieDataSet));
+                pieChart.setDrawEntryLabels(true);
+                pieChart.setUsePercentValues(true);
                 pieChart.setCenterText(objetivo.getNombre());
                 pieChart.animateXY(2000, 2000);
                 pieChart.getDescription().setEnabled(false);

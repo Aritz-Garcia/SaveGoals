@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:gravity="center"
-                android:text="@string/objetivos"
+                android:text="@string/objetivos_emoji"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -39,12 +39,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:gravity="center"
-                android:text="@string/cumplidos"
+                android:text="@string/cumplidos_emoji"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/cumplidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_fecha_pasada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@string/fecha_pasada_emoji"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/fecha_pasada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -59,16 +77,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAddObj"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:clickable="true"
             android:src="@drawable/mas"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

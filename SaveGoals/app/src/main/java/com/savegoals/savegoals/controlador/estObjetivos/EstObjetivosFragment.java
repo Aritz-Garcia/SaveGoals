@@ -125,16 +125,18 @@ public class EstObjetivosFragment extends Fragment implements View.OnClickListen
                 pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                 pieDataSet.setSliceSpace(2);
                 pieDataSet.setValueTextSize(12);
+                if (settingssp.getBoolean("oscuro", false)) {
+                    pieChart.setEntryLabelColor(Color.WHITE);
+                    pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
+                    pieChart.getLegend().setTextColor(Color.WHITE);
+                } else {
+                    pieChart.setEntryLabelColor(Color.BLACK);
+                    pieChart.getLegend().setTextColor(Color.BLACK);
+                }
                 pieChart.setData(new PieData(pieDataSet));
                 pieChart.setDrawEntryLabels(true);
                 pieChart.setUsePercentValues(true);
                 pieChart.setDrawHoleEnabled(false);
-                if (settingssp.getBoolean("oscuro", false)) {
-                    pieChart.setEntryLabelColor(Color.WHITE);
-                    pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
-                } else {
-                    pieChart.setEntryLabelColor(Color.BLACK);
-                }
                 pieChart.animateXY(2000, 2000);
                 pieChart.getDescription().setEnabled(false);
             }
@@ -227,16 +229,18 @@ public class EstObjetivosFragment extends Fragment implements View.OnClickListen
                 pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                 pieDataSet.setSliceSpace(2);
                 pieDataSet.setValueTextSize(12);
+                if (settingssp.getBoolean("oscuro", false)) {
+                    pieChart.setEntryLabelColor(Color.WHITE);
+                    pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
+                    pieChart.getLegend().setTextColor(Color.WHITE);
+                } else {
+                    pieChart.setEntryLabelColor(Color.BLACK);
+                    pieChart.getLegend().setTextColor(Color.BLACK);
+                }
                 pieChart.setData(new PieData(pieDataSet));
                 pieChart.setDrawEntryLabels(true);
                 pieChart.setUsePercentValues(true);
                 pieChart.setDrawHoleEnabled(false);
-                if (settingssp.getBoolean("oscuro", false)) {
-                    pieChart.setEntryLabelColor(Color.WHITE);
-                    pieChart.setEntryLabelTypeface(Typeface.DEFAULT_BOLD);
-                } else {
-                    pieChart.setEntryLabelColor(Color.BLACK);
-                }
                 pieChart.animateXY(2000, 2000);
                 pieChart.getDescription().setEnabled(false);
             }

@@ -26,6 +26,8 @@ public class PagerController extends FragmentPagerAdapter {
                 return new EstadisticasEstadisticasFragment(id);
             case 2:
                 return new EstadisticasEntradasFragment(id);
+            case 3:
+                return new EstadisticasGraficoFragment(id);
             default:
                 return null;
         }

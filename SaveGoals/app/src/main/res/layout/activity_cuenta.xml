@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CuentaActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAtrasCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:src="@drawable/deshacer"
+        app:backgroundTint="@color/rojo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvCuentaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secundarioOscuro"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/cuenta"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/tvCuentaCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/cerrar_sesion" />
+
+        <Button
+            android:id="@+id/btnEliminarCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/rojo"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/eliminar_cuenta" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -224,9 +223,8 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
                 paramsIcono.width = 0;
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    icono.setForegroundGravity(Gravity.CENTER);
-                }
+                icono.setForegroundGravity(Gravity.CENTER);
+
                 switch (objetivos.get(i).getCategoria()) {
                     case 1:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.avion));
@@ -317,9 +315,8 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
                 paramsIcono.width = 0;
                 paramsIcono.weight = 1;
                 icono.setLayoutParams(paramsIcono);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    icono.setForegroundGravity(Gravity.CENTER);
-                }
+                icono.setForegroundGravity(Gravity.CENTER);
+
                 switch (entradas.get(i).getCategoria()) {
                     case 1:
                         icono.setImageDrawable(getResources().getDrawable(R.drawable.cartera));

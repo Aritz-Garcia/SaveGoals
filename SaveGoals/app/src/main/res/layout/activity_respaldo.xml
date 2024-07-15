@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RespaldoActivity">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAtrasRes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:src="@drawable/deshacer"
+        app:backgroundTint="@color/rojo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secundarioOscuro"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/copia_restautar_titl"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvCuentaInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="5sp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFechasInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp" />
+
+        <Button
+            android:id="@+id/btnCopiaSeg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/copia_de_seguridad" />
+
+        <Button
+            android:id="@+id/btnRestaurar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="1"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/recuperar_copia" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
