@@ -15,6 +15,9 @@ public interface EntradasDao {
     @Query("SELECT * FROM entradas")
     List<Entradas> getAll();
 
+    @Query("SELECT idObjetivos, idEntrada, E.categoria, E.fecha, E.nombre, E.cantidad FROM entradas E JOIN objetivos O ON O.id == E.idObjetivos WHERE o.archivado = 0")
+    List<Entradas> getAllSinObjetivosArchivados();
+
     @Query("SELECT * FROM entradas WHERE idObjetivos LIKE :idObjetivos")
     List<Entradas> findByIdObj(int idObjetivos);
 
@@ -23,6 +26,9 @@ public interface EntradasDao {
 
     @Query("SELECT * FROM entradas WHERE fecha LIKE :fecha")
     List<Entradas> findByFecha(String fecha);
+
+    @Query("SELECT idObjetivos, idEntrada, E.categoria, E.fecha, E.nombre, E.cantidad FROM entradas E JOIN objetivos O ON O.id == E.idObjetivos WHERE E.fecha LIKE :fecha AND O.archivado = 0")
+    List<Entradas> findByFechaSinArchivar(String fecha);
 
     @Query("UPDATE entradas SET categoria = :categoria, fecha = :fecha, nombre = :nombre, cantidad = :cantidad WHERE idObjetivos = :idObjetivos AND idEntrada = :idEntrada")
     void update(int idObjetivos, int idEntrada, int categoria, String fecha, String nombre, float cantidad);

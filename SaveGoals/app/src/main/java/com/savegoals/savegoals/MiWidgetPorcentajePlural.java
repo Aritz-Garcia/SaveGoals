@@ -1,7 +1,6 @@
 package com.savegoals.savegoals;
 
 import static android.app.PendingIntent.FLAG_IMMUTABLE;
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -16,7 +15,6 @@ import com.savegoals.savegoals.data.entities.Objetivos;
 import com.savegoals.savegoals.db.AppDatabase;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 public class MiWidgetPorcentajePlural extends AppWidgetProvider {
 
@@ -84,86 +82,106 @@ public class MiWidgetPorcentajePlural extends AppWidgetProvider {
             AppDatabase appDatabase = AppDatabase.getDatabase(context);
             Objetivos objetivo1 = appDatabase.objetivosDao().findById(Integer.parseInt(objetivosIdSeleccionadosArray[0]));
             Objetivos objetivo2 = appDatabase.objetivosDao().findById(Integer.parseInt(objetivosIdSeleccionadosArray[1]));
-            RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_text);
-            if (objetivo1.getCategoria() != objetivo2.getCategoria()) {
-                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
-            } else {
-                switch (objetivo1.getCategoria()) {
-                    case 1:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
-                        break;
 
-                    case 2:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
-                        break;
-
-                    case 3:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
-                        break;
-
-                    case 4:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
-                        break;
-
-                    case 5:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
-                        break;
-
-                    case 6:
-                        text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
-                        break;
-
-                    case 7:
+            if (objetivo1 != null && objetivo2 != null) {
+                if (!objetivo1.getArchivado() && !objetivo2.getArchivado()) {
+                    RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_text);
+                    if (objetivo1.getCategoria() != objetivo2.getCategoria()) {
                         text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
-                        break;
+                    } else {
+                        switch (objetivo1.getCategoria()) {
+                            case 1:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
+                                break;
 
+                            case 2:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
+                                break;
+
+                            case 3:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
+                                break;
+
+                            case 4:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
+                                break;
+
+                            case 5:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
+                                break;
+
+                            case 6:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
+                                break;
+
+                            case 7:
+                                text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
+                                break;
+
+                        }
+                    }
+
+                    text.setTextViewText(R.id.tv_texto_widget, objetivo1.getNombre() + " // " + objetivo2.getNombre());
+                    float totalAhorrado = objetivo1.getAhorrado() + objetivo2.getAhorrado();
+                    float totalCantidad = objetivo1.getCantidad() + objetivo2.getCantidad();
+                    text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(totalAhorrado) + "€ / " + obtieneDosDecimales(totalCantidad) + "€");
+                    views.addView(R.id.ll_contenedor, text);
+
+                    int porcentajeCalc;
+
+                    if (totalAhorrado == 0) {
+                        porcentajeCalc = 1;
+                    } else {
+                        porcentajeCalc = (int) ((totalAhorrado * 100) / totalCantidad);
+                    }
+
+                    RemoteViews progressBar = null;
+
+                    if (porcentajeCalc < 50) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_rojo);
+                    } else if (porcentajeCalc < 75) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_amarillo);
+                    } else if (porcentajeCalc < 100) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_verde);
+                    } else {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_completado);
+                    }
+
+                    progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
+
+                    progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
+
+                    if (totalAhorrado == 0) {
+                        porcentajeCalc = 0;
+                        progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
+                        progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
+                    }
+
+                    views.addView(R.id.ll_contenedor, progressBar);
+
+                    // PendingIntent para abrir la app al inicio
+                    Intent intent = new Intent(context, MenuActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE);
+                    views.setOnClickPendingIntent(R.id.ll_contenedor, pendingIntent);
+                } else {
+                    RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_sin_nada);
+                    text.setTextViewText(R.id.tvEmoticono_widget_sin_nada, context.getString(R.string.widget_emoticono_sin_nada));
+                    text.setTextViewText(R.id.tv_texto_widget_sin_nada, context.getString(R.string.widget_texto_sin_nada_plural));
+                    text.setTextViewText(R.id.tv_texto_widget_sin_nada_2, context.getString(R.string.widget_texto_sin_nada_2));
+                    views.addView(R.id.ll_contenedor, text);
                 }
-            }
 
-            text.setTextViewText(R.id.tv_texto_widget, objetivo1.getNombre() + " // " + objetivo2.getNombre());
-            float totalAhorrado = objetivo1.getAhorrado() + objetivo2.getAhorrado();
-            float totalCantidad = objetivo1.getCantidad() + objetivo2.getCantidad();
-            text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(totalAhorrado) + "€ / " + obtieneDosDecimales(totalCantidad) + "€");
-            views.addView(R.id.ll_contenedor, text);
-
-            int porcentajeCalc;
-
-            if (totalAhorrado == 0) {
-                porcentajeCalc = 1;
             } else {
-                porcentajeCalc = (int) ((totalAhorrado * 100) / totalCantidad);
+                RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_sin_nada);
+                text.setTextViewText(R.id.tvEmoticono_widget_sin_nada, context.getString(R.string.widget_emoticono_sin_nada));
+                text.setTextViewText(R.id.tv_texto_widget_sin_nada, context.getString(R.string.widget_texto_sin_nada_plural));
+                text.setTextViewText(R.id.tv_texto_widget_sin_nada_2, context.getString(R.string.widget_texto_sin_nada_2));
+                views.addView(R.id.ll_contenedor, text);
+
             }
-
-            RemoteViews progressBar = null;
-
-            if (porcentajeCalc < 50) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_rojo);
-            } else if (porcentajeCalc < 75) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_amarillo);
-            } else if (porcentajeCalc < 100) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_verde);
-            } else {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_completado);
-            }
-
-            progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
-
-            progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
-
-            if (totalAhorrado == 0) {
-                porcentajeCalc = 0;
-                progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
-                progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
-            }
-
-            views.addView(R.id.ll_contenedor, progressBar);
-
-            // PendingIntent para abrir la app al inicio
-            Intent intent = new Intent(context, MenuActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE);
-            views.setOnClickPendingIntent(R.id.ll_contenedor, pendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
+
         }
 
     }

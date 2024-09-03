@@ -27,6 +27,7 @@
     <string name="calculadora_text">"El objetivo se cumplirá el "</string>
     <string name="error_estadisticas_obj">Las entradas de este objetivo son negativas</string>
     <string name="error_est_aho">NO HAY NADA AHORRADO EN LOS OBJETIVOS</string>
+    <string name="error_est_obj">NO HAY OBJETIVOS</string>
 
     <!-- Layouts -->
     <string name="resumen">RESUMEN</string>
@@ -57,6 +58,7 @@
     <string name="objetivos_emoji">OBJETIVOS 🎯</string>
     <string name="cumplidos_emoji">CUMPLIDOS 🏆</string>
     <string name="fecha_pasada_emoji">FECHA PASADA ⏳</string>
+    <string name="archivado_emoji">ARCHIVADOS 📁</string>
     <string name="calculadora_title">Calculadora de fecha</string>
     <string name="calculadora_message">Introduce la cantidad que quieres ahorrar y la cantidad que ahorras y cada cuantos días</string>
     <string name="calculadora_ahorrar">Cantidad a ahorrar</string>
@@ -121,11 +123,16 @@
     <string name="widget_config_text2">No hay ningún objetivo sin cumplir</string>
     <string name="widget_config_text3">No hay dos objetivos o más sin cumplir</string>
     <string name="salir">Salir</string>
+    <string name="widget_emoticono_sin_nada">⛔</string>
+    <string name="widget_texto_sin_nada">Ha habido un error con el objetivo</string>
+    <string name="widget_texto_sin_nada_plural">Ha habido un error con los objetivos</string>
+    <string name="widget_texto_sin_nada_2">Elimina el widget y vuelve a añadirlo</string>
 
     <!-- Configuracion -->
     <string name="iniciar_sesion">INICIAR SESIÓN</string>
     <string name="cuenta">CUENTA</string>
     <string name="configuracion">CONFIGURACIÓN</string>
+    <string name="creditos">CRÉDITOS</string>
     <string name="google_is">Google</string>
     <string name="cuenta_is">Correo Electrónico</string>
     <string name="pass_is">Contraseña</string>
@@ -167,6 +174,13 @@
     <string name="correo_olvidado_ok">Correo enviado</string>
     <string name="correo_olvidado_ko">Error al mandar correo</string>
     <string name="correo_olvidado">Has olvidado la contraseña? Haz click aquí</string>
+    <string name="creditos_text">Créditos</string>
+    <string name="error_creditos">No hay créditos</string>
+
+    <!-- Archivar -->
+    <string name="archivar_title">Archivados</string>
+    <string name="select_title">Seleccionar</string>
+    <string name="cancelar_title">Cancelar</string>
 
     <!-- Shortcuts -->
     <string name="shortcut1_texto_corto">Agregar nuevo Objetivo</string>

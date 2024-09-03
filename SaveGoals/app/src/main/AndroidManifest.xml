@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SaveGoals"
         tools:targetApi="34">
         <activity
+            android:name=".CreditosActivity"
+            android:exported="false" />
+        <activity
             android:name=".CuentaActivity"
             android:exported="false" />
         <activity
@@ -82,10 +85,12 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data android:name="android.app.shortcuts"
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity

@@ -1,6 +1,9 @@
 package com.savegoals.savegoals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,6 +25,7 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
     Button btnCalcular, btnCrearCalc;
     String dateResultado;
     Switch swInicio;
+    SharedPreferences settingssp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
         btnCalcular.setOnClickListener(this);
         btnCrearCalc.setOnClickListener(this);
         swInicio.setOnClickListener(this);
+
+        settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+        setDayNight();
 
     }
 
@@ -189,6 +197,19 @@ public class CalculadoraActivity extends AppCompatActivity implements View.OnCli
             intent.putExtra("fecha", dateResultado);
             intent.putExtra("cantidad", etCantidadLlegar.getText().toString());
             startActivity(intent);
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnCalcular.setTextColor(Color.WHITE);
+            btnCrearCalc.setTextColor(Color.WHITE);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnCalcular.setTextColor(Color.WHITE);
+            btnCrearCalc.setTextColor(Color.WHITE);
         }
     }
 }

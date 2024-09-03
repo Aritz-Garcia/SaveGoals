@@ -170,6 +170,46 @@
             android:layout_height="1dp"
             android:background="@color/grey" />
 
+        <TextView
+            android:id="@+id/tvCreditosTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/secundarioOscuro"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/creditos"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/vwLineaCreditosTitle"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvCreditos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20sp"
+            android:paddingTop="10sp"
+            android:paddingEnd="20sp"
+            android:paddingBottom="10sp"
+            android:text="@string/creditos_text"
+            app:drawableEndCompat="@drawable/fecha_derecha"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/vwLineaCreditos"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </FrameLayout>

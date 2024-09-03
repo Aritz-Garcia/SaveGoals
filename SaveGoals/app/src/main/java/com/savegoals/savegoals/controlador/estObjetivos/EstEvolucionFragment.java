@@ -74,7 +74,7 @@ public class EstEvolucionFragment extends Fragment {
         super.onResume();
 
         AppDatabase appDatabase = AppDatabase.getDatabase(getContext());
-        List<Objetivos> objetivos = appDatabase.objetivosDao().getAll();
+        List<Objetivos> objetivos = appDatabase.objetivosDao().getAllSinArchivados();
         float total = 0;
         float ahorrado = 0;
         float pendiente;

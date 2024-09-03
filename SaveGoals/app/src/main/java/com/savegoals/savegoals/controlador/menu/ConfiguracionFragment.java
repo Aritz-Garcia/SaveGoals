@@ -42,7 +42,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.savegoals.savegoals.AlarmNotification;
+import com.savegoals.savegoals.CreditosActivity;
 import com.savegoals.savegoals.CuentaActivity;
 import com.savegoals.savegoals.R;
 import com.savegoals.savegoals.RespaldoActivity;
@@ -57,8 +60,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
     SharedPreferences.Editor editor;
     Switch swOscuro, swNotificaciones;
     Spinner spNotiHora;
-    View vwLineaNoti, vwLineaCuenta;
-    TextView tvISGoogle, tvISCorreo, tvCorreoText, tvISTitulo, tvRespaldo, tvCuentaIS;
+    View vwLineaNoti, vwLineaCuenta, vwCreditosTitle, vwCreditos;
+    TextView tvISGoogle, tvISCorreo, tvCorreoText, tvISTitulo, tvRespaldo, tvCuentaIS, tvCreditosTitle, tvCreditos;
+    FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -94,6 +98,11 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         tvISTitulo = view.findViewById(R.id.tvISTit);
         tvRespaldo = view.findViewById(R.id.tvRespaldoTextIS);
         tvCuentaIS = view.findViewById(R.id.tvCuentaIS);
+        tvCreditosTitle = view.findViewById(R.id.tvCreditosTitle);
+        tvCreditos = view.findViewById(R.id.tvCreditos);
+        vwCreditosTitle = view.findViewById(R.id.vwLineaCreditosTitle);
+        vwCreditos = view.findViewById(R.id.vwLineaCreditos);
+        db = FirebaseFirestore.getInstance();
 
         if (settingssp.getBoolean("oscuro", false)) {
             swOscuro.setChecked(true);
@@ -101,6 +110,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISCorreo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
             tvRespaldo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
             tvCuentaIS.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
+            tvCreditos.setCompoundDrawableTintList(getResources().getColorStateList(R.color.white));
 
         } else {
             swOscuro.setChecked(false);
@@ -108,6 +118,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             tvISCorreo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
             tvRespaldo.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
             tvCuentaIS.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
+            tvCreditos.setCompoundDrawableTintList(getResources().getColorStateList(R.color.black));
 
         }
 
@@ -153,6 +164,7 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
         tvISCorreo.setOnClickListener(this);
         tvRespaldo.setOnClickListener(this);
         tvCuentaIS.setOnClickListener(this);
+        tvCreditos.setOnClickListener(this);
 
         if (settingssp.getString("uid", "").isEmpty()) {
             // SIN INICIAR SESION
@@ -175,7 +187,6 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }
-
 
         return view;
     }
@@ -204,6 +215,26 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
 
             tvCorreoText.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         }
+
+        db.collection("creditos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().isEmpty()) {
+                        tvCreditosTitle.setVisibility(View.GONE);
+                        tvCreditos.setVisibility(View.GONE);
+                        vwCreditosTitle.setVisibility(View.GONE);
+                        vwCreditos.setVisibility(View.GONE);
+                    } else {
+                        tvCreditosTitle.setVisibility(View.VISIBLE);
+                        tvCreditos.setVisibility(View.VISIBLE);
+                        vwCreditosTitle.setVisibility(View.VISIBLE);
+                        vwCreditos.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
     }
 
     private void setDayNight() {
@@ -239,6 +270,9 @@ public class ConfiguracionFragment extends Fragment implements View.OnClickListe
             Intent intent = new Intent(getContext(), CuentaActivity.class);
             startActivity(intent);
 
+        } else if (v.getId() == tvCreditos.getId()) {
+            Intent intent = new Intent(getContext(), CreditosActivity.class);
+            startActivity(intent);
         }
     }
 

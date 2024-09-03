@@ -107,7 +107,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
         AppDatabase db = AppDatabase.getDatabase(getContext());
 
         if (todos) {
-            List<Objetivos> objetivos = db.objetivosDao().getAll();
+            List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
 
             if (objetivos.isEmpty()) {
                 // No hay objetivos
@@ -121,7 +121,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                 tvError.setVisibility(View.GONE);
 
                 List<Entry> entries = new ArrayList<>();
-                List<Entradas> entradasAll = db.entradasDao().getAll();
+                List<Entradas> entradasAll = db.entradasDao().getAllSinObjetivosArchivados();
                 // ordenar entradas por fechas
                 Collections.sort(entradasAll, new Comparator<Entradas>() {
                     @Override
@@ -209,20 +209,21 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                 lineChart.getDescription().setEnabled(false);
             }
         } else {
-            List<Objetivos> objetivos = db.objetivosDao().getAll();
+            List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
 
             if (objetivos.isEmpty()) {
                 // No hay objetivos
                 tvTitle.setVisibility(View.GONE);
                 lineChart.setVisibility(View.GONE);
                 tvError.setVisibility(View.VISIBLE);
-            } else {
-                // Hay objetivos
-                tvTitle.setVisibility(View.VISIBLE);
-                lineChart.setVisibility(View.VISIBLE);
-                tvError.setVisibility(View.GONE);
 
-                List<Entradas> entradasAll = db.entradasDao().getAll();
+            } else {
+            // Hay objetivos
+            tvTitle.setVisibility(View.VISIBLE);
+            lineChart.setVisibility(View.VISIBLE);
+            tvError.setVisibility(View.GONE);
+
+            List<Entradas> entradasAll = db.entradasDao().getAllSinObjetivosArchivados();
                 // Ordenar entradas por fechas
                 Collections.sort(entradasAll, new Comparator<Entradas>() {
                     @Override
@@ -249,7 +250,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                 lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(fechas));
 
 
-                List<Objetivos> objetivosAll = db.objetivosDao().getAll();
+                List<Objetivos> objetivosAll = db.objetivosDao().getAllSinArchivados();
                 ArrayList<ILineDataSet> listLineDataSet = new ArrayList<>();
 
                 for (int i = 0; i < objetivosAll.size(); i++) {
@@ -327,9 +328,8 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                         lineDataSet.setValueTextColor(Color.BLACK);
                     }
 
-                    if (total > 0) {
-                        listLineDataSet.add(lineDataSet);
-                    }
+                    listLineDataSet.add(lineDataSet);
+
                 }
                 if (settingssp.getBoolean("oscuro", false)) {
                     lineChart.getXAxis().setTextColor(Color.WHITE);
@@ -346,6 +346,7 @@ public class EstGraficoFragment extends Fragment implements View.OnClickListener
                 lineChart.animateXY(3000, 2000, Easing.EaseInOutBack, Easing.EaseInOutBack);
                 lineChart.getDescription().setEnabled(false);
             }
+
         }
 
     }

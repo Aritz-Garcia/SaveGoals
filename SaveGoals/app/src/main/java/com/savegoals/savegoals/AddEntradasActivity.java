@@ -3,6 +3,7 @@ package com.savegoals.savegoals;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -282,8 +283,12 @@ public class AddEntradasActivity extends AppCompatActivity implements View.OnCli
         boolean oscuro = settingssp.getBoolean("oscuro", false);
         if (oscuro) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnVolverEntradas.setTextColor(Color.WHITE);
+            btnGuardar.setTextColor(Color.WHITE);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnVolverEntradas.setTextColor(Color.WHITE);
+            btnGuardar.setTextColor(Color.WHITE);
         }
     }
 
