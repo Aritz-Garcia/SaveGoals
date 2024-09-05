@@ -3,6 +3,7 @@ package com.savegoals.savegoals.controlador.estadisticas;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,7 +54,6 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         settingssp = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
-        setDayNight();
     }
 
     @Override
@@ -90,6 +90,8 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
 
         btnAñadirEntrada = view.findViewById(R.id.btnAñadirEntardaResumen);
         btnAñadirEntrada.setOnClickListener(this);
+
+        setDayNight();
 
         return view;
     }
@@ -341,8 +343,10 @@ public class EstadisticasResumenFragment extends Fragment implements View.OnClic
         boolean oscuro = settingssp.getBoolean("oscuro", false);
         if (oscuro) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnAñadirEntrada.setForegroundTintList(ColorStateList.valueOf(Color.WHITE));
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnAñadirEntrada.setForegroundTintList(ColorStateList.valueOf(Color.BLACK));
         }
     }
 

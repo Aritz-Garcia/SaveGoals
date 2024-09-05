@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -88,6 +89,8 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
             }
         });
 
+        setDayNight();
+
         return view;
     }
 
@@ -106,8 +109,8 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
         AppDatabase db = AppDatabase.getDatabase(getContext());
         Date dateHoy = new Date();
 
-        List<Objetivos> objetivos = db.objetivosDao().getAll();
-        List<Entradas> entradas = db.entradasDao().getAll();
+        List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
+        List<Entradas> entradas = db.entradasDao().getAllSinObjetivosArchivados();
 
         mesText();
         fechaSelect(dateHoy);
@@ -204,8 +207,8 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
 
         String fecha = dateFormat.format(dateClicked);
 
-        List<Objetivos> objetivos = db.objetivosDao().findByFecha(fecha);
-        List<Entradas> entradas = db.entradasDao().findByFecha(fecha);
+        List<Objetivos> objetivos = db.objetivosDao().findByFechaSinArchivar(fecha);
+        List<Entradas> entradas = db.entradasDao().findByFechaSinArchivar(fecha);
         if (objetivos.size() != 0) {
             tvObjetivosCal.setVisibility(View.VISIBLE);
             lyCalDatosObj.setVisibility(View.VISIBLE);
@@ -387,6 +390,17 @@ public class CalendarioFragment extends Fragment implements View.OnClickListener
         } else {
             tvEntradasCal.setVisibility(View.GONE);
             lyCalDatosEnt.setVisibility(View.GONE);
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnIrDia.setTextColor(Color.WHITE);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnIrDia.setTextColor(Color.WHITE);
         }
     }
 }

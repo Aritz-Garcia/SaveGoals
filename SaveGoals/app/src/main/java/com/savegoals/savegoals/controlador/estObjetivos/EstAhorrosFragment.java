@@ -93,7 +93,7 @@ public class EstAhorrosFragment extends Fragment implements View.OnClickListener
         AppDatabase db = AppDatabase.getDatabase(getContext());
         if (objetivos) {
             // Datos de Objetivos
-            List<Objetivos> objetivos = db.objetivosDao().getAll();
+            List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
 
             if (objetivos.size() == 0) {
                 tvError.setVisibility(View.VISIBLE);
@@ -162,7 +162,7 @@ public class EstAhorrosFragment extends Fragment implements View.OnClickListener
             }
         } else {
             // Datos de Entradas
-            List<Entradas> entradas = db.entradasDao().getAll();
+            List<Entradas> entradas = db.entradasDao().getAllSinObjetivosArchivados();
 
             if (entradas.size() == 0) {
                 tvError.setVisibility(View.VISIBLE);

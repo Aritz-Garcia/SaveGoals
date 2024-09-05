@@ -21,6 +21,8 @@ public class Objetivos {
     public float ahorrado;
     @NonNull
     public boolean completado;
+    @NonNull
+    public boolean archivado;
 
     public Objetivos() {}
 
@@ -31,6 +33,17 @@ public class Objetivos {
         this.cantidad = cantidad;
         this.ahorrado = ahorrado;
         this.completado = completado;
+        this.archivado = false;
+    }
+
+    public Objetivos(int categoria, String nombre, String fecha, float cantidad, float ahorrado, boolean completado, boolean archivado) {
+        this.categoria = categoria;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.cantidad = cantidad;
+        this.ahorrado = ahorrado;
+        this.completado = completado;
+        this.archivado = archivado;
     }
 
     public int getId() {
@@ -87,5 +100,13 @@ public class Objetivos {
 
     public void setCompletado(boolean completado) {
         this.completado = completado;
+    }
+
+    public boolean getArchivado() {
+        return archivado;
+    }
+
+    public void setArchivado(boolean archivado) {
+        this.archivado = archivado;
     }
 }

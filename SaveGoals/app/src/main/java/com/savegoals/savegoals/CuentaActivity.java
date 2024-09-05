@@ -2,6 +2,8 @@ package com.savegoals.savegoals;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -69,6 +72,7 @@ public class CuentaActivity extends AppCompatActivity implements View.OnClickLis
         btnCerrarSesion.setOnClickListener(this);
         btnEliminarCuenta.setOnClickListener(this);
 
+        setDayNight();
     }
 
     @Override
@@ -233,6 +237,21 @@ public class CuentaActivity extends AppCompatActivity implements View.OnClickLis
     public void onDialogNegativeClickTextoDialog(DialogFragment dialog) {
         if (eliminar) {
             finish();
+        }
+    }
+
+    private void setDayNight() {
+        boolean oscuro = settingssp.getBoolean("oscuro", false);
+        if (oscuro) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnAtras.setForegroundTintList(ColorStateList.valueOf(Color.WHITE));
+            btnCerrarSesion.setTextColor(Color.WHITE);
+            btnEliminarCuenta.setTextColor(Color.WHITE);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnAtras.setForegroundTintList(ColorStateList.valueOf(Color.BLACK));
+            btnCerrarSesion.setTextColor(Color.WHITE);
+            btnEliminarCuenta.setTextColor(Color.WHITE);
         }
     }
 }

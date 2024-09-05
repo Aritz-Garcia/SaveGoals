@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/selectBtn"
+        android:icon="@drawable/checkbox"
+        android:title="@string/select_title"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/archivarBtn"
+        android:icon="@drawable/caja"
+        android:title="@string/archivar_title"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/calcularBtn"
+        android:icon="@drawable/calculadora"
+        android:title="@string/calculadora_title"
+        app:showAsAction="ifRoom" />
+
+</menu>

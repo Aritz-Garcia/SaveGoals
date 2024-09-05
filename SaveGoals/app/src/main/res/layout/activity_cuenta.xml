@@ -13,7 +13,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        android:src="@drawable/deshacer"
+        android:foreground="@drawable/deshacer"
+        android:foregroundGravity="center"
         app:backgroundTint="@color/rojo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

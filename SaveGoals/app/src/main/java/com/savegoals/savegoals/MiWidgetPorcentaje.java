@@ -80,82 +80,100 @@ public class MiWidgetPorcentaje extends AppWidgetProvider {
 
             AppDatabase appDatabase = AppDatabase.getDatabase(context);
             Objetivos objetivo = appDatabase.objetivosDao().findById(objetivoIdSeleccionado);
-            RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_text);
-            switch (objetivo.getCategoria()) {
-                case 1:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
-                    break;
 
-                case 2:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
-                    break;
+            if (objetivo != null) {
+                if (!objetivo.getArchivado()) {
+                    RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_text);
+                    switch (objetivo.getCategoria()) {
+                        case 1:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.avion);
+                            break;
 
-                case 3:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
-                    break;
+                        case 2:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.hucha);
+                            break;
 
-                case 4:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
-                    break;
+                        case 3:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.regalo);
+                            break;
 
-                case 5:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
-                    break;
+                        case 4:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.carrito);
+                            break;
 
-                case 6:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
-                    break;
+                        case 5:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.clase);
+                            break;
 
-                case 7:
-                    text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
-                    break;
+                        case 6:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.mando);
+                            break;
 
-            }
+                        case 7:
+                            text.setImageViewResource(R.id.iv_icono_widg, R.drawable.otros);
+                            break;
 
+                    }
 
+                    text.setTextViewText(R.id.tv_texto_widget, objetivo.getNombre());
+                    text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(objetivo.getAhorrado()) + "€ / " + obtieneDosDecimales(objetivo.getCantidad()) + "€");
+                    views.addView(R.id.ll_contenedor, text);
 
-            text.setTextViewText(R.id.tv_texto_widget, objetivo.getNombre());
-            text.setTextViewText(R.id.tv_cant_widg, obtieneDosDecimales(objetivo.getAhorrado()) + "€ / " + obtieneDosDecimales(objetivo.getCantidad()) + "€");
-            views.addView(R.id.ll_contenedor, text);
+                    int porcentajeCalc;
 
-            int porcentajeCalc;
+                    if (objetivo.getAhorrado() == 0) {
+                        porcentajeCalc = 1;
+                    } else {
+                        porcentajeCalc = (int) ((objetivo.getAhorrado() * 100) / objetivo.getCantidad());
+                    }
 
-            if (objetivo.getAhorrado() == 0) {
-                porcentajeCalc = 1;
+                    RemoteViews progressBar = null;
+
+                    if (porcentajeCalc < 50) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_rojo);
+                    } else if (porcentajeCalc < 75) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_amarillo);
+                    } else if (porcentajeCalc < 100) {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_verde);
+                    } else {
+                        progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_completado);
+                    }
+
+                    progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
+
+                    progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
+
+                    if (objetivo.getAhorrado() == 0) {
+                        porcentajeCalc = 0;
+                        progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
+                        progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
+                    }
+
+                    views.addView(R.id.ll_contenedor, progressBar);
+
+                    // PendingIntent para abrir la app al inicio
+                    Intent intent = new Intent(context, MenuActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE);
+                    views.setOnClickPendingIntent(R.id.ll_contenedor, pendingIntent);
+                } else {
+                    RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_sin_nada);
+                    text.setTextViewText(R.id.tvEmoticono_widget_sin_nada, context.getString(R.string.widget_emoticono_sin_nada));
+                    text.setTextViewText(R.id.tv_texto_widget_sin_nada, context.getString(R.string.widget_texto_sin_nada));
+                    text.setTextViewText(R.id.tv_texto_widget_sin_nada_2, context.getString(R.string.widget_texto_sin_nada_2));
+                    views.addView(R.id.ll_contenedor, text);
+                }
+
             } else {
-                porcentajeCalc = (int) ((objetivo.getAhorrado() * 100) / objetivo.getCantidad());
+                RemoteViews text = new RemoteViews(context.getPackageName(), R.layout.widget_sin_nada);
+                text.setTextViewText(R.id.tvEmoticono_widget_sin_nada, context.getString(R.string.widget_emoticono_sin_nada));
+                text.setTextViewText(R.id.tv_texto_widget_sin_nada, context.getString(R.string.widget_texto_sin_nada));
+                text.setTextViewText(R.id.tv_texto_widget_sin_nada_2, context.getString(R.string.widget_texto_sin_nada_2));
+                views.addView(R.id.ll_contenedor, text);
+
             }
-
-            RemoteViews progressBar = null;
-
-            if (porcentajeCalc < 50) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_rojo);
-            } else if (porcentajeCalc < 75) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_amarillo);
-            } else if (porcentajeCalc < 100) {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_verde);
-            } else {
-                progressBar = new RemoteViews(context.getPackageName(), R.layout.widget_char_porcentaje_completado);
-            }
-
-            progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
-
-            progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
-
-            if (objetivo.getAhorrado() == 0) {
-                porcentajeCalc = 0;
-                progressBar.setProgressBar(R.id.pb_widget_porcentaje, 100, porcentajeCalc, false);
-                progressBar.setTextViewText(R.id.tv_porcentaje_text, porcentajeCalc + "%");
-            }
-
-            views.addView(R.id.ll_contenedor, progressBar);
-
-            // PendingIntent para abrir la app al inicio
-            Intent intent = new Intent(context, MenuActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE);
-            views.setOnClickPendingIntent(R.id.ll_contenedor, pendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
+
         }
 
     }

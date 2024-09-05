@@ -94,7 +94,7 @@ public class EstObjetivosFragment extends Fragment implements View.OnClickListen
 
         if (nombre) {
             // Datos por nombre
-            List<Objetivos> objetivos = db.objetivosDao().getAll();
+            List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
             if (objetivos.size() == 0) {
                 pieChart.setVisibility(View.GONE);
                 tvTitle.setVisibility(View.GONE);
@@ -142,7 +142,7 @@ public class EstObjetivosFragment extends Fragment implements View.OnClickListen
             }
         } else {
             // Datos por categoría
-            List<Objetivos> objetivos = db.objetivosDao().getAll();
+            List<Objetivos> objetivos = db.objetivosDao().getAllSinArchivados();
             if (objetivos.size() == 0) {
                 pieChart.setVisibility(View.GONE);
                 tvTitle.setVisibility(View.GONE);

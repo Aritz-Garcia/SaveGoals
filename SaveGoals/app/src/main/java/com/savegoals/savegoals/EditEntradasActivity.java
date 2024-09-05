@@ -3,6 +3,8 @@ package com.savegoals.savegoals;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -50,7 +52,6 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         db = AppDatabase.getDatabase(this);
 
         settingssp = getSharedPreferences("settings", Context.MODE_PRIVATE);
-        setDayNight();
 
         idO = getIntent().getIntExtra("idO", 0);
         idE = getIntent().getIntExtra("idE", 0);
@@ -98,6 +99,8 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
             etCantidad.setText(String.valueOf(entradas.getCantidad()));
         }
         spinnerCategoria.setSelection(entradas.getCategoria());
+
+        setDayNight();
     }
 
     private ArrayList<CustomItem> getCustomList() {
@@ -263,7 +266,7 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
 
                         if (i > 0) {
                             db.entradasDao().update(entradas.getIdObjetivos(), entradas.getIdEntrada(), entradas.getCategoria(),entradas.getFecha(), entradas.getNombre(), entradas.getCantidad());
-                            db.objetivosDao().update(objetivos.getId(), objetivos.getCategoria(), objetivos.getNombre(), objetivos.getFecha(), objetivos.getCantidad(), objetivos.getAhorrado(), objetivos.getCompletado());
+                            db.objetivosDao().update(objetivos.getId(), objetivos.getCategoria(), objetivos.getNombre(), objetivos.getFecha(), objetivos.getCantidad(), objetivos.getAhorrado(), objetivos.getCompletado(), objetivos.getArchivado());
                         } else {
                             // Alerta de que no cambia nada
                         }
@@ -365,8 +368,14 @@ public class EditEntradasActivity extends AppCompatActivity implements View.OnCl
         boolean oscuro = settingssp.getBoolean("oscuro", false);
         if (oscuro) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnEliminar.setForegroundTintList(ColorStateList.valueOf(Color.WHITE));
+            btnGuardar.setTextColor(Color.WHITE);
+            btnVolverEntradas.setTextColor(Color.WHITE);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnEliminar.setForegroundTintList(ColorStateList.valueOf(Color.BLACK));
+            btnGuardar.setTextColor(Color.WHITE);
+            btnVolverEntradas.setTextColor(Color.WHITE);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.savegoals.savegoals;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -179,7 +180,7 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
                         }
 
                         if (i > 0) {
-                            db.objetivosDao().update(objetivo.getId(), objetivo.getCategoria(), objetivo.getNombre(), objetivo.getFecha(), objetivo.getCantidad(), objetivo.getAhorrado(), objetivo.getCompletado());
+                            db.objetivosDao().update(objetivo.getId(), objetivo.getCategoria(), objetivo.getNombre(), objetivo.getFecha(), objetivo.getCantidad(), objetivo.getAhorrado(), objetivo.getCompletado(), objetivo.getArchivado());
                         }
 
                         finish();
@@ -256,8 +257,12 @@ public class EditObjetivosActivity extends AppCompatActivity implements View.OnC
         boolean oscuro = settingssp.getBoolean("oscuro", false);
         if (oscuro) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnEditar.setTextColor(Color.WHITE);
+            btnVolverObjetivos.setTextColor(Color.WHITE);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnEditar.setTextColor(Color.WHITE);
+            btnVolverObjetivos.setTextColor(Color.WHITE);
         }
     }
 }
